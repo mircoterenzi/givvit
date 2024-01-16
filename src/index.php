@@ -7,4 +7,5 @@ if(!isset($_SESSION["userId"])) {
   // @todo show homepage
 }
 
+include"register.php" //for the moment i will redirect automatically on registration page
 ?>
