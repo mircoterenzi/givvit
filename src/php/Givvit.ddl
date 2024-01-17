@@ -9,55 +9,55 @@ create database Givvit;
 -- _____________ 
 
 create table comments (
-     post numeric(1) not null,
+     post numeric not null,
      text varchar(256) not null,
      date date not null,
-     comment_id numeric(1) not null,
-     user numeric(1) not null,
-     redponded_by char(1),
+     comment_id numeric not null,
+     user numeric not null,
+     redponded_by numeric,
      constraint ID_comments_ID primary key (post, comment_id));
 
 create table donation (
-     user numeric(1) not null,
-     post numeric(1) not null,
-     amount numeric(1) not null,
+     user numeric not null,
+     post numeric not null,
+     amount numeric not null,
      constraint ID_donation_ID primary key (user, post));
 
 create table files (
-     post numeric(1) not null,
+     post numeric not null,
      name varchar(255) not null,
-     file_id numeric(1) not null,
+     file_id numeric not null,
      constraint ID_files_ID primary key (post, file_id));
 
 create table follow (
-     follower numeric(1) not null,
-     followed numeric(1) not null,
+     follower numeric not null,
+     followed numeric not null,
      constraint ID_follow_ID primary key (follower, followed));
 
 create table likes (
-     user numeric(1) not null,
-     post numeric(1) not null,
+     user numeric not null,
+     post numeric not null,
      constraint ID_likes_ID primary key (post, user));
 
 create table notification (
-     user_for numeric(1) not null,
-     notification_id numeric(1) not null,
+     user_for numeric not null,
+     notification_id numeric not null,
      date date not null,
      text varchar(250) not null,
      notification_type varchar(255) not null,
-     user_from numeric(1) not null,
-     visualized numeric(1) not null,
-     post_id numeric(1),
+     user_from numeric not null,
+     visualized numeric not null default 1,
+     post_id numeric,
      constraint ID_notification_ID primary key (user_for, notification_id));
 
 create table post (
-     post_id numeric(1) not null,
+     post_id numeric not null,
      short_description varchar(128),
      long_description varchar(512) not null,
-     amount_requested numeric(1) not null,
+     amount_requested numeric not null,
      date date not null,
-     closed numeric(1) not null,
-     user numeric(1) not null,
+     closed numeric not null default 1,
+     user numeric not null,
      topic varchar(32) not null,
      constraint ID_post_ID primary key (post_id));
 
@@ -66,12 +66,12 @@ create table topic (
      constraint ID_topic_ID primary key (name));
 
 create table user_profile (
-     user_id numeric(1) not null,
+     user_id numeric not null,
      user_name varchar(16) not null,
      first_name varchar(20) not null,
      last_name varchar(20) not null,
      password varchar(255) not null,
-     salt char(1) not null,
+     salt char(255) not null,
      description varchar(255),
      profile_img varchar(255),
      constraint ID_user_profile_ID primary key (user_id));
