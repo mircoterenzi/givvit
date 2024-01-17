@@ -82,59 +82,59 @@ create table user_profile (
 
 alter table comments add constraint REF_comme_user__FK
      foreign key (user)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table comments add constraint REF_comme_post
      foreign key (post)
-     references post;
+     references post(post_id);
 
 alter table donation add constraint REF_donat_post_FK
      foreign key (post)
-     references post;
+     references post(post_id);
 
 alter table donation add constraint REF_donat_user_
      foreign key (user)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table files add constraint REF_files_post
      foreign key (post)
-     references post;
+     references post(post_id);
 
 alter table follow add constraint REF_follo_user__1_FK
      foreign key (followed)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table follow add constraint REF_follo_user_
      foreign key (follower)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table likes add constraint REF_likes_post
      foreign key (post)
-     references post;
+     references post(post_id);
 
 alter table likes add constraint REF_likes_user__FK
      foreign key (user)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table notification add constraint REF_notif_user__1
      foreign key (user_for)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table notification add constraint REF_notif_user__FK
      foreign key (user_from)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table notification add constraint REF_notif_post_FK
      foreign key (post_id)
-     references post;
+     references post(post_id);
 
 alter table post add constraint REF_post_user__FK
      foreign key (user)
-     references user_profile;
+     references user_profile(user_id);
 
 alter table post add constraint REF_post_topic_FK
      foreign key (topic)
-     references topic;
+     references topic(name);
 
 
 -- Index Section
