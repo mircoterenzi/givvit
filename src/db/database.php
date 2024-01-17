@@ -420,6 +420,7 @@ class DatabaseHelper{
      * Login //TODO salt password (all below)
      */
 
+
     
     public function checkLogin($username){
         $query = "SELECT id, username, password, sale FROM utente WHERE username = ? LIMIT 1";
@@ -454,7 +455,7 @@ class DatabaseHelper{
      * Register
      */
 
-    public function insertUser($name, $surname, $username, $email, $password, $salt, $image, $descr) {
+    public function insertUser($name, $surname, $username, $email, $password, $salt, $image = null, $descr = null) {
         $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $image, $descr);
@@ -462,33 +463,5 @@ class DatabaseHelper{
 
         return $stmt->insert_id;
     }
-
-    public function insertUser($name, $surname, $username, $email, $password, $salt, $image) {
-        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, profile_img) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssss', $name, $surname, $username, $email, $password, $salt, $image);
-        $stmt->execute();
-
-        return $stmt->insert_id;
-    }
-
-    public function insertUser($name, $surname, $username, $email, $password, $salt, $descr) {
-        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, description) VALUES (?, ?, ?, ?, ?,  ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssss', $name, $surname, $username, $email, $password, $salt, $descr);
-        $stmt->execute();
-
-        return $stmt->insert_id;
-    }
-
-    public function insertUser($name, $surname, $username, $email, $password, $salt) {
-        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $salt);
-        $stmt->execute();
-
-        return $stmt->insert_id;
-    }
-
 }
 ?>
