@@ -86,12 +86,12 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //TODO
     public function getNotificationsById($userId) {
         $query = "
-            SELECT n.id as notificationId, n.tipo, n.testo, p.id as postId, ui.username, ui.id as userId, n.idUtenteRiceve
-            FROM notifica n LEFT JOIN post p ON p.id = n.idPost INNER JOIN utente ui ON ui.id = n.idUtenteInvio
-            WHERE n.idUtenteRiceve = ? AND n.abilitato = 1
+            SELECT n.notification_id, n.notification_type, n.text, n.post_id, u.username,
+            ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username ad username_from, ui.username as username_for
+            FROM notification n INNER JOIN user ui ON ui.id = n.user_for INNER JOIN utente ur ON ur.id = n.user_from
+            WHERE n.user_for = ? AND n.visualized = false
         ";
 
         $stmt = $this->db->prepare($query);
@@ -219,18 +219,18 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //TODO 
-    public function insertPost($testo, $immagine = null, $tema, $utente){
-        $query = "INSERT INTO post (testo, immagine, idTema, idUtente) VALUES (?, ?, ?, ?)";
+    //TODO files
+    public function insertPost( $short_descr = null, $long_descr, $user, $amount_requested, $topic){
+        $query = "INSERT INTO post (long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssii',$testo, $immagine, $tema, $utente);
+        $stmt->bind_param('ssisiis', $long_descr, $short_descr, $amount_requested, date("Y-m-d"), $user, $topic);
         $stmt->execute();
         
         return $stmt->insert_id;
     }
 
-    public function deletePostById($idPost){
-        $query = "UPDATE post SET abilitato = 0 WHERE id = ?";
+    public function closePost($post_id){
+        $query = "UPDATE post SET closed = 0 WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$idPost);
         $stmt->execute();
@@ -395,29 +395,20 @@ class DatabaseHelper{
     }
 
     /**
-     * Notification CRUD
+     * Notification CRUD 
      */
 
-    public function insertNotification($type, $text, $sender, $receiver) {
-        $query = "INSERT INTO notifica (notification_type, text, user_from, user_for) VALUES (?, ?, ?, ?)";
+    public function insertNotification($type, $text, $sender, $receiver, $postId = null) {
+        $query = "INSERT INTO nofication (notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssiii', $type, $text, $post, $sender, $receiver);
+        $stmt->bind_param('ssiiis', $type, $text, $sender, $receiver, $postId, date("Y-m-d"));
         $stmt->execute();
 
         return $stmt->insert_id;
     }
 
-    public function insertNotification($type, $text, $sender, $receiver, $postId) {
-        $query = "INSERT INTO notifica (notification_type, text, user_from, user_for, post_id ) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssiii', $type, $text, $post, $sender, $receiver, $postId);
-        $stmt->execute();
-
-        return $stmt->insert_id;
-    }
-
-    public function deleteNotificationById($idNotification){
-        $query = "UPDATE notifica SET abilitato = 0 WHERE id = ?";
+    public function viewedNotification($idNotification){
+        $query = "UPDATE nofication SET visualized = 0 WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$idNotification);
         $stmt->execute();
