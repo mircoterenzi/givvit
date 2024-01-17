@@ -52,6 +52,7 @@ create table notification (
 
 create table post (
      post_id numeric not null,
+     title varchar(32) not null,
      short_description varchar(128),
      long_description varchar(512) not null,
      amount_requested numeric not null,
