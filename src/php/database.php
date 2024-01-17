@@ -15,7 +15,7 @@ class DatabaseHelper{
 
     public function getUserById($userId) {
         $query = "SELECT u.username, u.description, u.profile_img
-        FROM user,
+        FROM user_profile,
         WHERE user_id = ?";
 
         $stmt = $this->db->prepare($query);
@@ -29,7 +29,7 @@ class DatabaseHelper{
     public function searchUser($input) {
         $query = "
             SELECT u.username, u.description, u.profile_img
-            FROM user,
+            FROM user_profile,
             WHERE username LIKE CONCAT(?, '%')
             OR nome LIKE CONCAT(?, '%')
             OR cognome LIKE CONCAT(?, '%')
@@ -45,7 +45,7 @@ class DatabaseHelper{
 
     public function getUsersByUsername($slug) {
         $query = "SELECT u.username, u.description, u.profile_img
-        FROM user , 
+        FROM user_profile , 
         WHERE username = ?";
 
         $stmt = $this->db->prepare($query);
@@ -59,7 +59,7 @@ class DatabaseHelper{
     public function getUserFollowing($userId) {
         $query = "
             SELECT u.user_id, u.username
-            FROM folow s INNER JOIN user u ON s.followed = u.user_id
+            FROM folow s INNER JOIN user_profile u ON s.followed = u.user_id
             WHERE s.follower = ?
         ";
 
@@ -74,7 +74,7 @@ class DatabaseHelper{
     public function getUserFollowed($userId) {
         $query = "
             SELECT u.user_id, u.username
-            FROM folow s INNER JOIN user u ON s.follower = u.user_id
+            FROM folow s INNER JOIN user_profile u ON s.follower = u.user_id
             WHERE s.followed = ?
         ";
 
@@ -90,7 +90,7 @@ class DatabaseHelper{
         $query = "
             SELECT n.notification_id, n.notification_type, n.text, n.post_id, u.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username ad username_from, ui.username as username_for
-            FROM notification n INNER JOIN user ui ON ui.id = n.user_for INNER JOIN utente ur ON ur.id = n.user_from
+            FROM notification n INNER JOIN user_profile ui ON ui.id = n.user_for INNER JOIN utente ur ON ur.id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
         ";
 
@@ -254,7 +254,7 @@ class DatabaseHelper{
      */
 
     public function insertComment($testo, $post, $utente){
-        $query = "INSERT INTO comment (text, user, post) VALUES (?, ?, ?)";
+        $query = "INSERT INTO comments (text, user, post) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sii',$testo, $utente, $post);
         $stmt->execute();
@@ -263,7 +263,7 @@ class DatabaseHelper{
     }
 
     public function insertCommentResponse($postId, $responseId){
-        $query = "UPDATE comment SET responded_by = ? WHERE post_id = ?";
+        $query = "UPDATE comments SET responded_by = ? WHERE post_id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ii',$responseId, $postId);
         $stmt->execute();
@@ -272,7 +272,7 @@ class DatabaseHelper{
     }
 
     public function getCommentOnPost($postId) {
-        $query = "SELECT * FROM like WHERE post = ?";
+        $query = "SELECT * FROM comments WHERE post = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
@@ -283,18 +283,18 @@ class DatabaseHelper{
     }
 
     /**
-     * Likes CRUD
+     * likess CRUD
      */
 
-    public function getLikesByPostIdAndUserId($idPost, $idUtente){
+    public function getLikesByPostIdAndUserId($idPost, $userID){
         $query = "
             SELECT *
-            FROM like
+            FROM likes
             WHERE post = ? AND user = ?
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $idUtente);
+        $stmt->bind_param('ii',$idPost, $userID);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -303,7 +303,7 @@ class DatabaseHelper{
 
 
     public function getPostLikes($postId) {
-        $count_likes = "SELECT COUNT(*) AS count_likes FROM comment WHERE post = ?";
+        $count_likes = "SELECT COUNT(*) AS count_likes FROM likes WHERE post = ?";
 
         $stmt = $db->prepare($count_likes);
         $stmt->bind_param("i", $post_id);
@@ -312,19 +312,19 @@ class DatabaseHelper{
         return $res->fetch_assoc()['count_likes'];
     }
 
-    public function insertLike($idPost, $idUtente){
-        $query = "INSERT INTO like (post, user) VALUES (?, ?)";
+    public function insertLike($idPost, $userID){
+        $query = "INSERT INTO likes (post, user) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $idUtente);
+        $stmt->bind_param('ii',$idPost, $userID);
         $stmt->execute();
         
         return $stmt->insert_id;
     }
 
-    public function removeLike($idPost, $idUtente){
-        $query = "DELETE FROM like WHERE idPost = ? AND idUtente = ?";
+    public function removeLike($idPost, $userID){
+        $query = "DELETE FROM likes WHERE idPost = ? AND userID = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $idUtente);
+        $stmt->bind_param('ii',$idPost, $userID);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -345,10 +345,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertDonation($idPost, $idUtente, $amount){
+    public function insertDonation($idPost, $userID, $amount){
         $query = "INSERT INTO donation (post, user, amount) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('iii',$idPost, $idUtente, $amount);
+        $stmt->bind_param('iii',$idPost, $userID, $amount);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -455,7 +455,7 @@ class DatabaseHelper{
      */
 
     public function insertUser($name, $surname, $username, $email, $password, $salt, $image, $descr) {
-        $query = "INSERT INTO user (first_name, last_name, username, email, password, sale, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $image, $descr);
         $stmt->execute();
@@ -464,7 +464,7 @@ class DatabaseHelper{
     }
 
     public function insertUser($name, $surname, $username, $email, $password, $salt, $image) {
-        $query = "INSERT INTO user (first_name, last_name, username, email, password, sale, profile_img) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, profile_img) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssssss', $name, $surname, $username, $email, $password, $salt, $image);
         $stmt->execute();
@@ -473,7 +473,7 @@ class DatabaseHelper{
     }
 
     public function insertUser($name, $surname, $username, $email, $password, $salt, $descr) {
-        $query = "INSERT INTO user (first_name, last_name, username, email, password, sale, description) VALUES (?, ?, ?, ?, ?,  ?, ?)";
+        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, description) VALUES (?, ?, ?, ?, ?,  ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssssss', $name, $surname, $username, $email, $password, $salt, $descr);
         $stmt->execute();
@@ -482,7 +482,7 @@ class DatabaseHelper{
     }
 
     public function insertUser($name, $surname, $username, $email, $password, $salt) {
-        $query = "INSERT INTO user (first_name, last_name, username, email, password, sale) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssss', $name, $surname, $username, $email, $password, $salt);
         $stmt->execute();
