@@ -1,4 +1,5 @@
-<?php foreach($templateParams["content"] as $post): ?>
+<?php if(isset($templateParams["posts"])): ?>
+    <?php foreach($templateParams["posts"] as $post): ?>
     <article class="mb-4 p-4 shadow-sm rounded-5 bg-white">
         <div class="row">
             <div class="col text-start">
@@ -10,17 +11,17 @@
                 </svg>
             </div>
         </div>
-        <h2 class="h3 my-3"><?php echo $post["short_description"]; ?></h1>
+        <h2 class="h3 my-3"><?php echo $post["title"]; ?></h1>
 
         <!-- If the photo is present:
             <?php if(isset($post["image"])): ?>
-            <?php echo $templateParams["titolo_pagina"]; ?>
+            <?php echo $templateParams["image"]; ?>
             <?php endif; ?>
         -->
 
         <img src="img/example.jpg" class="img-fluid mb-1" alt="post image"/>
-        <p><?php echo $post["long_description"]; ?></p>
-        <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+        <p><?php echo $post["short_description"]; ?></p>
+        <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
             <div class="progress-bar" style="width: 25%">25%</div>
         </div>
         <div class="row mt-2">
@@ -35,4 +36,9 @@
             </div>
         </div>
     </article>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p class="text-center">Non ci sono post :(</p>
+<?php endif; ?>
+
+
