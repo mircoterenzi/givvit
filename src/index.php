@@ -2,14 +2,16 @@
 require_once("db-config.php");
 
 if(!isset($_SESSION["userId"])) {
-  // @todo: show registration page if there's not an open session
+  // Show login page if there's not an open session
+  $templateParams["title"] = "Login";
+  $templateParams["name"] = "show-login.php";
+
+  require("template/access.php");
 } else {
-  // @todo show homepage
+  // Show homepage if the user is already logged
+  $templateParams["title"] = "Home";
+  $templateParams["name"] = "show-post.php";
+
+  require("template/base.php");
 }
-
-//for the moment i will redirect automatically on homepage
-$templateParams["title"] = "Home";
-$templateParams["name"] = "show-post.php";
-
-require("template/base.php");
 ?>
