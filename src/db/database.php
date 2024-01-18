@@ -425,28 +425,9 @@ class DatabaseHelper{
 
     
     public function checkLogin($username){
-        $query = "SELECT id, username, password, sale FROM utente WHERE username = ? LIMIT 1";
+        $query = "SELECT user_id, username, password, salt FROM user_profile WHERE username = ? LIMIT 1";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s', $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }   
-    
-    public function insertLoginAttempt($userId, $time){
-        $query = "INSERT INTO login_attempts (user_id, time) VALUES (?, ?)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('is', $userId, $time);
-        $stmt->execute();
-
-        return $stmt->insert_id;
-    }   
-
-    public function getLoginAttempts($userId, $timeThd){
-        $query = "SELECT time FROM login_attempts WHERE user_id = ? AND time > ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii', $userId, $timeThd);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -458,7 +439,7 @@ class DatabaseHelper{
      */
 
     public function insertUser($name, $surname, $username, $email, $password, $salt, $image = null, $descr = null) {
-        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, sale, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $image, $descr);
         $stmt->execute();
