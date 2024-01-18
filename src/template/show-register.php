@@ -29,5 +29,5 @@
     </div>
     <label for="register" hidden>Register</label>
     <input class="btn btn-primary w-100 mt-3 mb-2" type="submit" id="register" name="register" value="Register"/>
-    <p>Already member? <a class="text-decoration-none" href="#">Sign in</a></p> <!-- TODO open login page if clicked -->
+    <p>Already member? <a class="text-decoration-none" href="index.php">Sign in</a></p>
 </form>
