@@ -56,7 +56,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserFollowing($userId) {
+    public function getFollowedByUser($userId) {
         $query = "
             SELECT u.user_id, u.username
             FROM folow s INNER JOIN user_profile u ON s.followed = u.user_id
@@ -71,7 +71,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserFollowed($userId) {
+    public function getUserFollowers($userId) {
         $query = "
             SELECT u.user_id, u.username
             FROM folow s INNER JOIN user_profile u ON s.follower = u.user_id
@@ -223,7 +223,8 @@ class DatabaseHelper{
     public function insertPost( $short_descr = null, $long_descr, $user, $amount_requested, $topic){
         $query = "INSERT INTO post (long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssisiis', $long_descr, $short_descr, $amount_requested, date("Y-m-d"), $user, $topic);
+        $date = date("Y-m-d");
+        $stmt->bind_param('ssisiis', $long_descr, $short_descr, $amount_requested, $date, $user, $topic);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -305,8 +306,8 @@ class DatabaseHelper{
     public function getPostLikes($postId) {
         $count_likes = "SELECT COUNT(*) AS count_likes FROM likes WHERE post = ?";
 
-        $stmt = $db->prepare($count_likes);
-        $stmt->bind_param("i", $post_id);
+        $stmt = $this->db->prepare($count_likes);
+        $stmt->bind_param("i", $postId);
         $stmt->execute();
         $res = $stmt->get_result();
         return $res->fetch_assoc()['count_likes'];
@@ -337,7 +338,7 @@ class DatabaseHelper{
     public function checkDonation($idUser, $idPost){
         $query = "SELECT * FROM donation 
                 WHERE post = ? AND user = ?";
-
+        $stmt = $this->db->prepare($query);
         $stmt->bind_param('ii',$idPost, $idUser);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -401,7 +402,8 @@ class DatabaseHelper{
     public function insertNotification($type, $text, $sender, $receiver, $postId = null) {
         $query = "INSERT INTO nofication (notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssiiis', $type, $text, $sender, $receiver, $postId, date("Y-m-d"));
+        $date = date("Y-m-d");
+        $stmt->bind_param('ssiiis', $type, $text, $sender, $receiver, $postId, $date);
         $stmt->execute();
 
         return $stmt->insert_id;
