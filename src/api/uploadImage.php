@@ -10,11 +10,11 @@
         $result["uploadEseguito"] = true;
         $result["fileName"] = $uploadResult[1];
     } else {
-        $result["erroreUpload"] = "Upload immagine non riuscito";
+        $result["errorInUpload"] = "Upload immagine non riuscito";
     }
    } else { 
       // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
-      $result["erroreUpload"] = "Richiesta non valida";
+      $result["errorInUpload"] = "Richiesta non valida";
    }
 
    header('Content-Type: application/json');

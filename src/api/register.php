@@ -2,9 +2,6 @@
    include '../db/database.php';
    include '../utils/functions.php';
 
-   sec_session_start();
-
-   $dbh = new DatabaseHelper("localhost", "root", "", "ontopic", 3306);
    $result["signinDone"] = false;
 
    //inserisco l'utente nel db se non esiste già (username univoco)
@@ -16,7 +13,7 @@
       //controllo se esiste un utente con lo stesso user, altrimenti esegui l'inserimento
       if($dbh->getUsersByUsername($_POST["username"])) {
         $result["errorSignin"] = "Username already taken";
-      } else if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, $_POST["image"])) {
+      } else if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, $_POST["image"], $_POST["desc"])) {
          $result["signinDone"] = true;
       }  
     } else { 
