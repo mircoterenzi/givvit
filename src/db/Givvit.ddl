@@ -73,6 +73,7 @@ create table user_profile (
      last_name varchar(32) not null,
      password varchar(255) not null,
      salt char(255) not null,
+     email char(125) ,
      description varchar(512),
      profile_img varchar(512),
      constraint ID_user_profile_ID primary key (user_id));
@@ -191,4 +192,3 @@ create unique index ID_topic_IND
 
 create unique index ID_user_profile_IND
      on user_profile (user_id);
-

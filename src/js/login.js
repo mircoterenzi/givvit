@@ -1,5 +1,5 @@
 
-document.querySelector("#login-form").addEventListener("submit", function (event) {
+document.querySelector("#form").addEventListener("login", function (event) {
     event.preventDefault()
     login()
     event.target.reset()
@@ -10,11 +10,11 @@ function login() {
     formData.append('username', document.querySelector("#username").value)
     formData.append('password', document.querySelector("#password").value)
     axios.post('./api/login.php', formData).then(response => {
-        if (response.data["logineseguito"]) {
-            document.querySelector("#login-form > p").innerText = "Login done !!"
+        if (response.data["loginDone "]) {
+            document.querySelector("#form > p").innerText = "Login done !!"
             setTimeout(() => document.location.href = "", 2000);
         } else {
-            document.querySelector("#login-form > p").innerText = response.data["loginError"]
+            document.querySelector("#form > p").innerText = response.data["loginError"]
         }
     });
 }

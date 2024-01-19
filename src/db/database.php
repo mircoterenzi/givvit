@@ -436,7 +436,7 @@ class DatabaseHelper{
      * Register
      */
 
-    public function insertUser($name, $surname, $username, $email, $password, $salt, $image = null, $descr = null) {
+    public function insertUser($name, $surname, $username, $email = null, $password, $salt, $image = null, $descr = null) {
         $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $image, $descr);
