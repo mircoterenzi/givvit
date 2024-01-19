@@ -90,7 +90,7 @@ class DatabaseHelper{
 
     public function getNotificationsById($user_id) {
         $query = "
-            SELECT n.notification_id, n.notification_type, n.text, n.post_id, u.username,
+            SELECT n.notification_id, n.notification_type, n.text, n.post_id, ur.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username ad username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.id = n.user_for INNER JOIN utente ur ON ur.id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
@@ -284,9 +284,10 @@ class DatabaseHelper{
      */
 
     public function insertComment($testo, $post, $utente){
-        $query = "INSERT INTO comments (text, user, post) VALUES (?, ?, ?)";
+        $query = "INSERT INTO comments (text, user, post, date) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sii',$testo, $utente, $post);
+        $date = date("Y-m-d");
+        $stmt->bind_param('siis',$testo, $utente, $post, $date);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -302,7 +303,9 @@ class DatabaseHelper{
     }
 
     public function getCommentOnPost($postId) {
-        $query = "SELECT * FROM comments WHERE post = ?
+        $query = "SELECT c.* u.username 
+                FROM comments JOIN user_profile u ON u.user_id = c.user
+                WHERE post = ?
                 ORDER BY p.date DESC";
 
         $stmt = $this->db->prepare($query);
