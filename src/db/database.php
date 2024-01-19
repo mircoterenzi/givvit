@@ -61,7 +61,7 @@ class DatabaseHelper{
     public function getFollowedByUser($user_id) {
         $query = "
             SELECT u.user_id, u.username
-            FROM folow s INNER JOIN user_profile u ON s.followed = u.user_id
+            FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
             WHERE s.follower = ?
         ";
 
@@ -76,7 +76,7 @@ class DatabaseHelper{
     public function getUserFollowers($user_id) {
         $query = "
             SELECT u.user_id, u.username
-            FROM folow s INNER JOIN user_profile u ON s.follower = u.user_id
+            FROM follow s INNER JOIN user_profile u ON s.follower = u.user_id
             WHERE s.followed = ?
         ";
 
@@ -224,8 +224,28 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public getHomeForUser($user_id, $n=-1){
-        
+    public function getHomeForUser($user_id, $n=-1){
+        $query = "SELECT p.title, us.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
+                FROM post p JOIN user_profile us ON us.user_id = p.user 
+                WHERE user in (
+                    SELECT u.user_id
+                    FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
+                    WHERE s.follower = ?
+                )
+                ORDER BY p.date DESC";
+
+        if($n > 0){
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if($n > 0){
+            $stmt->bind_param('i',$n);
+        }
+        $stmt->bind_param('i',$user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function insertPost($title, $short_description = null, $long_description,$user, $amount_requested, $topic){
@@ -387,7 +407,7 @@ class DatabaseHelper{
 
     public function getTopics($n=-1){
         $query = "
-            SELECT nome
+            SELECT name
             FROM topic
         ";
         if($n > 0){

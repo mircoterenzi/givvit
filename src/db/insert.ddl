@@ -3,7 +3,7 @@ INSERT INTO user_profile (user_id, username, first_name, last_name, password, de
 VALUES
 (1, 'pioli', 'Alessandro', 'Coli', 'password1', 'il capo del db', NULL),
 (2, 'sbobito', 'Dario', 'Berti', 'password2', NULL, NULL),
-(3, 'suwi', 'Mirco', 'Terenzi', 'password3', 'quello con tutti 30', NULL),
+(3, 'souzuy', 'Mirco', 'Terenzi', 'password3', 'quello con tutti 30', NULL),
 (4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'Passionate about art and creativity.', NULL),
 (5, 'tech_guru', 'Alex', 'Smith', 'password5', 'Software engineer with a love for technology.', NULL),
 (6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'Promoting a healthy lifestyle.', NULL),
