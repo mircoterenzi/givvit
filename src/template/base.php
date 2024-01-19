@@ -31,7 +31,7 @@
             </div>
         </nav>
         <!-- Bottom navbar -->
-        <nav class="d-flex fixed-bottom justify-content-center">     <!-- TODO right now the icons do nothing if clicked -->
+        <nav class="d-flex fixed-bottom justify-content-center">
             <div class="p-3 mb-2 shadow-lg rounded-5 bg-white">
                 <a href="explore.php" class="link-underline link-underline-opacity-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-compass border-primary" viewBox="0 0 16 16">
@@ -56,9 +56,13 @@
             <h1 class="h2"><?php echo $templateParams["title"]; ?></h1>
         </header>
         <main class="container align-items-center justify-content-center">
-            <?php
-                require($templateParams["name"]);
-            ?>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 border">
+                <?php
+                    require($templateParams["name"]);
+                ?>
+                </div>
+            </div>
         </main>
         <!-- Notification window -->
         <?php require_once("./components/notification-modal.php"); ?>
