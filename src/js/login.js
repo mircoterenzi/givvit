@@ -1,5 +1,5 @@
 
-document.querySelector("#form").addEventListener("login", function (event) {
+document.getElementById("login-form").addEventListener("login", function (event) {
     event.preventDefault()
     login()
     event.target.reset()
@@ -7,14 +7,14 @@ document.querySelector("#form").addEventListener("login", function (event) {
 
 function login() {
     const formData = new FormData()
-    formData.append('username', document.querySelector("#username").value)
-    formData.append('password', document.querySelector("#password").value)
+    formData.append('username', document.getElementById("username").value)
+    formData.append('password', document.getElementById("password").value)
     axios.post('./api/login.php', formData).then(response => {
-        if (response.data["loginDone "]) {
-            document.querySelector("#form > p").innerText = "Login done !!"
-            setTimeout(() => document.location.href = "", 2000);
+        if (response.data["loginDone"]) {
+            document.getElementById("result").innerText = "Login done !!"
+            setTimeout(() => document.location.href = "", 20000);
         } else {
-            document.querySelector("#form > p").innerText = response.data["loginError"]
+            document.getElementById("result").innerText = response.data["loginError"]
         }
     });
 }

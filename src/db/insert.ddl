@@ -1,19 +1,19 @@
 -- Insert sample data into user_profile table
-INSERT INTO user_profile (user_id, username, first_name, last_name, password, salt, description, profile_img)
+INSERT INTO user_profile (user_id, username, first_name, last_name, password, description, profile_img)
 VALUES
-(1, 'pioli', 'Alessandro', 'Coli', 'hashed_password_1', 'outcgl', 'il capo di db', NULL),
-(2, 'sbobito 69', 'Dario', 'Berti', 'hashed_password_2', 'lgucvj', NULL, NULL),
-(3, 'suwi', 'Mirco', 'Terenzi', 'hashed_password_3', 'ajajaj', 'quello con tutti 30', NULL),
-(4, 'creative_mind', 'Emily', 'Johnson', 'hashed_password_4', 'zxcvb', 'Passionate about art and creativity.', NULL),
-(5, 'tech_guru', 'Alex', 'Smith', 'hashed_password_5', 'qweas', 'Software engineer with a love for technology.', NULL),
-(6, 'health_enthusiast', 'Sophia', 'Miller', 'hashed_password_6', '12345', 'Promoting a healthy lifestyle.', NULL),
-(7, 'adventure_seeker', 'Ethan', 'Davis', 'hashed_password_7', 'abcde', 'Exploring the world one adventure at a time.', NULL),
-(8, 'music_lover', 'Olivia', 'Clark', 'hashed_password_8', 'fghij', 'Passionate about music and concerts.', NULL),
-(9, 'bookworm', 'Daniel', 'White', 'hashed_password_9', 'uvwxy', 'Avid reader and literature enthusiast.', NULL),
-(10, 'fitness_freak', 'Ava', 'Wilson', 'hashed_password_10', 'ijklm', 'Dedicated to fitness and well-being.', NULL),
-(11, 'foodie_explorer', 'Mia', 'Martin', 'hashed_password_11', 'mnopq', 'Exploring diverse cuisines and flavors.', NULL),
-(12, 'coding_enthusiast', 'Liam', 'Thompson', 'hashed_password_12', 'rstuv', 'Passionate about coding and programming.', NULL),
-(13, 'nature_lover', 'Emma', 'Anderson', 'hashed_password_13', 'wxyz', 'Connecting with nature and wildlife.', NULL);
+(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'il capo del db', NULL),
+(2, 'sbobito', 'Dario', 'Berti', 'password2', NULL, NULL),
+(3, 'suwi', 'Mirco', 'Terenzi', 'password3', 'quello con tutti 30', NULL),
+(4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'Passionate about art and creativity.', NULL),
+(5, 'tech_guru', 'Alex', 'Smith', 'password5', 'Software engineer with a love for technology.', NULL),
+(6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'Promoting a healthy lifestyle.', NULL),
+(7, 'adventure_seeker', 'Ethan', 'Davis', 'password7', 'Exploring the world one adventure at a time.', NULL),
+(8, 'music_lover', 'Olivia', 'Clark', 'password8', 'Passionate about music and concerts.', NULL),
+(9, 'bookworm', 'Daniel', 'White', 'password9', 'Avid reader and literature enthusiast.', NULL),
+(10, 'fitness_freak', 'Ava', 'Wilson', 'password10', 'Dedicated to fitness and well-being.', NULL),
+(11, 'foodie_explorer', 'Mia', 'Martin', 'password11', 'Exploring diverse cuisines and flavors.', NULL),
+(12, 'coding_enthusiast', 'Liam', 'Thompson', 'password12', 'Passionate about coding and programming.', NULL),
+(13, 'nature_lover', 'Emma', 'Anderson', 'password13', 'Connecting with nature and wildlife.', NULL);
 
 
 -- Insert sample data into topic table

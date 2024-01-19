@@ -2,7 +2,7 @@
    include '../db/database.php';
    include '../utils/functions.php';
 
-   $result["logineseguito"] = false;
+   $result["loginDone"] = false;
 
    //effettua il login
    if(isset($_POST['username'], $_POST['password'])) { 
@@ -13,11 +13,11 @@
          $result["loginDone"] = true;
       } else {
          // Login fallito
-         $result["errorlogin"] = "Wrong username or password";
+         $result["loginError"] = "Wrong username or password";
       }
    } else { 
       // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
-      $result["errorelogin"] = "Invalid Request";
+      $result["loginError"] = "Invalid Request";
    }
 
    header('Content-Type: application/json');

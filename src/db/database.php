@@ -1,4 +1,6 @@
 <?php
+
+    //TODO files (all) - orderedBy date on getPosts, add username to get Post, comments, notifications
 class DatabaseHelper{
     public $db;
 
@@ -13,13 +15,13 @@ class DatabaseHelper{
     * User CRUD
     */
 
-    public function getUserById($userId) {
-        $query = "SELECT u.username, u.description, u.profile_img
+    public function getUserById($user_id) {
+        $query = "SELECT username, first_name, last_name
         FROM user_profile
         WHERE user_id = ?";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -56,7 +58,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getFollowedByUser($userId) {
+    public function getFollowedByUser($user_id) {
         $query = "
             SELECT u.user_id, u.username
             FROM folow s INNER JOIN user_profile u ON s.followed = u.user_id
@@ -64,14 +66,14 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserFollowers($userId) {
+    public function getUserFollowers($user_id) {
         $query = "
             SELECT u.user_id, u.username
             FROM folow s INNER JOIN user_profile u ON s.follower = u.user_id
@@ -79,14 +81,14 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNotificationsById($userId) {
+    public function getNotificationsById($user_id) {
         $query = "
             SELECT n.notification_id, n.notification_type, n.text, n.post_id, u.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username ad username_from, ui.username as username_for
@@ -95,7 +97,7 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -103,7 +105,7 @@ class DatabaseHelper{
     }
 
 
-    public function checkFollow($userId, $followedId) {
+    public function checkFollow($user_id, $followedId) {
         $query = "
             SELECT *
             FROM follow
@@ -111,36 +113,36 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$userId,$followedId);
+        $stmt->bind_param('ii',$user_id,$followedId);
         $stmt->execute();
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function followUser($userId, $followedId) {
+    public function followUser($user_id, $followedId) {
         $query = "
             INSERT INTO follow (follower, followed)
             VALUES (?, ?)
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$userId,$followedId);
+        $stmt->bind_param('ii',$user_id,$followedId);
         $stmt->execute();
     }
 
-    public function unfollowUser($userId, $followedId) {
+    public function unfollowUser($user_id, $followedId) {
         $query = "
             DELETE FROM follow
             WHERE follower = ? AND followed = ?
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$userId,$followedId);
+        $stmt->bind_param('ii',$user_id,$followedId);
         $stmt->execute();
     }
 
-    public function updateUserWithImg($userId, $username, $email, $nome, $cognome, $imgProfilo) {
+    public function updateUserWithImg($user_id, $username, $email, $nome, $cognome, $imgProfilo) {
         $query = "
             UPDATE utente
             SET username = ?, nome = ?, cognome = ?, email = ?, imgProfilo = ?
@@ -148,11 +150,11 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssi',$username,$nome,$cognome,$email,$imgProfilo,$userId);
+        $stmt->bind_param('sssssi',$username,$nome,$cognome,$email,$imgProfilo,$user_id);
         $stmt->execute();
     }
 
-    public function updateUserWithoutImg($userId, $username, $email, $nome, $cognome) {
+    public function updateUserWithoutImg($user_id, $username, $email, $nome, $cognome) {
         $query = "
             UPDATE utente
             SET username = ?, nome = ?, cognome = ?, email = ?
@@ -160,7 +162,7 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssi',$username,$nome,$cognome,$email,$userId);
+        $stmt->bind_param('ssssi',$username,$nome,$cognome,$email,$user_id);
         $stmt->execute();
     }
 
@@ -181,7 +183,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostsbyUser($userId, $n=-1){
+    public function getPostsbyUser($user_id, $n=-1){
         $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
         FROM post
         WHERE user = ?";
@@ -193,7 +195,7 @@ class DatabaseHelper{
         if($n > 0){
             $stmt->bind_param('i',$n);
         }
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -219,7 +221,6 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    //TODO files
     public function insertPost($title, $short_description = null, $long_description,$user, $amount_requested, $topic){
         $query = "INSERT INTO post (title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
@@ -287,7 +288,7 @@ class DatabaseHelper{
      * likess CRUD
      */
 
-    public function getLikesByPostIdAndUserId($idPost, $userID){
+    public function getLikesByPostIdAnduser_id($idPost, $user_id){
         $query = "
             SELECT *
             FROM likes
@@ -295,7 +296,7 @@ class DatabaseHelper{
         ";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $userID);
+        $stmt->bind_param('ii',$idPost, $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -313,19 +314,19 @@ class DatabaseHelper{
         return $res->fetch_assoc()['count_likes'];
     }
 
-    public function insertLike($idPost, $userID){
+    public function insertLike($idPost, $user_id){
         $query = "INSERT INTO likes (post, user) VALUES (?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $userID);
+        $stmt->bind_param('ii',$idPost, $user_id);
         $stmt->execute();
         
         return $stmt->insert_id;
     }
 
-    public function removeLike($idPost, $userID){
+    public function removeLike($idPost, $user_id){
         $query = "DELETE FROM likes WHERE post = ? AND user = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $userID);
+        $stmt->bind_param('ii',$idPost, $user_id);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -346,10 +347,10 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertDonation($idPost, $userID, $amount){
+    public function insertDonation($idPost, $user_id, $amount){
         $query = "INSERT INTO donation (post, user, amount) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('iii',$idPost, $userID, $amount);
+        $stmt->bind_param('iii',$idPost, $user_id, $amount);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -366,7 +367,7 @@ class DatabaseHelper{
         if($n > 0){
             $stmt->bind_param('i',$n);
         }
-        $stmt->bind_param('i',$userId);
+        $stmt->bind_param('i',$user_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -436,7 +437,7 @@ class DatabaseHelper{
      * Register
      */
 
-    public function getNextUserId(){
+    public function getNextuser_id(){
         $query = "SELECT MAX(user_id) as max_id FROM user_profile";
         $stmt = $this->db->execute_query($query);
         $row = $stmt->fetch_assoc();
@@ -448,7 +449,7 @@ class DatabaseHelper{
     public function insertUser($name, $surname, $username, $email = null, $password, $salt, $image = null, $descr = null) {
         $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $id = $this->getNextUserId();
+        $id = $this->getNextuser_id();
         $stmt->bind_param('issssssss',$id, $name, $surname, $username, $email, $password, $salt, $image, $descr);
         $stmt->execute();
 
