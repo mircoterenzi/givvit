@@ -13,10 +13,10 @@
         </div>
         <h2 class="h3 my-3"><?php echo $post["title"]; ?></h1>
 
-        <!-- If the photo is present:
-            <?php if(isset($post["image"])): ?>
-            <?php echo $templateParams["image"]; ?>
-            <?php endif; ?>
+        <!-- TODO: remove comment
+            <?php if(isset($post["image"])): 
+                echo($templateParams["image"]);
+            endif; ?>
         -->
 
         <img src="img/example.jpg" class="img-fluid mb-1" alt="post image"/>
@@ -38,7 +38,7 @@
     </article>
     <?php endforeach; ?>
 <?php else: ?>
-    <p class="text-center">Non ci sono post :(</p>
+    <p class="text-center">There are no post :(</p>
 <?php endif; ?>
 
 
