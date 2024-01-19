@@ -68,7 +68,7 @@ create table topic (
 
 create table user_profile (
      user_id numeric not null,
-     user_name varchar(32) not null,
+     username varchar(32) not null,
      first_name varchar(32) not null,
      last_name varchar(32) not null,
      password varchar(255) not null,

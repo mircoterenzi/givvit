@@ -436,10 +436,20 @@ class DatabaseHelper{
      * Register
      */
 
+    public function getNextUserId(){
+        $query = "SELECT MAX(user_id) as max_id FROM user_profile";
+        $stmt = $this->db->execute_query($query);
+        $row = $stmt->fetch_assoc();
+    
+        return $row['max_id'] + 1;
+    }
+    
+
     public function insertUser($name, $surname, $username, $email = null, $password, $salt, $image = null, $descr = null) {
-        $query = "INSERT INTO user_profile (first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $image, $descr);
+        $id = $this->getNextUserId();
+        $stmt->bind_param('issssssss',$id, $name, $surname, $username, $email, $password, $salt, $image, $descr);
         $stmt->execute();
 
         return $stmt->insert_id;

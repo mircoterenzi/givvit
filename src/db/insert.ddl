@@ -1,5 +1,5 @@
 -- Insert sample data into user_profile table
-INSERT INTO user_profile (user_id, user_name, first_name, last_name, password, salt, description, profile_img)
+INSERT INTO user_profile (user_id, username, first_name, last_name, password, salt, description, profile_img)
 VALUES
 (1, 'pioli', 'Alessandro', 'Coli', 'hashed_password_1', 'outcgl', 'il capo di db', NULL),
 (2, 'sbobito 69', 'Dario', 'Berti', 'hashed_password_2', 'lgucvj', NULL, NULL),
