@@ -52,18 +52,18 @@
                 </a>
             </div>
         </nav>
-        <header class="d-flex px-4 mt-5">
-            <h1 class="h2"><?php echo $templateParams["title"]; ?></h1>
-        </header>
-        <main class="container align-items-center justify-content-center">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 border">
-                <?php
-                    require($templateParams["name"]);
-                ?>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 border">
+                <header class="d-flex px-4 mt-5">
+                    <h1 class="h2"><?php echo $templateParams["title"]; ?></h1>
+                </header>
+                <main class="container">
+                        <?php
+                            require($templateParams["name"]);
+                        ?>
+                </main>
             </div>
-        </main>
+        </div>
         <!-- Notification window -->
         <?php require_once("./components/notification-modal.php"); ?>
         <!-- Add new post window -->

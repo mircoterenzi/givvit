@@ -224,7 +224,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public getHomeForUser($user_id, $n=-1){
+    public function getHomeForUser($user_id, $n=-1){
         
     }
 
@@ -387,7 +387,7 @@ class DatabaseHelper{
 
     public function getTopics($n=-1){
         $query = "
-            SELECT nome
+            SELECT name
             FROM topic
         ";
         if($n > 0){
