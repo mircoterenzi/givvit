@@ -26,7 +26,7 @@
         </div>
         <div class="row mt-2">
             <div class="col inline text-start">
-                <p>@username</p>
+                <p>@<?php echo $post["username"]; ?></p>
             </div>
             <div class="col text-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-chat-left-dots" viewBox="0 0 16 16">

@@ -1,6 +1,6 @@
 <?php
 
-    //TODO files (all) - orderedBy date on getPosts, add username to get Post, comments, notifications
+    //TODO files (all) - comments, notifications
 class DatabaseHelper{
     public $db;
 
@@ -171,9 +171,10 @@ class DatabaseHelper{
      */
 
     public function getPostById($postId) {
-        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
-                FROM post 
-                WHERE post_id = ?";
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
+                FROM post p JOIN user_profile u ON u.user_id = p.user 
+                WHERE post_id = ?
+                ORDER BY p.date DESC";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
@@ -184,9 +185,10 @@ class DatabaseHelper{
     }
 
     public function getPostsbyUser($user_id, $n=-1){
-        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
-        FROM post
-        WHERE user = ?";
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
+                FROM post p JOIN user_profile u ON u.user_id = p.user 
+                WHERE user = ?
+                ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -203,9 +205,10 @@ class DatabaseHelper{
     }
  
     public function getPostsbyTheme($theme, $n=-1){
-        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
-                FROM post
-                WHERE topic = ?";
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
+                FROM post p JOIN user_profile u ON u.user_id = p.user 
+                WHERE topic = ?
+                ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -219,6 +222,10 @@ class DatabaseHelper{
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public getHomeForUser($user_id, $n=-1){
+        
     }
 
     public function insertPost($title, $short_description = null, $long_description,$user, $amount_requested, $topic){
