@@ -1,19 +1,17 @@
 <!-- Profile info -->
 <section class="container p-4 shadow-sm rounded-5 bg-white">
-    <div class="d-flex justify-content-center mb-2">
-        <div class="ratio ratio-1x1 w-50">
-            <div class="overflow-hidden rounded-circle">
-                <img src="<?php echo($profile["profile_img"]); ?>" class="img-fluid" alt="profile picture"/>
+    <div class="row mb-3 align-items-center">
+        <div class="col-6">
+            <div class="ratio ratio-1x1 rounded-circle overflow-hidden">
+                <img src="<?php echo($profile["profile_img"]); ?>" alt="profile picture"/>
             </div>
         </div>
-        <div class="col align-self-center ms-4">
-            <p class="row">Followers: <?php echo($profile["followers"]); ?></p>
-            <p class="row">Following: <?php echo($profile["following"]); ?></p>
-        </div>
+        <p class="col-3">Followers: <?php echo($profile["followers"]); ?></p>
+        <p class="col-3">Following: <?php echo($profile["following"]); ?></p>
     </div>
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col text-start">
-            <p class="mb-0"><?php echo($profile["name"]); ?></p>
+            <p class="mb-0"><?php echo($profile["name"]); ?> <?php echo($profile["surname"]); ?></p>
             <p class="fw-bold">@<?php echo($profile["username"]); ?></p>
         </div>
         <div class="col text-end">
@@ -34,9 +32,11 @@
 </section>
 
 <!-- Post selection -->
-<section class="d-flex p-4 justify-content-center">
-    <button type="button" class="btn btn-primary mx-2">Posted: <?php echo($profile["num_posted"]); ?></button>
-    <button type="button" class="btn btn-primary mx-2">Supported: <?php echo($profile["num_supported"]); ?></button>
+<section class="container my-4">
+    <div class="btn-group">
+        <a href="#" class="btn btn-primary active" aria-current="page">Posted: <?php echo($profile["num_posted"]); ?></a>
+        <a href="#" class="btn btn-primary">Supported: <?php echo($profile["num_supported"]); ?></a>
+    </div>
 </section>
 
 <!-- Posts -->
