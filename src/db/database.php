@@ -1,6 +1,6 @@
 <?php
 
-    //TODO files (all) - comments, notifications
+    //TODO files (all)
 class DatabaseHelper{
     public $db;
 
@@ -94,6 +94,7 @@ class DatabaseHelper{
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username ad username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.id = n.user_for INNER JOIN utente ur ON ur.id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
+            ORDER BY p.date DESC
         ";
 
         $stmt = $this->db->prepare($query);
@@ -301,7 +302,8 @@ class DatabaseHelper{
     }
 
     public function getCommentOnPost($postId) {
-        $query = "SELECT * FROM comments WHERE post = ?";
+        $query = "SELECT * FROM comments WHERE post = ?
+                ORDER BY p.date DESC";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
@@ -385,7 +387,8 @@ class DatabaseHelper{
 
     public function supportedPostByUser($idUser, $n=-1){
         $query = "SELECT * FROM post 
-                WHERE post_id IN ( SELECT post from donation WHERE user = ?)";
+                WHERE post_id IN ( SELECT post from donation WHERE user = ?) 
+                ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
