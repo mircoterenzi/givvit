@@ -64,10 +64,11 @@
                 $stmt->execute(); // Esegue la query creata.
                 $stmt->store_result();
         
+                $password = 0; // used to ignore error
                 if($stmt->num_rows == 1) { // se l'utente esiste
-                $stmt->bind_result($password); // recupera le variabili dal risultato ottenuto.
-                $stmt->fetch();
-                $login_check = hash('sha512', $password.$user_browser);
+                    $stmt->bind_result($password); // recupera le variabili dal risultato ottenuto.
+                    $stmt->fetch();
+                    $login_check = hash('sha512', $password.$user_browser);
                 if($login_check == $login_string) {
                     // Login eseguito!!!!
                     return true;

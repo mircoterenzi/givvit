@@ -10,7 +10,7 @@ create database Givvit;
 
 create table comments (
      post numeric not null,
-     text varchar(256) not null,
+     text varchar(512) not null,
      date date not null,
      comment_id numeric not null,
      user numeric not null,
@@ -43,7 +43,7 @@ create table notification (
      user_for numeric not null,
      notification_id numeric not null,
      date date not null,
-     text varchar(250) not null,
+     text varchar(255) not null,
      notification_type varchar(255) not null,
      user_from numeric not null,
      visualized numeric not null default 1,
@@ -52,9 +52,9 @@ create table notification (
 
 create table post (
      post_id numeric not null,
-     title varchar(32) not null,
-     short_description varchar(128),
-     long_description varchar(512) not null,
+     title varchar(64) not null,
+     short_description varchar(255),
+     long_description varchar(1024) not null,
      amount_requested numeric not null,
      date date not null,
      closed numeric not null default 1,
@@ -68,13 +68,13 @@ create table topic (
 
 create table user_profile (
      user_id numeric not null,
-     user_name varchar(16) not null,
-     first_name varchar(20) not null,
-     last_name varchar(20) not null,
+     user_name varchar(32) not null,
+     first_name varchar(32) not null,
+     last_name varchar(32) not null,
      password varchar(255) not null,
      salt char(255) not null,
-     description varchar(255),
-     profile_img varchar(255),
+     description varchar(512),
+     profile_img varchar(512),
      constraint ID_user_profile_ID primary key (user_id));
 
 

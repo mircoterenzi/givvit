@@ -15,7 +15,7 @@ class DatabaseHelper{
 
     public function getUserById($userId) {
         $query = "SELECT u.username, u.description, u.profile_img
-        FROM user_profile,
+        FROM user_profile
         WHERE user_id = ?";
 
         $stmt = $this->db->prepare($query);
@@ -29,7 +29,7 @@ class DatabaseHelper{
     public function searchUser($input) {
         $query = "
             SELECT u.username, u.description, u.profile_img
-            FROM user_profile,
+            FROM user_profile
             WHERE username LIKE CONCAT(?, '%')
             OR nome LIKE CONCAT(?, '%')
             OR cognome LIKE CONCAT(?, '%')
@@ -45,7 +45,7 @@ class DatabaseHelper{
 
     public function getUsersByUsername($slug) {
         $query = "SELECT u.username, u.description, u.profile_img
-        FROM user_profile , 
+        FROM user_profile
         WHERE username = ?";
 
         $stmt = $this->db->prepare($query);
@@ -169,7 +169,7 @@ class DatabaseHelper{
      */
 
     public function getPostById($postId) {
-        $query = "SELECT user, long_descr, short_descr, files, topic, date, amount_requested, 
+        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
                 FROM post 
                 WHERE post_id = ?";
 
@@ -182,8 +182,8 @@ class DatabaseHelper{
     }
 
     public function getPostsbyUser($userId, $n=-1){
-        $query = "SELECT user, long_descr, short_descr, files, topic, date, amount_requested, 
-        FROM post 
+        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
+        FROM post
         WHERE user = ?";
 
         if($n > 0){
@@ -201,18 +201,18 @@ class DatabaseHelper{
     }
  
     public function getPostsbyTheme($theme, $n=-1){
-        $query = "SELECT user, long_descr, short_descr, files, topic, date, amount_requested, 
-                FROM post 
+        $query = "SELECT title, user, long_description, short_description, topic, date, amount_requested
+                FROM post
                 WHERE topic = ?";
 
         if($n > 0){
             $query .= " LIMIT ?";
         }
         $stmt = $this->db->prepare($query);
+        $stmt->bind_param('s',$theme);
         if($n > 0){
             $stmt->bind_param('i',$n);
         }
-        $stmt->bind_param('s',$theme);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -220,11 +220,11 @@ class DatabaseHelper{
     }
 
     //TODO files
-    public function insertPost( $short_descr = null, $long_descr, $user, $amount_requested, $topic){
-        $query = "INSERT INTO post (long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?)";
+    public function insertPost($title, $short_description = null, $long_description,$user, $amount_requested, $topic){
+        $query = "INSERT INTO post (title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $stmt->bind_param('ssisiis', $long_descr, $short_descr, $amount_requested, $date, $user, $topic);
+        $stmt->bind_param('sssisiis',$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -323,7 +323,7 @@ class DatabaseHelper{
     }
 
     public function removeLike($idPost, $userID){
-        $query = "DELETE FROM likes WHERE idPost = ? AND userID = ?";
+        $query = "DELETE FROM likes WHERE post = ? AND user = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ii',$idPost, $userID);
         $stmt->execute();
@@ -379,7 +379,7 @@ class DatabaseHelper{
 
     public function getTopics($n=-1){
         $query = "
-            SELECT  nome
+            SELECT nome
             FROM topic
         ";
         if($n > 0){
@@ -419,10 +419,8 @@ class DatabaseHelper{
     }
     
     /**
-     * Login //TODO salt password (all below)
+     * Login
      */
-
-
     
     public function checkLogin($username){
         $query = "SELECT user_id, username, password, salt FROM user_profile WHERE username = ? LIMIT 1";
