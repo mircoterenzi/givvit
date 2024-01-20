@@ -512,14 +512,14 @@ class DatabaseHelper{
     }
     
 
-    public function insertUser($name, $surname, $username, $email, $password, $salt, $descr) {
-        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public function insertUser($name, $surname, $username, $email, $password, $salt, $descr = null, $img = null) {
+        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, description,profile_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $id = $this->getNextuser_id();
-        $stmt->bind_param('isssssss',$id, $name, $surname, $username, $email, $password, $salt, $descr);
+        $stmt->bind_param('issssssss',$id, $name, $surname, $username, $email, $password, $salt, $descr, $img);
         $stmt->execute();
 
-        return $stmt->insert_id;
+        return $id;
     }
 }
 ?>

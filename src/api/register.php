@@ -13,11 +13,22 @@
       //controllo se esiste un utente con lo stesso user, altrimenti esegui l'inserimento
       if($dbh->getUsersByUsername($_POST["username"])) {
         $result["errorSignin"] = "Username already taken";
-      } else if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, $_POST["desc"])) {
-         $result["signinDone"] = true;
-         $_SESSION["userId"] = $dbh->getUsersByUsername($_POST["username"]);
+      } else if(isset($_POST["desc"]) && isset($_POST["image"])) {
+         if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, $_POST["desc"],$_POST["image"])){
+            $result["signinDone"] = true;
+         }
+      }else if(isset($_POST["desc"])) {
+         if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, $_POST["desc"], null)){
+            $result["signinDone"] = true;
+         }
+      }else if(isset($_POST["image"])) {
+         if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt, null, $_POST["image"])){
+            $result["signinDone"] = true;
+         }
       }else{
-         $result["errorSignin"] = "insert failed";
+         if($dbh->insertUser($_POST['name'], $_POST['surname'], $_POST["username"], $_POST["email"], $password, $salt)){
+            $result["signinDone"] = true;
+         }
       }
    } else { 
       // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.

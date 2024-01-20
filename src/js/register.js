@@ -6,6 +6,20 @@ document.getElementById("signin-form").addEventListener("submit", function (even
 
 //TODO img e descr optional
 
+function addtodb(formDataUser){
+    
+    axios.post('./api/register.php', formDataUser).then(response => {
+        console.log("  :");
+        console.log(response.data);
+        if (response.data["signinDone"]) {
+            document.getElementById("result").innerText = "Login done !!"
+            setTimeout(() => document.location.href = "", 2000);
+        } else {
+            document.getElementById("result").innerText = response.data["errorSignin"]
+        }
+    });
+}
+
 function signin() {
 
     //form data for user post req
@@ -18,31 +32,22 @@ function signin() {
     formDataUser.append('desc', document.getElementById("desc").value)
 
 
-    //const formDataImage = new FormData();
-    //formDataImage.append("image", document.getElementById("profile-img").files[0]);
+    const fileInput  = document.getElementById("profile-img");
 
-    axios.post('./api/register.php', formDataUser).then(response => {
-        if (response.data["signinDone"]) {
-            document.getElementById("result").innerText = "Login done !!"
-            setTimeout(() => document.location.href = "", 2000);
-        } else {
-            document.getElementById("result").innerText = response.data["errorSignin"]
-        }
-    });
-
-    /*make post req to upload image, if ok send post req to signin endpoint
-    axios.post('../api/uploadImage.php', formDataImage).then(responseUpload => {
-        if (!responseUpload.data["uploadDone"]) {
-            document.querySelector("#signin-form > p").innerText = responseUpload.data["errorInUpload"]
-        } else {
-            formDataUser.append('image', responseUpload.data["fileName"])
-            axios.post('../api/register.php', formDataUser).then(responseSignin => {
-                if (responseSignin.data["signinDone"]) {
-                    document.querySelector("#signin-form > p").innerText = "Registrazione eseguita con successo!"
-                    setTimeout(() => document.location.href = "../index.php", 2000);
-                } 
-            });
-        }
-    });*/
-    
+    if(fileInput.files.length > 0){ 
+        const formDataImage = new FormData();
+        formDataImage.append("image", fileInput.files[0]);
+        axios.post('./api/uploadImage.php', formDataImage).then(responseUpload => {
+            console.log("iamge upload:");
+            console.log(responseUpload.data);
+            if (!responseUpload.data["uploadDone"]) {
+                document.querySelector("#signin-form > p").innerText = responseUpload.data["errorInUpload"]
+            } else {
+                formDataUser.append('image', responseUpload.data["fileName"])
+                addtodb(formDataUser);
+            }
+        });
+    }else{
+        addtodb(formDataUser);
+    }
 }
