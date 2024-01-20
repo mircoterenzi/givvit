@@ -1,4 +1,4 @@
-<?php if(isset($templateParams["posts"])): ?>
+<?php if(!empty($templateParams["posts"])): ?>
     <?php foreach($templateParams["posts"] as $post): ?>
     <article class="mb-4 p-4 shadow-sm rounded-5 bg-white">
         <div class="row">
