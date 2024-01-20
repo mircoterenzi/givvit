@@ -1,4 +1,5 @@
 <!-- Profile info -->
+<?php $profile = $templateParams["profile"][0] ?>
 <section class="container p-4 shadow-sm rounded-5 bg-white">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
@@ -6,12 +7,12 @@
                 <img src="<?php echo($profile["profile_img"]); ?>" alt="profile picture"/>
             </div>
         </div>
-        <p class="col-3">Followers: <?php echo($profile["followers"]); ?></p>
-        <p class="col-3">Following: <?php echo($profile["following"]); ?></p>
+        <p class="col-3">Followers: <?php echo($profile["n_followers"]); ?></p>
+        <p class="col-3">Following: <?php echo($profile["n_followed"]); ?></p>
     </div>
     <div class="row align-items-center">
         <div class="col text-start">
-            <p class="mb-0"><?php echo($profile["name"]); ?> <?php echo($profile["surname"]); ?></p>
+            <p class="mb-0"><?php echo($profile["first_name"]); ?> <?php echo($profile["last_name"]); ?></p>
             <p class="fw-bold">@<?php echo($profile["username"]); ?></p>
         </div>
         <div class="col text-end">
@@ -22,20 +23,14 @@
             </svg>
         </div>
     </div>
-    <p>
-        <?php 
-        if(isset($profile["description"])):
-            echo($profile["description"]);
-        endif;
-        ?>
-    </p>
+    <p><?php  echo($profile["description"]);?></p>
 </section>
 
 <!-- Post selection -->
 <section class="container my-4">
     <div class="btn-group">
         <a href="#" class="btn btn-primary active" aria-current="page">Posted: <?php echo($profile["num_posted"]); ?></a>
-        <a href="#" class="btn btn-primary">Supported: <?php echo($profile["num_supported"]); ?></a>
+        <a href="#" class="btn btn-primary">Supported: <?php echo($profile["num_donations"]); ?></a>
     </div>
 </section>
 
