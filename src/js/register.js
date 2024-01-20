@@ -9,11 +9,9 @@ document.getElementById("signin-form").addEventListener("submit", function (even
 function addtodb(formDataUser){
     
     axios.post('./api/register.php', formDataUser).then(response => {
-        console.log("  :");
-        console.log(response.data);
         if (response.data["signinDone"]) {
             document.getElementById("result").innerText = "Login done !!"
-            setTimeout(() => document.location.href = "", 2000);
+            setTimeout(() => document.location.href = "index.php", 2000);
         } else {
             document.getElementById("result").innerText = response.data["errorSignin"]
         }
@@ -38,8 +36,6 @@ function signin() {
         const formDataImage = new FormData();
         formDataImage.append("image", fileInput.files[0]);
         axios.post('./api/uploadImage.php', formDataImage).then(responseUpload => {
-            console.log("iamge upload:");
-            console.log(responseUpload.data);
             if (!responseUpload.data["uploadDone"]) {
                 document.querySelector("#signin-form > p").innerText = responseUpload.data["errorInUpload"]
             } else {

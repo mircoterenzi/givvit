@@ -30,6 +30,11 @@
             $result["signinDone"] = true;
          }
       }
+      if($result["signinDone"]){
+         $_SESSION['userId'] = $dbh->getUsersByUsername($_POST["username"]); 
+         $_SESSION['username'] = $_POST["username"];
+         $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
+      }
    } else { 
       // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
       $result["errorSignin"] = "Request not valid";
