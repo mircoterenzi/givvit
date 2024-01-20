@@ -1,6 +1,6 @@
-<?php 
-   include '../db/database.php';
-   include '../utils/functions.php';
+<?php
+   require_once("../db-config.php");
+   require_once("../utils/functions.php");
 
    $result["loginDone"] = false;
 
