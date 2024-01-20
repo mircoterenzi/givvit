@@ -37,7 +37,7 @@
             if($dbPassword == $password) {       
                 $user_browser = $_SERVER['HTTP_USER_AGENT']; // Recupero il parametro 'user-agent' relativo all'utente corrente.
     
-                $_SESSION['user_id'] = $userId; 
+                $_SESSION['userId'] = $userId; 
                 $_SESSION['username'] = $username;
                 $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
                 // Login eseguito con successo.
