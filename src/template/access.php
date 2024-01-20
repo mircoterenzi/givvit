@@ -6,8 +6,6 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <title>Givvit: <?php echo $templateParams["title"]; ?></title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="../../js/login.js" defer></script>
-        <script src="../../js/register.js" defer></script>
         <link rel="icon" type="image/x-icon" href="img/logo-icon.png"/>
     </head>
     <body class="d-flex justify-content-center py-4 bg-primary-subtle">

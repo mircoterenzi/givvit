@@ -1,6 +1,3 @@
-
-const axios = require('axios/dist/browser/axios.cjs');
-
 document.getElementById("signin-form").addEventListener("submit", function (event) {
     event.preventDefault()
     signin()

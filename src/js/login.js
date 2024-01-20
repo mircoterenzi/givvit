@@ -1,5 +1,5 @@
 
-document.getElementById("login-form").addEventListener("login", function (event) {
+document.getElementById("login-form").addEventListener("sumbit", function (event) {
     event.preventDefault()
     login()
     event.target.reset()
