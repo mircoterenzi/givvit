@@ -27,7 +27,7 @@ class DatabaseHelper{
                 on posted.user = u.user_id join
                 (SELECT count(post) as num_donations, user FROM donation group by user) donations
                 on donations.user = u.user_id
-                WHERE user_id = ?";
+                WHERE u.user_id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$user_id);
@@ -49,9 +49,9 @@ class DatabaseHelper{
                 on posted.user = u.user_id join
                 (SELECT count(post) as num_donations, user FROM donation group by user) donations
                 on donations.user = u.user_id
-                    WHERE username LIKE CONCAT(?, '%')
-                    OR nome LIKE CONCAT(?, '%')
-                    OR cognome LIKE CONCAT(?, '%')";
+                    WHERE u.username LIKE CONCAT(?, '%')
+                    OR u.fist_name LIKE CONCAT(?, '%')
+                    OR u.last_name LIKE CONCAT(?, '%')";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sss',$input,$input,$input);
