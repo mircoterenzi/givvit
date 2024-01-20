@@ -236,7 +236,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostsbyTheme($theme, $n=-1){
+    public function getPostsbyTopic($topic, $n=-1){
         $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
@@ -247,7 +247,7 @@ class DatabaseHelper{
             $query .= " LIMIT ?";
         }
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s',$theme);
+        $stmt->bind_param('s',$topic);
         if($n > 0){
             $stmt->bind_param('i',$n);
         }
