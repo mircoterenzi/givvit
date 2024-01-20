@@ -205,6 +205,25 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
  
+    public function getAllPosts($n=-1){
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
+                FROM post p JOIN user_profile u ON u.user_id = p.user 
+                ORDER BY p.date DESC";
+
+        if($n > 0){
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if($n > 0){
+            $stmt->bind_param('i',$n);
+        }
+        $stmt->bind_param('i',$user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function getPostsbyTheme($theme, $n=-1){
         $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
