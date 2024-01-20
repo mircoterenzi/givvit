@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const name = t.id;
             const formData = new FormData();
             formData.append('topic', name);
-            axios.post('./api/choose-topic.php', formData);
-            alert(formData.get('topic'));
+            axios.post('./api/choose-topic.php', formData).then(() => {
+                setTimeout(() => document.location.href = "explore-with-topic.php", 1000);
+            });
         });
     });
 });
