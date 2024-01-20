@@ -11,6 +11,7 @@
       if(login($username, $password, $dbh) == true) {
          // Login eseguito
          $result["loginDone"] = true;
+         $_SESSION["userId"] = $dbh->getUsersByUsername($_POST["username"]);
       } else {
          // Login fallito
          $result["loginError"] = "Wrong username or password";

@@ -4,6 +4,8 @@ document.getElementById("signin-form").addEventListener("submit", function (even
     event.target.reset()
 });
 
+//TODO img e descr optional
+
 function signin() {
 
     //form data for user post req
@@ -16,10 +18,19 @@ function signin() {
     formDataUser.append('desc', document.getElementById("desc").value)
 
 
-    const formDataImage = new FormData();
-    formDataImage.append("image", document.getElementById("profile-img").files[0]);
+    //const formDataImage = new FormData();
+    //formDataImage.append("image", document.getElementById("profile-img").files[0]);
 
-    //make post req to upload image, if ok send post req to signin endpoint
+    axios.post('./api/register.php', formDataUser).then(response => {
+        if (response.data["signinDone"]) {
+            document.getElementById("result").innerText = "Login done !!"
+            setTimeout(() => document.location.href = "", 2000);
+        } else {
+            document.getElementById("result").innerText = response.data["errorSignin"]
+        }
+    });
+
+    /*make post req to upload image, if ok send post req to signin endpoint
     axios.post('../api/uploadImage.php', formDataImage).then(responseUpload => {
         if (!responseUpload.data["uploadDone"]) {
             document.querySelector("#signin-form > p").innerText = responseUpload.data["errorInUpload"]
@@ -32,6 +43,6 @@ function signin() {
                 } 
             });
         }
-    });
+    });*/
     
 }

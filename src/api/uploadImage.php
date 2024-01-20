@@ -1,6 +1,7 @@
 <?php 
-   include '../utils/functions.php';
-
+   require_once("../db-config.php");
+   require_once("../utils/functions.php");
+   
    $result["uploadEseguito"] = false;
 
    //carico img nel filesystem

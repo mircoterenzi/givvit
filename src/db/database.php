@@ -62,18 +62,7 @@ class DatabaseHelper{
     }
 
     public function getUsersByUsername($slug) {
-        $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
-                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
-                FROM user_profile u join 
-                (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
-                on c_followed.follower = u.user_id join 
-                (SELECT count(follower) as n_followers , followed FROM follow group by followed) c_follower
-                on c_follower.followed = u.user_id join
-                (SELECT count(post_id) as num_posted, user FROM post group by user) posted
-                on posted.user = u.user_id join
-                (SELECT count(post) as num_donations, user FROM donation group by user) donations
-                on donations.user = u.user_id
-                WHERE username = ?";
+        $query = "SELECT user_id FROM user_profile WHERE username = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s',$slug);
@@ -516,18 +505,18 @@ class DatabaseHelper{
 
     public function getNextuser_id(){
         $query = "SELECT MAX(user_id) as max_id FROM user_profile";
-        $stmt = $this->db->execute_query($query);
+        $stmt = $this->db->query($query);
         $row = $stmt->fetch_assoc();
     
         return $row['max_id'] + 1;
     }
     
 
-    public function insertUser($name, $surname, $username, $email = null, $password, $salt, $image = null, $descr = null) {
-        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, profile_img, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+    public function insertUser($name, $surname, $username, $email, $password, $salt, $descr) {
+        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $id = $this->getNextuser_id();
-        $stmt->bind_param('issssssss',$id, $name, $surname, $username, $email, $password, $salt, $image, $descr);
+        $stmt->bind_param('isssssss',$id, $name, $surname, $username, $email, $password, $salt, $descr);
         $stmt->execute();
 
         return $stmt->insert_id;
