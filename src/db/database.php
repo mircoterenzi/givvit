@@ -172,7 +172,7 @@ class DatabaseHelper{
      */
 
     public function getPostById($postId) {
-        $query = "SELECT p.title, u.user_name, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE post_id = ?
@@ -187,7 +187,7 @@ class DatabaseHelper{
     }
 
     public function getPostsbyUser($user_id, $n=-1){
-        $query = "SELECT p.title, u.user_name, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE user = ?
@@ -208,7 +208,7 @@ class DatabaseHelper{
     }
  
     public function getAllPosts($n = 10){
-        $query = "SELECT p.title, u.user_name, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 ORDER BY p.date DESC
@@ -223,7 +223,7 @@ class DatabaseHelper{
     }
 
     public function getPostsbyTheme($theme, $n=-1){
-        $query = "SELECT p.title, u.user_name, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
                 WHERE topic = ?
@@ -244,7 +244,7 @@ class DatabaseHelper{
     }
 
     public function getHomeForUser($user_id, $n=-1){
-        $query = "SELECT p.title, u.user_name, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
                 WHERE user in (
