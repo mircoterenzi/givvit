@@ -22,8 +22,8 @@
         <img src="img/example.jpg" class="img-fluid mb-1" alt="post image"/>
         <p><?php echo $post["short_description"]; ?></p>
         <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
-            <div class="progress-bar" style="width: <?php echo $post["ammount_raised"]/$post["amount_requested"] * 100?>%">
-            <?php echo $post["ammount_raised"]/$post["amount_requested"] * 100?> %
+            <div class="progress-bar" style="width: <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,0)?>%">
+            <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,2)?> %
         </div>
         </div>
         <div class="row mt-2">
