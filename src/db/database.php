@@ -16,9 +16,18 @@ class DatabaseHelper{
     */
 
     public function getUserById($user_id) {
-        $query = "SELECT username, first_name, last_name
-        FROM user_profile
-        WHERE user_id = ?";
+        $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
+                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
+                FROM user_profile u join 
+                (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
+                on c_followed.follower = u.user_id join 
+                (SELECT count(follower) as n_followers , followed FROM follow group by followed) c_follower
+                on c_follower.followed = u.user_id join
+                (SELECT count(post_id) as num_posted, user FROM post group by user) posted
+                on posted.user = u.user_id join
+                (SELECT count(post) as num_donations, user FROM donation group by user) donations
+                on donations.user = u.user_id
+                WHERE user_id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$user_id);
@@ -29,13 +38,20 @@ class DatabaseHelper{
     }
 
     public function searchUser($input) {
-        $query = "
-            SELECT u.username, u.description, u.profile_img
-            FROM user_profile
-            WHERE username LIKE CONCAT(?, '%')
-            OR nome LIKE CONCAT(?, '%')
-            OR cognome LIKE CONCAT(?, '%')
-        ";
+        $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
+                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
+                FROM user_profile u join 
+                (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
+                on c_followed.follower = u.user_id join 
+                (SELECT count(follower) as n_followers , followed FROM follow group by followed) c_follower
+                on c_follower.followed = u.user_id join
+                (SELECT count(post_id) as num_posted, user FROM post group by user) posted
+                on posted.user = u.user_id join
+                (SELECT count(post) as num_donations, user FROM donation group by user) donations
+                on donations.user = u.user_id
+                    WHERE username LIKE CONCAT(?, '%')
+                    OR nome LIKE CONCAT(?, '%')
+                    OR cognome LIKE CONCAT(?, '%')";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sss',$input,$input,$input);
@@ -46,9 +62,18 @@ class DatabaseHelper{
     }
 
     public function getUsersByUsername($slug) {
-        $query = "SELECT u.username, u.description, u.profile_img
-        FROM user_profile
-        WHERE username = ?";
+        $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
+                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
+                FROM user_profile u join 
+                (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
+                on c_followed.follower = u.user_id join 
+                (SELECT count(follower) as n_followers , followed FROM follow group by followed) c_follower
+                on c_follower.followed = u.user_id join
+                (SELECT count(post_id) as num_posted, user FROM post group by user) posted
+                on posted.user = u.user_id join
+                (SELECT count(post) as num_donations, user FROM donation group by user) donations
+                on donations.user = u.user_id
+                WHERE username = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('s',$slug);
