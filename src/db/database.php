@@ -1,6 +1,4 @@
 <?php
-
-    //TODO files (all)
 class DatabaseHelper{
     public $db;
 
@@ -508,13 +506,23 @@ class DatabaseHelper{
     /**
      * Notification CRUD 
      */
+    public function getNextNotificationId($user_for){
+        $query = "SELECT MAX(notification_id) as max_id FROM notification where user_for = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i',$user_for);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_all(MYSQLI_ASSOC);
+    
+        return $row['max_id'] + 1;
+    }
 
-     //TODO get not_id
     public function insertNotification($type, $text, $sender, $receiver, $postId = null) {
-        $query = "INSERT INTO nofication (notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO nofication (notification_id, notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $stmt->bind_param('ssiiis', $type, $text, $sender, $receiver, $postId, $date);
+        $id = $this->getNextNotificationId($receiver);
+        $stmt->bind_param('issiiis',$id, $type, $text, $sender, $receiver, $postId, $date);
         $stmt->execute();
 
         return $stmt->insert_id;
