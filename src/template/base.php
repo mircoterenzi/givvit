@@ -4,9 +4,10 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <title>Givvit: <?php echo $templateParams["title"]; ?></title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <title>Givvit: <?php echo $templateParams["title"]; ?></title>
         <link rel="icon" type="image/x-icon" href="img/logo-icon.png"/>
         <?php
         if(isset($templateParams["js"])):
@@ -18,9 +19,9 @@
         endif;
         ?>
     </head>
-    <body class="container justify-content-center py-4 bg-primary-subtle">
+    <body class="container justify-content-center py-4">
         <!-- Top navbar -->
-        <nav class="nav p-2 fixed-top shadow-sm bg-white">
+        <nav class="nav p-2 fixed-top shadow-sm">
             <div class="container">
                 <div class="row">
                     <div class="col text-start pos-relative">
@@ -47,10 +48,10 @@
             </div>
         </nav>
         <!-- Bottom navbar -->
-        <nav class="d-flex fixed-bottom justify-content-center">
-            <div class="p-3 mb-2 shadow-lg rounded-5 bg-white">
+        <div class="d-flex fixed-bottom justify-content-center">
+            <nav class="nav p-3 mb-2 shadow-lg rounded-5">
                 <a href="explore.php" class="link-underline link-underline-opacity-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-compass border-primary" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-compass" viewBox="0 0 16 16">
                         <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016m6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
                         <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
                     </svg>
@@ -66,10 +67,10 @@
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                     </svg>
                 </a>
-            </div>
-        </nav>
+            </nav>
+        </div>
         <div class="row justify-content-center">
-            <div class="col-lg-6 border">
+            <div class="col-lg-6">
                 <header class="d-flex px-4 mt-5">
                     <h1 class="h2"><?php echo $templateParams["title"]; ?></h1>
                 </header>

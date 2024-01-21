@@ -1,9 +1,9 @@
 <?php if(!empty($templateParams["posts"])): ?>
     <?php foreach($templateParams["posts"] as $post): ?>
-    <article class="mb-4 p-4 shadow-sm rounded-5 bg-white">
+    <article class="card mb-4 p-4 shadow-sm rounded-5">
         <div class="row">
             <div class="col text-start">
-                <a class="badge link-underline link-underline-opacity-0 bg-primary"><?php echo $post["topic"]; ?></a>
+                <a class="badge link-underline link-underline-opacity-0"><?php echo $post["topic"]; ?></a>
             </div>
             <div class="col text-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-star" viewBox="0 0 16 16">

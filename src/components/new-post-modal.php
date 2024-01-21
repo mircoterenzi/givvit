@@ -41,7 +41,7 @@
                         <input type="file" class="form-control" id="img" name="img"/>
                     </div>
                     <label for="submit" hidden>Post it!</label>
-                    <input class="btn btn-primary w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
+                    <input class="btn w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
                 </form>
             </div>
         </div>

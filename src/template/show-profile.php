@@ -1,6 +1,6 @@
 <!-- Profile info -->
 <?php $profile = $templateParams["profile"][0] ?>
-<section class="container p-4 shadow-sm rounded-5 bg-white">
+<section class="card p-4 shadow-sm rounded-5">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
             <div class="ratio ratio-1x1 rounded-circle overflow-hidden">
@@ -34,8 +34,8 @@
 <!-- Post selection -->
 <section class="container my-4">
     <div class="btn-group">
-        <a href="#" class="btn btn-primary active" aria-current="page">Posted: <?php echo($profile["num_posted"]); ?></a>
-        <a href="#" class="btn btn-primary">Supported: <?php echo($profile["num_donations"]); ?></a>
+        <a href="#" class="btn active" aria-current="page">Posted: <?php echo($profile["num_posted"]); ?></a>
+        <a href="#" class="btn">Supported: <?php echo($profile["num_donations"]); ?></a>
     </div>
 </section>
 
