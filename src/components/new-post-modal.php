@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST">
+                <form action="#" method="POST" id = "insert-post">
                     <div class="mb-2">
                         <label for="title">Title*</label>
                         <input type="text" class="form-control" id="title" name="title" required/>
@@ -33,15 +33,16 @@
                         <div id="shortDescHelp" class="form-text">This description is used when your post is showed on the homepage or the explore page</div>
                     </div>
                     <div class="mb-2">
-                        <label for="fullDesc" >Full description</label>
-                        <textarea class="form-control" id="fullDesc" name="fullDesc"></textarea>
+                        <label for="fullDesc" >Full description*</label>
+                        <textarea class="form-control" id="fullDesc" name="fullDesc" required></textarea>
                     </div>
                     <div class="mb-2">
                         <label for="img">Image</label>
                         <input type="file" class="form-control" id="img" name="img"/>
                     </div>
+                    <p id ="result"></p>
                     <label for="submit" hidden>Post it!</label>
-                    <input class="btn btn-primary w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
+                    <input class="btn btn-primary w-100 my-2" type="submit" id="submit" name="post" value="Post it!"/>
                 </form>
             </div>
         </div>

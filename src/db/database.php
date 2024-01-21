@@ -288,14 +288,23 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function insertPost($title, $short_description = null, $long_description,$user, $amount_requested, $topic){
-        $query = "INSERT INTO post (title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public function getNextPostid(){
+        $query = "SELECT MAX(post_id) as max_id FROM post";
+        $stmt = $this->db->query($query);
+        $row = $stmt->fetch_assoc();
+    
+        return $row['max_id'] + 1;
+    }
+
+    public function insertPost($title, $long_description,$user, $amount_requested, $topic, $short_description = null){
+        $query = "INSERT INTO post (post_id,title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $stmt->bind_param('sssisiis',$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
+        $id = $this->getNextPostid();
+        $stmt->bind_param('isssisis',$id,$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
         $stmt->execute();
         
-        return $stmt->insert_id;
+        return $id;
     }
 
     public function closePost($post_id){
@@ -348,9 +357,8 @@ class DatabaseHelper{
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('isi',$postId, $name,$id);
         $stmt->execute();
-        $result = $stmt->get_result();
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $stmt->affected_rows;
     }
 
     /**
