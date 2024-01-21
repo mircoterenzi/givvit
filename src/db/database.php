@@ -186,7 +186,7 @@ class DatabaseHelper{
     public function getPostById($postId) {
         $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
                 FROM post p JOIN user_profile u ON u.user_id = p.user 
-                JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
+                left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE post_id = ?
                 ORDER BY p.date DESC";
 
@@ -203,7 +203,7 @@ class DatabaseHelper{
                 p.amount_requested, r.ammount_raised, img.name as path
                 FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
-                JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
+                left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE user = ?
                 ORDER BY p.date DESC";
 
@@ -226,7 +226,7 @@ class DatabaseHelper{
                 p.amount_requested, r.ammount_raised, img.name as path
                 FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
-                JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
+                left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 ORDER BY p.date DESC
                 LIMIT ?";
         
@@ -243,9 +243,9 @@ class DatabaseHelper{
             p.amount_requested, r.ammount_raised, img.name as path
             FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
-                JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
-                WHERE topic = ?
-                ORDER BY p.date DESC";
+            left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
+            WHERE topic = ?
+            ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -266,7 +266,7 @@ class DatabaseHelper{
             p.amount_requested, r.ammount_raised, img.name as path
             FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
-            JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
+            left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
             WHERE user in (
                     SELECT u.user_id
                     FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
