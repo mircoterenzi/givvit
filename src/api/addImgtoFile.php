@@ -3,7 +3,7 @@
    
    $result["uploadDone"] = false;
 
-   if($dbh->insertFile($_POST["userId"],$_POST["fileName"])){
+   if($dbh->insertFile($_SESSION["userId"],$_POST["fileName"])){
      $result["uploadDone"] = true;
    }else{
      $result["errorInUpload"] = "error while linking image to post" ;

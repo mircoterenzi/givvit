@@ -16,42 +16,40 @@ function insertPost() {
     formDataUser.append('shortDesc', document.getElementById("shortDesc").value)
     formDataUser.append('fullDesc', document.getElementById("fullDesc").value)
 
-    const postId = 0;
+    let postId = 0;
     axios.post('./api/insert-post.php', formDataUser).then(response => {
+        console.log(response.data);
         if (response.data["insertDone"]) {
             document.getElementById("result").innerText = "Insert done !!"
-            setTimeout(() => document.location.href = "index.php", 2000);
-        } else {
             postId = response.data["PostId"];
+        } else {
             document.getElementById("result").innerText = response.data["errorInsert"]
         }
-        console.log(response.data);
+        setTimeout(() => document.location.href = "", 5000);
     });
 
     const fileInput  = document.getElementById("img");
-
     if(fileInput.files.length > 0 && postId > 0){ 
         console.log("ziopera");
-            for( const img of fileInput){
-            const fileName = "error";
-            const formDataImage = new FormData();
+        for( const img of fileInput.files){
+            let fileName = "error";
+            let formDataImage = new FormData();
             formDataImage.append("image", img);
             axios.post('./api/uploadImage.php', formDataImage).then(responseUpload => {
                 if (!responseUpload.data["uploadDone"]) {
-                    document.querySelector("#insert-post > p").innerText = responseUpload.data["errorInImageUpload"]
+                    document.getElementById("result").innerText = responseUpload.data["errorInImageUpload"]
                 }else{
                     fileName = responseUpload.data["fileName"];
                 }
             });
-            const formFileName = new FormData();
+            let formFileName = new FormData();
             formFileName.append("fileName",fileName);
             formFileName.append("postId",postId);
             axios.post('./api/addImgtoFile.php', formDataImage).then(responsAdd => {
                 if (!responsAdd.data["uploadDone"]) {
-                    document.querySelector("#insert-post > p").innerText = responsAdd.data["errorInImageUpload"]
+                    document.getElementById("result").innerText = responsAdd.data["errorInImageUpload"]
                 }
-                console.log(responseAdd.data);
-                setTimeout(() => document.location.href = "", 20000);
+                console.log(responsAdd.data);
             });
         }
     }

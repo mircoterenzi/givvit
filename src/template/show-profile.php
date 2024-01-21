@@ -44,7 +44,7 @@
     <?php
     require_once("db-config.php");
     if($_SESSION["post-type"] == "Posted"):
-        $templateParams["posts"] = $dbh->getPostById($_SESSION["userId"]);
+        $templateParams["posts"] = $dbh->getPostsbyUser($_SESSION["userId"]);
         require("show-post.php");
     elseif($_SESSION["post-type"] == "Supported"):
         $templateParams["posts"] = $dbh->getSupportedPostByUser($_SESSION["userId"]);
