@@ -1,0 +1,37 @@
+:root {
+    --primary-color: #190056;
+    --secondary-color: #5A44B7;
+    --bg-color: #E2DCF9;
+    --bg-color-card: white;
+}
+
+body {
+    background-color: var(--bg-color);
+}
+
+.badge, .progress-bar {
+    background-color: var(--secondary-color);
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--bg-color-card);
+    border-style: none;
+}
+
+.btn:hover, .btn.active {
+    background-color: var(--secondary-color);
+    color: var(--bg-color-card);
+}
+
+.card, .nav {
+    background-color: var(--bg-color-card);
+}
+
+a {
+    color: var(--secondary-color)
+}
+
+.notification {
+    background-color: var(--bg-color);
+}
