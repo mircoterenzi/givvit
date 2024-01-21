@@ -7,7 +7,7 @@
 
 <!-- Posts -->
 </section>
-        <!--itera ogni elemento $post_fullnell'array $templateParams["posts"]-->
+        <!--itera ogni elemento $postnell'array $templateParams["posts"]-->
         <article class="mb-4 p-4 shadow-sm rounded-5 bg-white">
             <div class="row">
                 <!--badge topic $post_full["topic"]-->
@@ -78,10 +78,11 @@
             <p><?php echo $post_full["long_description"]; ?></p>
 
             <!--barra progressi-->
-            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post_full["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
-            <div class="progress-bar" style="width: <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%">
-            <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,2)?> %
-        </div>
+            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
+                <div class="progress-bar" style="width:  <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%">
+                <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,2)?> % 
+            </div>
+            </div>
 
             <!-- Post selection -->
             <section class="d-flex flex-row p-4">
