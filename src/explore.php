@@ -6,6 +6,10 @@ $templateParams["name"] = "show-explore.php";
 $templateParams["topics-list"] = $dbh->getTopics();
 $templateParams["js"] = array("js/choose-topic.js", "js/notification-viewed.js", "utils/functions.js");
 
+if (!isset($_SESSION["topic"])):
+    $_SESSION["topic"] = "All";
+endif;
+
 if ($_SESSION['topic'] == "All"):
     $templateParams["posts"] = $dbh->getAllPosts();
 else:
