@@ -1,7 +1,7 @@
 <?php
 require_once("db-config.php");
 
-$templateParams["title"] = "Explore: " . $_SESSION['topic'];
+$templateParams["title"] = "Explore";
 $templateParams["name"] = "show-explore.php"; 
 $templateParams["topics-list"] = $dbh->getTopics();
 $templateParams["js"] = array("js/choose-topic.js", "utils/functions.js");
