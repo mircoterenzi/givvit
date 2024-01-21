@@ -1,4 +1,3 @@
-<head><script src="js/choose-topic.js"></script></head>
 <div class="d-flex justify-content-end mb-3">
     <div class="dropdown">
         <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
