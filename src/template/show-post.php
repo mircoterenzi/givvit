@@ -13,13 +13,10 @@
         </div>
         <h2 class="h3 my-3"><?php echo $post["title"]; ?></h2>
 
-        <!-- TODO: remove comment
-            <?php if(isset($post["image"])): 
-                echo($templateParams["image"]);
-            endif; ?>
-        -->
+        <?php if(!empty($post["path"])): ?>
+            <img src="img/<?php echo($post["path"]);?>" class="img-fluid mb-1" alt="post image"/>
+        <?php endif; ?>
 
-        <img src="img/example.jpg" class="img-fluid mb-1" alt="post image"/>
         <p><?php echo $post["short_description"]; ?></p>
         <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
             <div class="progress-bar" style="width: <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,0)?>%">

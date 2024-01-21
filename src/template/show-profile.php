@@ -4,11 +4,11 @@
     <div class="row mb-3 align-items-center">
         <div class="col-6">
             <div class="ratio ratio-1x1 rounded-circle overflow-hidden">
-                <img src="<?php 
+                <img src="img/<?php 
                 if(!empty($profile["profile_img"])): 
                 echo($profile["profile_img"]); 
                 else: 
-                echo("img/default-propic.jpg");
+                echo("default-propic.jpg");
                 endif; ?>" alt="profile picture"/>
             </div>
         </div>
