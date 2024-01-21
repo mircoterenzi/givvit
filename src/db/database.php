@@ -346,10 +346,8 @@ class DatabaseHelper{
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$post_id);
         $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_all(MYSQLI_ASSOC);
     
-        return $row['max_id'] + 1;
+        return $stmt->affected_rows + 1;
     }
     public function insertFile($post_id, $name){
         $query = "insert into files (post,name,file_id) values (?,?,?)";
@@ -470,10 +468,14 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function supportedPostByUser($idUser, $n=-1){
-        $query = "SELECT * FROM post 
-                WHERE post_id IN ( SELECT post from donation WHERE user = ?) 
-                ORDER BY p.date DESC";
+    public function getSupportedPostByUser($idUser, $n=-1){
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+            p.amount_requested, r.ammount_raised, img.name as path
+            FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+            (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
+            JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id
+            WHERE post_id IN ( SELECT post from donation WHERE user = ?) 
+            ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";

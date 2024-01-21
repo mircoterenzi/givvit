@@ -42,11 +42,7 @@
                     </div>
                     <p id ="result"></p>
                     <label for="submit" hidden>Post it!</label>
-<<<<<<< HEAD
-                    <input class="btn btn-primary w-100 my-2" type="submit" id="submit" name="post" value="Post it!"/>
-=======
                     <input class="btn w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
->>>>>>> 3c90e8b9b671e2f1bdfcf259d184465f2dc8f871
                 </form>
             </div>
         </div>
