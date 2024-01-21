@@ -1,6 +1,3 @@
-<head>
-<script src="js/login.js" defer></script>
-</head>
 <form action="#" method="POST" id="login-form">
     <div>
         <label for="username">Username</label>

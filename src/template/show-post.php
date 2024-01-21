@@ -11,7 +11,7 @@
                 </svg>
             </div>
         </div>
-        <h2 class="h3 my-3"><?php echo $post["title"]; ?></h1>
+        <h2 class="h3 my-3"><?php echo $post["title"]; ?></h2>
 
         <!-- TODO: remove comment
             <?php if(isset($post["image"])): 

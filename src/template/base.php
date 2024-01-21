@@ -8,6 +8,15 @@
         <title>Givvit: <?php echo $templateParams["title"]; ?></title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link rel="icon" type="image/x-icon" href="img/logo-icon.png"/>
+        <?php
+        if(isset($templateParams["js"])):
+            foreach($templateParams["js"] as $script):
+        ?>
+            <script defer src="<?php echo $script; ?>"></script>
+        <?php
+            endforeach;
+        endif;
+        ?>
     </head>
     <body class="container justify-content-center py-4 bg-primary-subtle">
         <!-- Top navbar -->

@@ -1,6 +1,3 @@
-<head>
-    <script src="js/notification-viewed.js"></script>
-</head>
 <?php if(!empty($templateParams["notifications"])): ?>
     <?php foreach($templateParams["notifications"] as $notification): ?>
     <article class="notification d-flex p-2 mt-2 rounded-3 border bg-secondary-subtle" id="<?php echo $notification["notification_id"] ?>">

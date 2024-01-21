@@ -1,6 +1,3 @@
-<head>
-<script src="js/register.js" defer></script>
-</head>
 <form action="#" method="POST" id="signin-form">
     <div>
         <label for="email">Email*</label>

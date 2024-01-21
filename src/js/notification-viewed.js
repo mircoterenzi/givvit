@@ -8,11 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 curr.style.opacity = "0.5"; 
                 const formData = new FormData();
                 formData.append('id', id);
-                axios.post("./api/notification-viewed.php",formData).then(() => {
-                    setTimeout(() => document.location.href = "", 30000); //TODO make better
-                });
+                axios.post("./api/notification-viewed.php",formData);
                 this.classList.add("seen");
-            }
+            }   
         });
     });
 });

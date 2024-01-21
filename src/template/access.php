@@ -7,6 +7,15 @@
         <title>Givvit: <?php echo $templateParams["title"]; ?></title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link rel="icon" type="image/x-icon" href="img/logo-icon.png"/>
+        <?php
+        if(isset($templateParams["js"])):
+            foreach($templateParams["js"] as $script):
+        ?>
+            <script defer src="<?php echo $script; ?>"></script>
+        <?php
+            endforeach;
+        endif;
+        ?>
     </head>
     <body class="d-flex justify-content-center py-4 bg-primary-subtle">
         <div class="mw-75 m-3 p-5 shadow-lg rounded-5 bg-white">
