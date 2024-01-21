@@ -2,23 +2,17 @@
 
 <!--definisco un post di esempio temporaneamente per testare-->
 <?php
-    $post["topic"] = 'science';
-    $post["title"] = 'SCIENTOLOGY: Tool that proves the Earth is flat';
-    $post["image"] = 'C:/xampp/htdocs/WEB23-Givvit/src/img/example.jpg';
-    $post["long_description"] = "An event showcasing various artworks from talented artists.";
-    $post["amount_requested"] = 1000;
-    $post["username"] = '@sbobito';
-    $donation["import"] = 50;
+    $post_full= $templateParams["post_open"][0];
 ?>
 
 <!-- Posts -->
 </section>
-        <!--itera ogni elemento $post nell'array $templateParams["posts"]-->
+        <!--itera ogni elemento $post_fullnell'array $templateParams["posts"]-->
         <article class="mb-4 p-4 shadow-sm rounded-5 bg-white">
             <div class="row">
-                <!--badge topic $post["topic"]-->
+                <!--badge topic $post_full["topic"]-->
                 <div class="col text-start">
-                    <a class="badge link-underline link-underline-opacity-0 bg-primary"><?php echo $post["topic"]; ?></a>
+                    <a class="badge link-underline link-underline-opacity-0 bg-primary"><?php echo $post_full["topic"]; ?></a>
                 </div>
 
                 <!--stella SVG-->
@@ -35,7 +29,7 @@
 
             </div>
             <!--titolo del post-->
-            <h2 class="h3 my-3"><?php echo $post["title"]; ?></h1>
+            <h2 class="h3 my-3"><?php echo $post_full["title"]; ?></h1>
 
             <div class="row mt-2">
                 <!--ICONA BOTTONE IMG PROFILO, NON VERA FOTO-->
@@ -44,12 +38,12 @@
                 </button>
                 <!--tag username-->
                 <div class="col inline text-start">
-                    <p><?php echo $post["username"] ?></p>
+                    <p><?php echo $post_full["username"] ?></p>
                 </div>
             </div>
             <br>
         
-            <!-- STAMPARE DA $post["image"]-->
+            <!-- STAMPARE DA $post_full["image"]-->
             <!--carousel-->
             <div id="demo" class="carousel slide" data-bs-ride="carousel">
             <!-- Indicators/dots -->
@@ -81,12 +75,13 @@
             
 
             <!--descrizione lunga-->
-            <p><?php echo $post["long_description"]; ?></p>
+            <p><?php echo $post_full["long_description"]; ?></p>
 
             <!--barra progressi-->
-            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
-                <div class="progress-bar" style="width: 25%">25%</div>
-            </div>
+            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post_full["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
+            <div class="progress-bar" style="width: <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%">
+            <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,2)?> %
+        </div>
 
             <!-- Post selection -->
             <section class="d-flex flex-row p-4">
