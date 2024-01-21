@@ -34,12 +34,23 @@
 <!-- Post selection -->
 <section class="container my-4">
     <div class="btn-group">
-        <a href="#" class="btn active" aria-current="page">Posted: <?php echo($profile["num_posted"]); ?></a>
-        <a href="#" class="btn">Supported: <?php echo($profile["num_donations"]); ?></a>
+        <a class="btn <?php if($_SESSION["post_type"] == "Posted"): echo "active"; endif; ?>" id="Posted">Posted: <?php echo($profile["num_posted"]); ?></a>
+        <a class="btn  <?php if($_SESSION["post_type"] == "Supported"): echo "active"; endif; ?>" id="Supported">Supported: <?php echo($profile["num_donations"]); ?></a>
     </div>
 </section>
 
 <!-- Posts -->
 </section>
-    <?php require("show-post.php"); ?>
+    <?php
+    require_once("db-config.php");
+    if($_SESSION["post_type"] == "Posted"):
+        $templateParams["posts"] = $dbh->getPostById($_SESSION["userId"]);
+        require("show-post.php");
+    elseif($_SESSION["post_type"] == "Supported"):
+        $templateParams["posts"] = $dbh->getPostById($_SESSION["userId"]);  //TODO: manca query per avere post supportati
+        require("show-post.php");
+    else:
+        echo("Error");
+    endif;
+    ?>
 </section>
