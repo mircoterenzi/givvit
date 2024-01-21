@@ -477,7 +477,7 @@ class DatabaseHelper{
     }
 
     public function viewedNotification($idNotification){
-        $query = "UPDATE nofication SET visualized = 0 WHERE id = ?";
+        $query = "UPDATE nofication SET visualized = 1 WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$idNotification);
         $stmt->execute();

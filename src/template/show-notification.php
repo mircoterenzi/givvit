@@ -1,6 +1,9 @@
-<?php if(isset($templateParams["notifications"])): ?>
+<head>
+    <script src="js/notification-viewed.js"></script>
+</head>
+<?php if(!empty($templateParams["notifications"])): ?>
     <?php foreach($templateParams["notifications"] as $notification): ?>
-    <article class="d-flex p-2 mt-2 rounded-3 border">
+    <article class="notification d-flex p-2 mt-2 rounded-3 border bg-secondary-subtle" id="<?php echo $notification["notification_id"] ?>">
         <div class="row px-2">
             <div class="col-2">
                 <?php if($notification["notification_type"]=="follower"): ?>

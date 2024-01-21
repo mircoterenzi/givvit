@@ -7,7 +7,6 @@
             </div>
             <div class="modal-body">
                 <?php
-                $templateParams["notifications"] = $dbh->getNotificationsById($_SESSION["userId"]);
                 require("template/show-notification.php");
                 ?>
             </div>
