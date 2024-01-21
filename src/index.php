@@ -12,7 +12,8 @@ if(!isset($_SESSION["userId"])) {
   $templateParams["title"] = "Home";
   $templateParams["name"] = "show-post.php";
   $templateParams["posts"] = $dbh->getHomeForUser($_SESSION["userId"]);
-  $templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js");
+  $templateParams["js"] = array("js/notification-viewed.js");
+  $_SESSION['topic'] = "All";
 
   require("template/base.php");
 }

@@ -1,6 +1,6 @@
 <?php 
-   require_once("../db-config.php"); 
-   require_once("../db/database.php");
-
-   $templateParams["posts"] = $dbh->getPostsbyTopic($_POST['topic']);
+require_once("../db-config.php");
+if(isset($_POST['id'])) {
+   $_SESSION['topic'] = $_POST['id'];
+}
 ?>

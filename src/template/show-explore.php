@@ -7,7 +7,7 @@
             Add filter
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <?php foreach($templateParams["topics"] as $topic): ?>
+            <?php foreach($templateParams["topics-list"] as $topic): ?>
             <li><a class="dropdown-item" id="<?php echo $topic["name"] ?>"><?php echo($topic["name"]) ?></a></li>
             <?php endforeach; ?>
         </ul>
