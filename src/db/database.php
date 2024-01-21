@@ -466,6 +466,7 @@ class DatabaseHelper{
      * Notification CRUD 
      */
 
+     //TODO get not_id
     public function insertNotification($type, $text, $sender, $receiver, $postId = null) {
         $query = "INSERT INTO nofication (notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
@@ -476,10 +477,10 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function viewedNotification($idNotification){
-        $query = "UPDATE nofication SET visualized = 1 WHERE id = ?";
+    public function viewedNotification($user_id,$idNotification){
+        $query = "UPDATE notification SET visualized = 1 WHERE notification_id = ? and user_for = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$idNotification);
+        $stmt->bind_param('ii',$idNotification,$user_id);
         $stmt->execute();
         var_dump($stmt->error);
         return true;
