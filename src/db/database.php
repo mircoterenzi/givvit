@@ -201,8 +201,10 @@ class DatabaseHelper{
     }
 
     public function getPostsbyUser($user_id, $n=-1){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
-                FROM post p JOIN user_profile u ON u.user_id = p.user 
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+                p.amount_requested, r.ammount_raised, img.name as path
+                FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+                (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE user = ?
                 ORDER BY p.date DESC";
@@ -222,8 +224,10 @@ class DatabaseHelper{
     }
  
     public function getAllPosts($n = 10){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
-                FROM post p JOIN user_profile u ON u.user_id = p.user 
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+                p.amount_requested, r.ammount_raised, img.name as path
+                FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+                (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 ORDER BY p.date DESC
                 LIMIT ?";
@@ -237,8 +241,10 @@ class DatabaseHelper{
     }
 
     public function getPostsbyTopic($topic, $n=-1){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
-                FROM post p JOIN user_profile u ON u.user_id = p.user 
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+            p.amount_requested, r.ammount_raised, img.name as path
+            FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+            (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
                 JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
                 WHERE topic = ?
                 ORDER BY p.date DESC";
@@ -258,15 +264,17 @@ class DatabaseHelper{
     }
 
     public function getHomeForUser($user_id, $n=-1){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised
-                FROM post p JOIN user_profile u ON u.user_id = p.user 
-                JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
-                WHERE user in (
+        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+            p.amount_requested, r.ammount_raised, img.name as path
+            FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+            (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
+            JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
+            WHERE user in (
                     SELECT u.user_id
                     FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
                     WHERE s.follower = ?
                 )
-                ORDER BY p.date DESC";
+            ORDER BY p.date DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -306,6 +314,41 @@ class DatabaseHelper{
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+    /**
+     * Files CRUD
+     */
+
+    public function getFilesById($post_id){
+        $query = "SELECT name FROM files WHERE post = ? order by file_id";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i',$postId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getNextFileid($post_id){
+        $query = "SELECT MAX(file_id) as max_id FROM files where post = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i',$post_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_all(MYSQLI_ASSOC);
+    
+        return $row['max_id'] + 1;
+    }
+    public function insertFile($post_id, $name){
+        $query = "insert into files (post,name,file_id) values (?,?,?)";
+        $id = $this->getNextFileid($post_id);
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('isi',$postId, $name,$id);
         $stmt->execute();
         $result = $stmt->get_result();
 
