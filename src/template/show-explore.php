@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between px-2 mb-3">
     <h2 class="h5">
-        <?php if($_SESSION["topic"] != "All"): ?>
-        <span class="badge text-center"><?php echo $_SESSION['topic']; ?></span>
+        <?php if(!empty($_GET["topic"])): ?>
+        <span class="badge text-center"><?php echo $_GET['topic']; ?></span>
         <?php endif; ?>
     </h2>
     <div class="dropdown">
@@ -12,10 +12,10 @@
             Manage filter
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" id="All">Remove Filters</a></li>
+            <li><a href="explore.php" class="dropdown-item">Remove Filters</a></li>
             <li><hr class="dropdown-divider"></li>
             <?php foreach($templateParams["topics-list"] as $topic): ?>
-            <li><a class="dropdown-item" id="<?php echo $topic["name"] ?>"><?php echo($topic["name"]) ?></a></li>
+                <li><a href="explore.php?topic=<?php echo $topic["name"]; ?>" class="dropdown-item"><?php echo $topic["name"]; ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
