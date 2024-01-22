@@ -52,10 +52,11 @@ $profile = $templateParams["profile"][0]
 </section>
     <?php
     if($_SESSION["post-type"] == "Posted") {
-        $templateParams["posts"] = $dbh->getPostsbyUser($_SESSION["user_id"]);
+        $templateParams["posts"] = $dbh->getPostsbyUser($_SESSION["userId"]);
         require("show-post.php");
     } elseif($_SESSION["post-type"] == "Supported") {
-        $templateParams["posts"] = $dbh->getSupportedPostByUser($_SESSION["user_id"]);
+        $templateParams["posts"] = $dbh->getSupportedPostByUser($_SESSION["userId"]);
+        require("show-post.php");
     } else {
         echo("Error");
     }
