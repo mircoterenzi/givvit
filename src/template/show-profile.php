@@ -2,7 +2,10 @@
 <?php
 require_once("db-config.php");
 require_once("utils/functions.php");
-$profile = $dbh->getUserById($_GET["id"])[0] 
+$profile = $dbh->getUserById($_GET["id"])[0];
+if(empty($_GET["type"])) {
+    $_GET["type"] = "posted";
+}
 ?>
 <section class="card p-4 shadow-sm rounded-5">
     <div class="row mb-3 align-items-center">
