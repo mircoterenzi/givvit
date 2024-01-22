@@ -14,7 +14,7 @@ class DatabaseHelper{
     */
 
     public function getUserById($user_id) {
-        $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
+        $query = "SELECT u.user_id, u.username, u.description, u.profile_img, u.first_name, u.last_name, 
                 c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
                 FROM user_profile u left OUTER join
                 (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
@@ -222,7 +222,7 @@ class DatabaseHelper{
     }
  
     public function getAllPosts($n = 10){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+        $query = "SELECT p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
                 p.amount_requested, r.ammount_raised, img.name as path
                 FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
@@ -239,7 +239,7 @@ class DatabaseHelper{
     }
 
     public function getPostsbyTopic($topic, $n=-1){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+        $query = "SELECT p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
             p.amount_requested, r.ammount_raised, img.name as path
             FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 

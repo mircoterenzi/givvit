@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const formData = new FormData();
             formData.append('id', id);
             axios.post("./api/post-selection.php",formData).then(response => {
-                setTimeout(() => document.location.href = "profile.php");
+                document.location.href = "profile.php";
             });
 
         });

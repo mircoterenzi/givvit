@@ -142,4 +142,12 @@
         return array($result, $msg);
     }
 
+    function printVarIfPresent($var) {
+        if(!empty($var)){
+            return $var;
+        } else {
+            echo("0");
+        }
+    }
+
 ?>

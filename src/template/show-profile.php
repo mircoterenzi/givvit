@@ -1,5 +1,9 @@
 <!-- Profile info -->
-<?php $profile = $templateParams["profile"][0] ?>
+<?php
+require_once("db-config.php");
+require_once("utils/functions.php");
+$profile = $templateParams["profile"][0] 
+?>
 <section class="card p-4 shadow-sm rounded-5">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
@@ -12,8 +16,8 @@
                 endif; ?>" alt="profile picture"/>
             </div>
         </div>
-        <p class="col-3">Followers: <?php echo($profile["n_followers"]); ?></p>
-        <p class="col-3">Following: <?php echo($profile["n_followed"]); ?></p>
+        <p class="col-3">Followers: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
+        <p class="col-3">Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
     </div>
     <div class="row align-items-center">
         <div class="col text-start">
@@ -35,22 +39,25 @@
 <!-- Post selection -->
 <section class="container my-4">
     <div class="btn-group">
-        <a class="btn <?php if($_SESSION["post-type"] == "Posted"): echo "active"; endif; ?>" id="Posted">Posted: <?php echo($profile["num_posted"]); ?></a>
-        <a class="btn  <?php if($_SESSION["post-type"] == "Supported"): echo "active"; endif; ?>" id="Supported">Supported: <?php echo($profile["num_donations"]); ?></a>
+        <a class="btn <?php if($_SESSION["post-type"] == "Posted") { echo "active"; } ?>" id="Posted">
+            Posted: <?php echo(printVarIfPresent($profile["num_posted"])); ?>
+        </a>
+        <a class="btn <?php if($_SESSION["post-type"] == "Supported") { echo "active"; } ?>" id="Supported">
+            Supported: <?php echo(printVarIfPresent($profile["num_donations"])); ?>
+        </a>
     </div>
 </section>
 
 <!-- Posts -->
 </section>
     <?php
-    require_once("db-config.php");
-    if($_SESSION["post-type"] == "Posted"):
-        $templateParams["posts"] = $dbh->getPostsbyUser($_SESSION["userId"]);
+    if($_SESSION["post-type"] == "Posted") {
+        $templateParams["posts"] = $dbh->getPostsbyUser($_SESSION["user_id"]);
         require("show-post.php");
-    elseif($_SESSION["post-type"] == "Supported"):
-        $templateParams["posts"] = $dbh->getSupportedPostByUser($_SESSION["userId"]);
-    else:
+    } elseif($_SESSION["post-type"] == "Supported") {
+        $templateParams["posts"] = $dbh->getSupportedPostByUser($_SESSION["user_id"]);
+    } else {
         echo("Error");
-    endif;
+    }
     ?>
 </section>
