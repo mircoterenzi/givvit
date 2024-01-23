@@ -13,11 +13,11 @@
                     </div>
                     <div class="mb-2">
                         <label for="theme">Theme*</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select id ="theme" class="form-select" aria-label="Default select example">
                             <option selected></option>
-                            <option value="1">Health</option>
-                            <option value="2">Sport</option>
-                            <option value="3">Technology</option>
+                            <?php foreach($templateParams["topics-list"] as $topic): ?>
+                            <option id="<?php echo $topic["name"] ?>" value="<?php echo $topic["name"] ?>"><?php echo($topic["name"]) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="mb-2">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="mb-2">
                         <label for="img">Image</label>
-                        <input type="file" class="form-control" id="img" name="img"/>
+                        <input type="file" class="form-control" id="img" name="img" multiple />
                     </div>
                     <p id ="result"></p>
                     <label for="submit" hidden>Post it!</label>

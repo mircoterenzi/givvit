@@ -1,5 +1,6 @@
 <?php
 require_once("db-config.php");
+$templateParams["topics-list"] = $dbh->getTopics(); //for add post
 if(!isset($_SESSION["userId"])) {
   // Show login page if there's not an open session
   $templateParams["title"] = "Login";
