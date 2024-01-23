@@ -3,7 +3,7 @@
     <article class="card mb-4 p-4 shadow-sm rounded-5">
         <div class="row">
             <div class="col text-start">
-                <a class="badge link-underline link-underline-opacity-0"><?php echo $post["topic"]; ?></a>
+                <p class="badge"><?php echo $post["topic"]; ?></p>
             </div>
             <div class="col text-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-star" viewBox="0 0 16 16">
@@ -28,9 +28,8 @@
                 <a href="profile.php?id=<?php echo $post["user_id"]; ?>" class="username" id="<?php echo $post["user_id"]; ?>">@<?php echo $post["username"]; ?></a>
             </div>
             <div class="col text-end">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-chat-left-dots" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                    <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor" class="bi bi-arrow-up-right-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
                 </svg>
             </div>
         </div>

@@ -1,6 +1,5 @@
 <?php
 require_once("db-config.php");
-$templateParams["topics-list"] = $dbh->getTopics(); //for add post
 if(!isset($_SESSION["userId"])) {
   // Show login page if there's not an open session
   $templateParams["title"] = "Login";
@@ -13,6 +12,7 @@ if(!isset($_SESSION["userId"])) {
   $templateParams["title"] = "Home";
   $templateParams["name"] = "show-post.php";
   $templateParams["posts"] = $dbh->getHomeForUser($_SESSION["userId"]);
+  $templateParams["topics-list"] = $dbh->getTopics();
   $templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js", "js/insert-post.js");
 
   require("template/base.php");

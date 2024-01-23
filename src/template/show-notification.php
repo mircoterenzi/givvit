@@ -28,7 +28,7 @@
             <p class="align-self-center ms-2 mb-0">
                 <?php 
                     echo $notification["username"];
-                    if($notification["notification_type"]== "follower"): echo(" has followed you");
+                    if($notification["notification_type"]== "Follow"): echo(" has followed you");
                     elseif($notification["notification_type"]== "donation"): echo(" has made a donation");
                     elseif($notification["notification_type"]== "comment"): echo(" has commented");
                     else: echo(" likes your idea!");

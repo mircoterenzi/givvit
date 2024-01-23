@@ -29,7 +29,8 @@ body {
 }
 
 a {
-    color: var(--secondary-color)
+    color: var(--secondary-color);
+    text-decoration: none;
 }
 
 .notification {
