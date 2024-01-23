@@ -468,8 +468,8 @@ class DatabaseHelper{
         return $stmt->insert_id;
     }
 
-    public function getSupportedPostByUser($idUser, $n=-1){
-        $query = "SELECT p.title, u.username, p.long_description, p.short_description, p.topic, p.date, 
+    public function getSupportedPostByUser($user_id, $n=-1){
+        $query = "SELECT p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
             p.amount_requested, r.ammount_raised, img.name as path
             FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
