@@ -1,10 +1,11 @@
-<!-- Profile info -->
 <?php
 require_once("db-config.php");
 require_once("utils/functions.php");
 require_once("./components/remove-follow-modal.php");
+require_once("./components/user-list-modal.php");
 $profile = $templateParams["profile"][0];
 ?>
+<!-- Profile info -->
 <section class="card p-4 shadow-sm rounded-5" id="<?php echo $profile["user_id"]; ?>">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
@@ -17,8 +18,13 @@ $profile = $templateParams["profile"][0];
                 } ?>" alt="profile picture"/>
             </div>
         </div>
-        <p class="col-3">Followers: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
-        <p class="col-3">Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
+        <div class="col-6">
+            <p>Followers: <?php echo(printVarIfPresent($profile["n_followers"])); ?></p>
+            <p>Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
+            <svg data-bs-toggle="modal" data-bs-target="#user-list-modal" xmlns="http://www.w3.org/2000/svg" width="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </div>
     </div>
     <div class="row align-items-center">
         <div class="col text-start">

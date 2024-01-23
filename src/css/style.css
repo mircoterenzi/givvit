@@ -13,7 +13,7 @@ body {
     background-color: var(--secondary-color);
 }
 
-.btn {
+.btn, .btn.dropdown-toggle {
     background-color: var(--primary-color);
     color: var(--bg-color-card);
     border-style: none;
@@ -35,4 +35,8 @@ a {
 
 .notification {
     background-color: var(--bg-color);
+}
+
+.modal-body li {
+    list-style-type: none;
 }
