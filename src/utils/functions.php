@@ -27,7 +27,7 @@
                 
         if($checkLoginResult) { // se l'utente esiste
 
-            $userId = $checkLoginResult[0]["user_id"];
+            $userId = $checkLoginResult[0]["userId"];
             $username = $checkLoginResult[0]["username"];
             $dbPassword = $checkLoginResult[0]["password"];
             $salt = $checkLoginResult[0]["salt"];
@@ -54,12 +54,12 @@
 
     function login_check($mysqli) {
         // Verifica che tutte le variabili di sessione siano impostate correttamente
-        if(isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
-            $userId = $_SESSION['user_id'];
+        if(isset($_SESSION['userId'], $_SESSION['username'], $_SESSION['login_string'])) {
+            $userId = $_SESSION['userId'];
             $login_string = $_SESSION['login_string'];
             $username = $_SESSION['username'];     
             $user_browser = $_SERVER['HTTP_USER_AGENT']; // reperisce la stringa 'user-agent' dell'utente.
-            if ($stmt = $mysqli->prepare("SELECT password FROM user_profile WHERE user_id = ? LIMIT 1")) { 
+            if ($stmt = $mysqli->prepare("SELECT password FROM user_profile WHERE userId = ? LIMIT 1")) { 
                 $stmt->bind_param('i', $userId); // esegue il bind del parametro '$userId'.
                 $stmt->execute(); // Esegue la query creata.
                 $stmt->store_result();

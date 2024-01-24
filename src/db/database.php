@@ -61,14 +61,19 @@ class DatabaseHelper{
 
     public function getUsersByUsername($slug) {
         $query = "SELECT user_id FROM user_profile WHERE username = ?";
-
+    
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s',$slug);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->bind_param('s', $slug);
+    
+        if (!$stmt->execute()) {
+            die('Error: ' . $stmt->error);
+        }
 
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $result = $stmt->get_result();
+    
+        return $result->fetch_assoc();
     }
+    
 
     public function getFollowedByUser($user_id) {
         $query = "
