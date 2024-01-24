@@ -53,13 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             try {
                 const fileNames = await Promise.all(uploadPromises);
-                // Call api/add-post with postId and fileName
-                const formDataFile = new FormData();
-                formDataFile.append("postId",postId);
-                formDataFile.append("fileNames",fileNames);
-                const result = await axios.post('./api/addImgtoFile.php', formDataFile);
-                console.log(result);
-                // Reload the page or perform other actions if needed
+                console.log('File Names:', fileNames);
+                for(let i = 0; i < fileNames.length; i++){
+                    const formDataFile = new FormData();
+                    formDataFile.append("postId",postId);
+                    formDataFile.append("fileName",fileNames[i]);
+                    const result = await axios.post('./api/addImgtoFile.php', formDataFile);
+                }
             } catch (error) {
                 console.error('Error during image upload:', error);
                 document.getElementById("result").innerText = 'An error occurred during image upload.';

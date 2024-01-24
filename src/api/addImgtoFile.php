@@ -4,30 +4,17 @@
     $result["uploadDone"] = false;
     $result["errorInUpload"] = "ok";
 
-    if (isset($_POST["postId"]) && isset($_POST["fileNames"])) {
-      
-        $postId = $_POST["postId"];
-        $fileNames = $_POST["fileNames"];
+    if (isset($_POST["postId"]) && isset($_POST["fileName"])) {
 
-        // Ensure $fileNames is an array
-        if (!is_array($fileNames)) {
-            $fileNames = [$fileNames];
-        }
-
-        // Handle each file name
-        foreach ($fileNames as $fileName) {
-            if (!$dbh->insertFile($postId, $fileName)) {
-                $result["errorInUpload"] = "Error while linking image to post";
-                echo json_encode($result);
+        if (!$dbh->insertFile($_POST["postId"], $_POST["fileName"])) {
+            $result["errorInUpload"] = "Error while linking image to post";
                 exit;
             }
-        }
         if($result["errorInUpload"] == "ok"){
           $result["uploadDone"] = true;
         }
-        echo json_encode($result);
     } else {
         $result["errorInUpload"] = "Invalid data received";
-        echo json_encode($result);
     }
+    echo json_encode($result);
 ?>
