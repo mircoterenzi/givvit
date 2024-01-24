@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (response.data["insertDone"]) {
                 document.getElementById("result").innerText = "Insert done !!";
-                postId = response.data["PostId"];
+                const postId = response.data["PostId"];
                 await handleImageUpload(postId);
             } else {
                 document.getElementById("result").innerText = response.data.errorInsert;
@@ -45,23 +45,26 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (!responseUpload.data.uploadDone) {
                             throw new Error(responseUpload.data.errorInUpload);
                         }
-                        // Handle success if needed
+                        return responseUpload.data.fileName; // Return the file name
                     });
 
                 uploadPromises.push(uploadPromise);
             }
 
             try {
-                await Promise.all(uploadPromises);
+                const fileNames = await Promise.all(uploadPromises);
+                // Call api/add-post with postId and fileName
+                const formDataFile = new FormData();
+                formDataFile.append("postId",postId);
+                formDataFile.append("fileNames",fileNames);
+                const result = await axios.post('./api/addImgtoFile.php', formDataFile);
+                console.log(result);
                 // Reload the page or perform other actions if needed
-                setTimeout(() => document.location.reload(), 1000);
             } catch (error) {
                 console.error('Error during image upload:', error);
                 document.getElementById("result").innerText = 'An error occurred during image upload.';
             }
-        } else {
-            // No files to upload
-            setTimeout(() => document.location.reload(), 1000);
         }
+        setTimeout(() => document.location.reload(), 1000);
     }
 });

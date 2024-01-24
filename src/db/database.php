@@ -342,18 +342,25 @@ class DatabaseHelper{
     }
 
     public function getNextFileid($post_id){
-        $query = "SELECT MAX(file_id) as max_id FROM files where post = ?";
+        $query = "SELECT MAX(file_id) as max_id FROM files WHERE post = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$post_id);
+        $stmt->bind_param('i', $post_id);
         $stmt->execute();
     
-        return $stmt->affected_rows + 1;
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        if ($row['max_id'] === null) {
+            return 1;
+        }
+    
+        return $row['max_id'] + 1;
     }
+    
     public function insertFile($post_id, $name){
         $query = "insert into files (post,name,file_id) values (?,?,?)";
         $id = $this->getNextFileid($post_id);
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('isi',$postId, $name,$id);
+        $stmt->bind_param('isi',$post_id, $name,$id);
         $stmt->execute();
 
         return $stmt->affected_rows;
