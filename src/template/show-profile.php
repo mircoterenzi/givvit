@@ -62,7 +62,7 @@ $profile = $templateParams["profile"][0];
             <?php if($_GET["id"] == $_SESSION["userId"]): ?>
             <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=liked" class="dropdown-item" id="supported">
                 Liked
-                <span class="badge"><?php echo(printVarIfPresent($profile[""])); //@todo: inserire num post piacuiti (da inserire nella query) ?></span>
+                <span class="badge"><?php echo(printVarIfPresent($profile["num_liked"])); //@todo: inserire num post piacuiti (da inserire nella query) ?></span>
             </a></li>
             <?php endif; ?>
             <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=follower" class="dropdown-item" id="posted">

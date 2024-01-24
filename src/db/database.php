@@ -15,7 +15,7 @@ class DatabaseHelper{
 
     public function getUserById($user_id) {
         $query = "SELECT u.user_id, u.username, u.description, u.profile_img, u.first_name, u.last_name, 
-                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations
+                c_followed.n_followed, c_follower.n_followers, posted.num_posted, donations.num_donations, likes.num_liked
                 FROM user_profile u left OUTER join
                 (SELECT count(followed) as n_followed , follower FROM follow group by follower) c_followed
                 on c_followed.follower = u.user_id left OUTER join
@@ -23,8 +23,10 @@ class DatabaseHelper{
                 on c_follower.followed = u.user_id left OUTER join
                 (SELECT count(post_id) as num_posted, user FROM post group by user) posted
                 on posted.user = u.user_id left OUTER join
-                (SELECT count(post) as num_donations, user FROM donation group by user) donations
-                on donations.user = u.user_id
+                (SELECT count(post) as num_donations, user FROM donation group by user) donations 
+                on donations.user = u.user_id left outer join 
+                (SELECT count(post) as num_liked, user FROM likes group by user) likes
+                on likes.user = u.user_id
                 WHERE u.user_id = ?";
 
         $stmt = $this->db->prepare($query);
