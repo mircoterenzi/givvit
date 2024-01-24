@@ -29,6 +29,6 @@
     </div>
     <label for="submit" hidden>Register</label>
     <input class="btn w-100 mt-3 mb-2" type="submit" id="submit" name="register" value="Register"/>
-    <p id="result">  </p>
+    <p id="result"></p>
     <p>Already member? <a class="text-decoration-none" href="index.php">Sign in</a></p>
 </form>

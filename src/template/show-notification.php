@@ -2,7 +2,7 @@
     <?php foreach($templateParams["notifications"] as $notification): ?>
     <div class="row m-1">
         <div class="col-10">
-            <article class="notification row p-2 rounded-3 border" id="<?php echo $notification["notification_id"]; ?>">
+            <article class="notification row p-2 rounded-5" id="<?php echo $notification["notification_id"]; ?>">
                 <div class="col-auto">
                     <?php if($notification["notification_type"] == "Follow"): ?>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-person-fill-add" viewBox="0 0 16 16">

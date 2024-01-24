@@ -4,8 +4,6 @@ document.getElementById("signin-form").addEventListener("submit", function (even
     event.target.reset()
 });
 
-//TODO img e descr optional
-
 function addtodb(formDataUser){
     
     axios.post('./api/register.php', formDataUser).then(response => {

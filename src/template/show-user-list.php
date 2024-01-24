@@ -12,7 +12,7 @@
                     } ?>" alt="profile picture"/>
                 </div>
                 </div>
-                <div class="col-10">
+                <div class="col-auto">
                     <a href="profile.php?id=<?php echo $user["user_id"]; ?>" class="fw-bold mb-0">
                         @<?php echo $user["username"]; ?>
                     </a>
