@@ -90,9 +90,9 @@ $profile = $templateParams["profile"][0];
         $templateParams["user-list"] = $dbh->getUserFollowers($_GET["id"]);
         require("show-user-list.php");
     } elseif($_GET["type"] == "liked" && $_GET["id"] == $_SESSION["userId"]) {
-            $templateParams["user-list"] = $dbh->getUserFollowers($_GET["id"]); // @todo: inserire query che restituisce i post con i like
-            require("show-user-list.php");
-    } elseif($_GET["type"] == "following") {
+            $templateParams["posts"] = $dbh->getLikedPost($_GET["id"]); 
+            require("show-post.php");
+        } elseif($_GET["type"] == "following") {
         $templateParams["user-list"] = $dbh->getFollowedByUser($_GET["id"]);
         require("show-user-list.php");
     } else {

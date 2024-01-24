@@ -225,6 +225,29 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getLikedPost($user_id,$n = -1){
+        $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
+                p.amount_requested, r.ammount_raised, img.name as path
+                FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
+                (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
+                left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
+                join ( select * from likes where user = ?) l on l.post = p.post_id
+                ORDER BY p.date DESC";
+
+        if($n > 0){
+            $query .= " LIMIT ?";
+        }
+        $stmt = $this->db->prepare($query);
+        if($n > 0){
+            $stmt->bind_param('i',$n);
+        }
+        $stmt->bind_param('i',$user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
  
     public function getAllPosts($n = 10){
         $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
