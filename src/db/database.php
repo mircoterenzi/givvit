@@ -72,7 +72,7 @@ class DatabaseHelper{
 
     public function getFollowedByUser($user_id) {
         $query = "
-            SELECT u.user_id, u.username
+            SELECT u.user_id, u.username, u.profile_img, u.first_name, u.last_name
             FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
             WHERE s.follower = ?
         ";
@@ -87,7 +87,7 @@ class DatabaseHelper{
 
     public function getUserFollowers($user_id) {
         $query = "
-            SELECT u.user_id, u.username
+            SELECT u.user_id, u.username, u.profile_img, u.first_name, u.last_name
             FROM follow s INNER JOIN user_profile u ON s.follower = u.user_id
             WHERE s.followed = ?
         ";

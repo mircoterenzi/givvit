@@ -17,19 +17,8 @@ $profile = $templateParams["profile"][0];
             </div>
         </div>
         <div class="col-6">
-            <p>Followers: <?php echo(printVarIfPresent($profile["n_followers"])); ?></p>
-            <p>Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?></p>
-            <svg data-bs-toggle="modal" data-bs-target="#user-list-modal" xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-            </svg>
-        </div>
-    </div>
-    <div class="row align-items-center">
-        <div class="col text-start">
             <p class="mb-0"><?php echo($profile["first_name"]); ?> <?php echo($profile["last_name"]); ?></p>
             <p class="fw-bold">@<?php echo($profile["username"]); ?></p>
-        </div>
-        <div class="col text-end">
             <?php if($_GET["id"] == $_SESSION["userId"]): ?>
             <a href="api/logout.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -55,20 +44,26 @@ $profile = $templateParams["profile"][0];
     <p><?php  echo($profile["description"]);?></p>
 </section>
 
-<!-- Post selection -->
-<section class="container my-4">
+<!-- List selection -->
+<section class="d-flex my-4 justify-content-center">
     <div class="btn-group">
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=posted" class="btn <?php if($_GET["type"] == "posted") { echo "active"; } ?>" id="posted">
+        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=posted" class="btn btn-sm <?php if($_GET["type"] == "posted") { echo "active"; } ?>" id="posted">
             Posted: <?php echo(printVarIfPresent($profile["num_posted"])); ?>
         </a>
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=supported" class="btn <?php if($_GET["type"] == "supported") { echo "active"; } ?>" id="supported">
+        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=supported" class="btn btn-sm <?php if($_GET["type"] == "supported") { echo "active"; } ?>" id="supported">
             Supported: <?php echo(printVarIfPresent($profile["num_donations"])); ?>
+        </a>
+        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=follower" class="btn btn-sm <?php if($_GET["type"] == "follower") { echo "active"; } ?>" id="posted">
+            Follower: <?php echo(printVarIfPresent($profile["n_followers"])); ?>
+        </a>
+        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=following" class="btn btn-sm <?php if($_GET["type"] == "following") { echo "active"; } ?>" id="supported">
+            Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?>
         </a>
     </div>
 </section>
 
-<!-- Posts -->
-</section>
+<!-- List -->
+</section>  
     <?php
     if($_GET["type"] == "posted") {
         $templateParams["posts"] = $dbh->getPostsbyUser($_GET["id"]);
@@ -76,6 +71,12 @@ $profile = $templateParams["profile"][0];
     } elseif($_GET["type"] == "supported") {
         $templateParams["posts"] = $dbh->getSupportedPostByUser($_GET["id"]);
         require("show-post.php");
+    } elseif($_GET["type"] == "follower") {
+        $templateParams["user-list"] = $dbh->getUserFollowers($_GET["id"]);
+        require("show-user-list.php");
+    } elseif($_GET["type"] == "following") {
+        $templateParams["user-list"] = $dbh->getFollowedByUser($_GET["id"]);
+        require("show-user-list.php");
     } else {
         echo("Error");
     }
