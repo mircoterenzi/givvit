@@ -416,14 +416,14 @@ class DatabaseHelper{
     }
 
 
-    public function getPostLikes($postId) {
-        $count_likes = "SELECT COUNT(*) AS count_likes FROM likes WHERE post = ?";
+    public function checkLikeByUser($postId, $user_id) {
+        $count_likes = "SELECT * FROM likes WHERE post = ? and user = ?";
 
         $stmt = $this->db->prepare($count_likes);
-        $stmt->bind_param("i", $postId);
+        $stmt->bind_param("ii", $postId, $user_id);
         $stmt->execute();
-        $res = $stmt->get_result();
-        return $res->fetch_assoc()['count_likes'];
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function insertLike($idPost, $user_id){
