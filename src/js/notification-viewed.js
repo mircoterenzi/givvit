@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const notifications = document.querySelectorAll('.notification')
     notifications.forEach((n) => {
-        n.addEventListener('mouseout', function () {
+        n.addEventListener('click', function () {
             if (!this.classList.contains("seen")) {
                 const id = n.id;
                 const curr = document.getElementById(id);
-                curr.style.opacity = "0.5"; 
+                curr.style.opacity = "0.75"; 
                 const formData = new FormData();
                 formData.append('id', id);
                 axios.post("./api/notification-viewed.php",formData);
