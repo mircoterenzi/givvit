@@ -84,5 +84,4 @@ $profile = $templateParams["profile"][0];
 </section>
 <?php
 require_once("./components/remove-follow-modal.php");
-require_once("./components/user-list-modal.php");
 ?>
