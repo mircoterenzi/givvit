@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST" id = "insert-post">
+                <form action="#" method="POST" id = "insert-post" enctype="multipart/form-data">
                     <div class="mb-2">
                         <label for="title">Title*</label>
                         <input type="text" class="form-control" id="title" name="title" required/>
@@ -37,8 +37,8 @@
                         <textarea class="form-control" id="fullDesc" name="fullDesc" required></textarea>
                     </div>
                     <div class="mb-2">
-                        <label for="img">Image</label>
-                        <input type="file" class="form-control" id="img" name="img" multiple />
+                        <label for="img">Profile image</label>
+                        <input type="file" class="form-control" id="img" name="img" multiple/>
                     </div>
                     <p id ="result"></p>
                     <label for="submit" hidden>Post it!</label>

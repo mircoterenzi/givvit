@@ -11,7 +11,7 @@
         $result["uploadDone"] = true;
         $result["fileName"] = $uploadResult[1];
     } else {
-        $result["errorInUpload"] = "Upload immagine non riuscito";
+        $result["errorInUpload"] =  $uploadResult[1];
     }
    } else { 
       // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
