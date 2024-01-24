@@ -47,18 +47,33 @@ $profile = $templateParams["profile"][0];
 <!-- List selection -->
 <section class="d-flex my-4 justify-content-center">
     <div class="btn-group">
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=posted" class="btn btn-sm <?php if($_GET["type"] == "posted") { echo "active"; } ?>" id="posted">
-            Posted: <?php echo(printVarIfPresent($profile["num_posted"])); ?>
-        </a>
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=supported" class="btn btn-sm <?php if($_GET["type"] == "supported") { echo "active"; } ?>" id="supported">
-            Supported: <?php echo(printVarIfPresent($profile["num_donations"])); ?>
-        </a>
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=follower" class="btn btn-sm <?php if($_GET["type"] == "follower") { echo "active"; } ?>" id="posted">
-            Follower: <?php echo(printVarIfPresent($profile["n_followers"])); ?>
-        </a>
-        <a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=following" class="btn btn-sm <?php if($_GET["type"] == "following") { echo "active"; } ?>" id="supported">
-            Following: <?php echo(printVarIfPresent($profile["n_followed"])); ?>
-        </a>
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Now displaying: <?php echo $_GET["type"]; ?>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=posted" class="dropdown-item" id="posted">
+                Posted
+                <span class="badge"><?php echo(printVarIfPresent($profile["num_posted"])); ?></span>
+            </a></li>
+            <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=supported" class="dropdown-item" id="supported">
+                Supported
+                <span class="badge"><?php echo(printVarIfPresent($profile["num_donations"])); ?></span>
+            </a></li>
+            <?php if($_GET["id"] == $_SESSION["userId"]): ?>
+            <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=liked" class="dropdown-item" id="supported">
+                Liked
+                <span class="badge"><?php echo(printVarIfPresent($profile[""])); //@todo: inserire num post piacuiti (da inserire nella query) ?></span>
+            </a></li>
+            <?php endif; ?>
+            <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=follower" class="dropdown-item" id="posted">
+                Follower
+                <span class="badge"><?php echo(printVarIfPresent($profile["n_followers"])); ?></span>
+            </a></li>
+            <li><a href="profile.php?id=<?php echo $profile["user_id"] ?>&type=following" class="dropdown-item" id="supported">
+                Following
+                <span class="badge"><?php echo(printVarIfPresent($profile["n_followed"])); ?></span>
+            </a></li>
+        </ul>
     </div>
 </section>
 
@@ -74,6 +89,9 @@ $profile = $templateParams["profile"][0];
     } elseif($_GET["type"] == "follower") {
         $templateParams["user-list"] = $dbh->getUserFollowers($_GET["id"]);
         require("show-user-list.php");
+    } elseif($_GET["type"] == "liked" && $_GET["id"] == $_SESSION["userId"]) {
+            $templateParams["user-list"] = $dbh->getUserFollowers($_GET["id"]); // @todo: inserire query che restituisce i post con i like
+            require("show-user-list.php");
     } elseif($_GET["type"] == "following") {
         $templateParams["user-list"] = $dbh->getFollowedByUser($_GET["id"]);
         require("show-user-list.php");
