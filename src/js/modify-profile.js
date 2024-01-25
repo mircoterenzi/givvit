@@ -23,7 +23,7 @@ function editprof() {
     addtodb(formDataUser);
 
 
-    /*const fileInput  = document.getElementById("profile-img");
+    const fileInput  = document.getElementById("profile-img");
 
     if(fileInput.files.length > 0){ 
         const formDataImage = new FormData();
@@ -38,5 +38,5 @@ function editprof() {
         });
     }else{
         addtodb(formDataUser);
-    }*/
+    }
 }
