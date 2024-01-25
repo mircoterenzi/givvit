@@ -36,6 +36,19 @@ class DatabaseHelper{
 
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+    public function editUser($id, $name, $surname, $username, $descr = null, $img = null)
+    {
+        $query = "
+            UPDATE user_profile
+            SET username = ?, first_name = ?, last_name = ?, description = ?, profile_img = ?
+            WHERE user_id = ?
+        ";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('sssssi', $username, $name, $surname, $descr, $img, $id);
+        $stmt->execute();
+    }
+    
 
     public function searchUser($input) {
         $query = "SELECT u.username, u.description, u.profile_img, u.first_name, u.last_name, 
@@ -159,30 +172,6 @@ class DatabaseHelper{
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('ii',$user_id,$followedId);
-        $stmt->execute();
-    }
-
-    public function updateUserWithImg($user_id, $username, $email, $nome, $cognome, $imgProfilo) {
-        $query = "
-            UPDATE utente
-            SET username = ?, nome = ?, cognome = ?, email = ?, imgProfilo = ?
-            WHERE id = ?
-        ";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('sssssi',$username,$nome,$cognome,$email,$imgProfilo,$user_id);
-        $stmt->execute();
-    }
-
-    public function updateUserWithoutImg($user_id, $username, $email, $nome, $cognome) {
-        $query = "
-            UPDATE utente
-            SET username = ?, nome = ?, cognome = ?, email = ?
-            WHERE id = ?
-        ";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ssssi',$username,$nome,$cognome,$email,$user_id);
         $stmt->execute();
     }
 

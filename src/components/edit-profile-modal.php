@@ -6,7 +6,7 @@
                 <button type="button" onclick="reload()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#" method="POST" id="signin-form">
+                <form action="#" method="POST" id="edit-profile-form">
                     <div>
                         <label for="name">Name*</label>
                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $profile["first_name"] ?>" required/>
