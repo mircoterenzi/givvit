@@ -25,7 +25,7 @@
     </div>
     <div>
         <label for="desc">Profile description</label>
-        <textarea class="form-control" id="desc" name="desc" height="200%"></textarea>
+        <textarea class="form-control" id="desc" name="desc"></textarea>
     </div>
     <label for="submit" hidden>Register</label>
     <input class="btn w-100 mt-3 mb-2" type="submit" id="submit" name="register" value="Register"/>
