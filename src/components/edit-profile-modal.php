@@ -27,6 +27,7 @@
                         <label for="desc">Profile description</label>
                         <textarea class="form-control" id="desc" name="desc"><?php echo $profile["description"] ?></textarea>
                     </div>
+                    <p id="result"></p>
                     <label for="submit" hidden>Register</label>
                     <input class="btn w-100 mt-3 mb-2" type="submit" id="submit" name="register" value="Update your profile"/>
                 </form>

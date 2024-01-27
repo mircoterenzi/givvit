@@ -46,7 +46,7 @@ class DatabaseHelper{
     
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('sssssi', $username, $name, $surname, $descr, $img, $id);
-        $stmt->execute();
+        return $stmt->execute();
     }
     
 
@@ -83,11 +83,19 @@ class DatabaseHelper{
         if (!$stmt->execute()) {
             die('Error: ' . $stmt->error);
         }
-
+    
         $result = $stmt->get_result();
     
-        return $result->fetch_assoc();
+        // Check if any rows are returned
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['user_id'];
+        } else {
+            // No rows found, return 0
+            return 0;
+        }
     }
+    
     
 
     public function getFollowedByUser($user_id) {
