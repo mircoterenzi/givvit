@@ -51,7 +51,7 @@ $profile = $templateParams["profile"][0];
 <!-- List selection -->
 <section class="d-flex my-4 justify-content-center">
     <div class="btn-group">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Now displaying: <?php echo $_GET["type"]; ?>
         </button>
         <ul class="dropdown-menu">
