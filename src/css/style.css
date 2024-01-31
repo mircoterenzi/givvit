@@ -28,8 +28,12 @@ body {
     background-color: var(--bg-color-card);
 }
 
-a {
+a{
     color: var(--secondary-color);
+    text-decoration: none;
+}
+a.post-content{
+    color: black;
     text-decoration: none;
 }
 

@@ -11,6 +11,7 @@
                 </svg>
             </div>
         </div>
+        <div><a class="post-content" href="open-post.php?postId=<?php echo $post["post_id"]; ?>" id="<?php echo $post["post_id"]; ?>">
         <h2 class="h3 my-3"><?php echo $post["title"]; ?></h2>
 
         <?php if(!empty($post["path"])): ?>
@@ -18,6 +19,7 @@
         <?php endif; ?>
 
         <p><?php echo $post["short_description"]; ?></p>
+        </a></div>
         <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
             <div class="progress-bar" style="width: <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,0)?>%">
             <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,2)?> %
@@ -26,13 +28,6 @@
         <div class="row mt-2">
             <div class="col inline text-start">
                 <a href="profile.php?id=<?php echo $post["user_id"]; ?>" class="username" id="<?php echo $post["user_id"]; ?>">@<?php echo $post["username"]; ?></a>
-            </div>
-            <div class="col text-end">
-                <a href="open-post.php?postId=<?php echo $post["post_id"]; ?>" id="<?php echo $post["post_id"]; ?>">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-arrow-up-right-circle" viewBox="0 0 16 16" alt="open-post icon">
-                        <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.854 10.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707z"/>
-                </svg>
-                </a>
             </div>
         </div>
     </article>
