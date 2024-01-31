@@ -2,6 +2,7 @@
 
 <?php
     $post_full= $templateParams["post_open"][0];
+    $images = $dbh -> getFilesById($post_full["post_id"]);
 ?>
 
 <!-- Posts -->
@@ -43,36 +44,39 @@
             </div>
             <br>
         
-            <!-- STAMPARE DA $post_full["image"]-->
+            <?php if(!empty($images)): ?>  
             <!--carousel-->
-            <div id="demo" class="carousel slide" data-bs-ride="carousel">
-            <!-- Indicators/dots -->
-            <div class="carousel-indicators">
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-            </div>
-            <!-- The slideshow/carousel -->
-            <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/example.jpg" alt="" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="img/example.jpg" alt="" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="img/example.jpg" alt="" class="d-block w-100">
-            </div>
-            </div>
-            <!-- Left and right controls/icons -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            </button>
-            </div>
-            
+                <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicators/dots -->
+                <div class="carousel-indicators">
+                    <?php foreach ($images as $image): ?>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="<?php echo $image["file_id"] - 1; ?>" <?php echo ($image["file_id"] == 1) ? 'class="active"' : ''; ?>></button>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- The slideshow/carousel -->
+                <div class="carousel-inner">
+                    <?php foreach ($images as $image): ?>
+                        <div class="carousel-item <?php echo ($image["file_id"] == 1) ? 'active' : ''; ?>">
+                            <img src="img/<?php echo $image["name"]; ?>" alt="" class="d-block w-100">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Left and right controls/icons -->
+                <?php if (sizeof($images) > 1): ?>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                <?php endif; ?>
+                </div>
+
+            <?php else: ?>
+                <p class="text-center">There are no images :(</p>
+            <?php endif; ?>
 
             <!--descrizione lunga-->
             <p><?php echo $post_full["long_description"]; ?></p>

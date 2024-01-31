@@ -375,10 +375,10 @@ class DatabaseHelper{
      */
 
     public function getFilesById($post_id){
-        $query = "SELECT name FROM files WHERE post = ? order by file_id";
+        $query = "SELECT name, file_id FROM files WHERE post = ? order by file_id";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$postId);
+        $stmt->bind_param('i',$post_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
