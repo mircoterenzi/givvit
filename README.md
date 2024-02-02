@@ -7,5 +7,5 @@ Givvit is a social networking website developed for the Web Technology course at
 
 ## How to use
 * Clone the repo into your web server.
-* Use the "create" and "populate" scripts in the doc folder to get the database and some sample data.
+* Use the "create" and "populate" scripts in the src/db folder to get the database and some sample data.
 * Use the "index.php" file as the entry point for the website.
