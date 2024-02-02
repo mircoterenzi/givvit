@@ -3,7 +3,7 @@ require_once("db-config.php");
 $templateParams["title"] = "Explore";
 $templateParams["name"] = "show-explore.php"; 
 $templateParams["topics-list"] = $dbh->getTopics();
-$templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js");
+$templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js","js/star.js");
 if(empty($_GET["topic"])) {
     $templateParams["posts"] = $dbh->getAllPosts();
 } else {

@@ -14,26 +14,30 @@ observerLike.observe(postContainerLike, {
 
 */
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
-    const add = document.querySelector('.empty-star');
-    if(add != null) {
-        add.addEventListener('click', () => star("liked"));
-    }
-
-    const remove = document.querySelector('.full-star');
-    if(remove != null) {
-        remove.addEventListener('click', () => star("not-liked"));
-    }
-
-    function star(type) {
-        const mainpost = document.querySelector('.mainpost');
-        const formData = new FormData();
-            formData.append('type', type);
-            formData.append('postid', mainpost.id);
+    const addStars = document.querySelectorAll('.empty-star');
+    const removeStars = document.querySelectorAll('.full-star');
+    
+    addStars.forEach(function (add) {
+        add.addEventListener('click', function(){
+            const formData = new FormData();
+            formData.append('type', "liked");
+            formData.append('postid', this.getAttribute('value')); 
             axios.post("./api/star.php",formData).then(() => {
                 setTimeout(() => location.reload(), 100)
             });
-    }
+        });
+    });
+
+    removeStars.forEach(function (remove) {
+        remove.addEventListener('click', function(){
+            const formData = new FormData();
+            formData.append('type', "not-liked");
+            formData.append('postid', this.getAttribute('value')); 
+            axios.post("./api/star.php",formData).then(() => {
+                setTimeout(() => location.reload(), 100)
+            });
+        });
+    });
 });
+
