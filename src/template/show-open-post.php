@@ -8,11 +8,11 @@
 <!-- Posts -->
 </section>
         <!--itera ogni elemento $postnell'array $templateParams["posts"]-->
-        <article class="mainpost mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
+        <article class="post mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
             <div class="row">
                 <!--badge topic $post_full["topic"]-->
                 <div class="col text-start">
-                    <a class="badge link-underline link-underline-opacity-0 bg-primary"><?php echo $post_full["topic"]; ?></a>
+            <a class="badge" href="explore.php?topic=<?php echo $post_full["topic"]; ?>"><?php echo $post_full["topic"]; ?></a>
                 </div>
 
                 <!--stella SVG-->
