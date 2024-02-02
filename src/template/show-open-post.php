@@ -8,7 +8,7 @@
 <!-- Posts -->
 </section>
         <!--itera ogni elemento $postnell'array $templateParams["posts"]-->
-        <article class="post mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
+        <article class="mainpost mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
             <div class="row">
                 <!--badge topic $post_full["topic"]-->
                 <div class="col text-start">
