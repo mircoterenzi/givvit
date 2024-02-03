@@ -1,6 +1,6 @@
 <?php if(!empty($templateParams["posts"])): ?>
     <?php foreach($templateParams["posts"] as $post): ?>
-    <article class="card mb-4 p-4 shadow-sm rounded-5" data-link="open-post.php?postId=<?php echo $post["post_id"]; ?>">
+    <article class="card post mb-4 p-4 shadow-sm rounded-5" data-link="open-post.php?postId=<?php echo $post["post_id"]; ?>">
         <div class="row">
             <div class="col text-start">
             <a class="badge" href="explore.php?topic=<?php echo $post["topic"]; ?>"><?php echo $post["topic"]; ?></a>

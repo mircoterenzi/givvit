@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.post');
     
     cards.forEach(c => {
         c.addEventListener('click', function(){
