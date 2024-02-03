@@ -13,7 +13,7 @@ if(!isset($_SESSION["userId"])) {
   $templateParams["name"] = "show-post.php";
   $templateParams["posts"] = $dbh->getHomeForUser($_SESSION["userId"]);
   $templateParams["topics-list"] = $dbh->getTopics();
-  $templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js", "js/insert-post.js","js/star.js");
+  $templateParams["js"] = array("js/notification-viewed.js", "utils/functions.js", "js/insert-post.js", "js/star.js", "js/open-post.js");
 
   require("template/base.php");
 }

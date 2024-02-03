@@ -18,22 +18,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const addStars = document.querySelectorAll('.empty-star');
     const removeStars = document.querySelectorAll('.full-star');
     
-    addStars.forEach(function (add) {
+    addStars.forEach(add => {
         add.addEventListener('click', function(){
             const formData = new FormData();
             formData.append('type', "liked");
-            formData.append('postid', this.getAttribute('value')); 
+            formData.append('postid', add.getAttribute('value')); 
             axios.post("./api/star.php",formData).then(() => {
                 setTimeout(() => location.reload(), 100)
             });
         });
     });
 
-    removeStars.forEach(function (remove) {
+    removeStars.forEach(remove => {
         remove.addEventListener('click', function(){
             const formData = new FormData();
             formData.append('type', "not-liked");
-            formData.append('postid', this.getAttribute('value')); 
+            formData.append('postid', remove.getAttribute('value')); 
             axios.post("./api/star.php",formData).then(() => {
                 setTimeout(() => location.reload(), 100)
             });
