@@ -89,7 +89,7 @@
             </div>
 
             <!-- Post selection -->
-            <section class="d-flex flex-row p-4">
+            <section class="d-flex flex-row p-4 d-flex justify-content-center">
                 <button type="button" class="btn btn-outline-secondary mx-2">import: $</button>
                 <button type="button" class="btn btn-primary mx-2 bg-success">donate</button>
             </section>
