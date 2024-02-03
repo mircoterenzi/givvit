@@ -12,4 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }   
         });
     });
+
+    const buttons = document.querySelectorAll('.open-not')
+    buttons.forEach((b) => {
+        b.addEventListener('click', function () {
+            const path = b.getAttribute('data-link');
+            setTimeout(() => {
+                window.location.href = path;
+            }, 100)
+        });
+    });
 });
