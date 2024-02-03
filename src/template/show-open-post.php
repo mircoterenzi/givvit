@@ -124,13 +124,13 @@
                 <?php if(!empty($comments)): ?>
                     <?php foreach($comments as $comment): ?>
                         <div class="row align-items-center">
-                            <div class="col-2 justify-content-right">
+                            <div class="col-md-1 col-2">
                                 <!--icona del proprietario del commento-->
                                 <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
                                     <i class="fa fa-user"></i>
                                 </button>
                             </div>
-                            <div class="col-10">
+                            <div class="col-md-11 col-10">
                                 <!--commento riguardo il post aperto-->
                                 <article class="card post mb-2 p-2 shadow-sm rounded-4 bg-light">
                                     <?php echo "<p>$comment</p><br>";?>
