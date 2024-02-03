@@ -4,7 +4,7 @@ require_once("utils/functions.php");
 $profile = $templateParams["profile"][0];
 ?>
 <!-- Profile info -->
-<section class="card p-4 shadow-sm rounded-5" id="<?php echo $profile["user_id"]; ?>">
+<section class="card p-4 shadow-sm rounded-5" user-id="<?php echo $profile["user_id"]; ?>">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
             <div class="ratio ratio-1x1 rounded-circle overflow-hidden">

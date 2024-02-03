@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     notifications.forEach((n) => {
         n.addEventListener('click', function () {
             if (!this.classList.contains("seen")) {
-                const id = n.id;
+                const id = n.getAttribute('data-id');
                 n.style.opacity = "0.5"; 
                 const formData = new FormData();
                 formData.append('id', id);

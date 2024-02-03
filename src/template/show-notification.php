@@ -1,6 +1,6 @@
 <?php if(!empty($templateParams["notifications"])): ?>
     <?php foreach($templateParams["notifications"] as $notification): ?>
-    <article class="notification container mb-2 p-3 rounded-5" id="<?php echo $notification["notification_id"]; ?>" <?php if($notification["visualized"]){ echo('style="opacity: 0.5;"'); } ?> />
+    <article class="notification container mb-2 p-3 rounded-5" data-id="<?php echo $notification["notification_id"]; ?>" <?php if($notification["visualized"]){ echo('style="opacity: 0.5;"'); } ?> />
         <div class="row">
             <div class="col-1">
                 <?php if($notification["notification_type"] == "Follow"): ?>
