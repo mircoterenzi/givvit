@@ -3,6 +3,14 @@
 <?php
     $post_full= $templateParams["post_open"][0];
     $images = $dbh -> getFilesById($post_full["post_id"]);
+    //$comments = $dbh -> getCommentOnPost($post_full["post_id"]);
+    $comments = [
+        "Commento 1",
+        "Commento 2",
+        "Commento 3",
+        "Commento 4",
+        "Commento 5"
+    ];
 ?>
 
 <!-- Posts -->
@@ -14,7 +22,6 @@
                 <div class="col text-start">
             <a class="badge" href="explore.php?topic=<?php echo $post_full["topic"]; ?>"><?php echo $post_full["topic"]; ?></a>
                 </div>
-
                 <!--stella SVG-->
                 <div class="col text-end">
                     <?php
@@ -75,7 +82,7 @@
                 </div>
 
             <?php else: ?>
-                <p class="text-center">There are no images :(</p>
+                <img src="img/example.jpg" alt="" class="d-block w-100">
             <?php endif; ?>
 
             <!--descrizione lunga-->
@@ -94,23 +101,45 @@
                 <button type="button" class="btn btn-primary mx-2 bg-success">donate</button>
             </section>
 
-            <!--commenti-->
+            <!--inserimento commento-->
             <div class="row align-items-center">
-                <div class="col-lg-3 col-2 d-flex justify-content-end">
+                <div class="col-lg-3 col-2 d-flex justify-content-start">
                     <!--ICONA FOTO PROFILO DELL'UTENTE LOGGATO IN USO-->
                     <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
                         <i class="fa fa-user"></i>
                     </button>
                 </div>
                 <div class="col-lg-6 col-8">
-                    <textarea class="form-control" id="comment" name="text" placeholder="Insert your comment"></textarea>
+                    <textarea class="form-control" id="comment" name="inputText" placeholder="Insert your comment"></textarea>
                 </div>
-                <div class="col-lg-3 col-2 d-flex justify-content-start">
+                <div class="col-lg-3 col-2 d-flex justify-content-end">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 20 20">
                         <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
                     </svg>
                 </div>
             </div>
+            <hr class="hr hr-blurry m-2" />
+            <!--lista di commenti del post-->
+            <section>
+                <?php if(!empty($comments)): ?>
+                    <?php foreach($comments as $comment): ?>
+                        <div class="row align-items-center">
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
+                                    <i class="fa fa-user"></i>
+                                </button>
+                            </div>
+                            <div class="col-10">
+                                <article class="card post mb-4 p-4 shadow-sm rounded-5 bg-light">
+                                    <?php echo "<p>$comment</p><br>";?>
+                                </article>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center">There are no comments for now >:( </p>
+                <?php endif; ?>
+            </section>
         </article>
 
 </section>
