@@ -5,7 +5,7 @@
     --bg-color-card: white;
 }
 
-body {
+body, .notification {
     background-color: var(--bg-color);
 }
 
@@ -19,7 +19,7 @@ body {
     border-style: none;
 }
 
-.btn:hover, .btn.active {
+.btn:hover, .btn:active, .btn:focus {
     background-color: var(--secondary-color);
     color: var(--bg-color-card);
 }
@@ -28,21 +28,13 @@ body {
     background-color: var(--bg-color-card);
 }
 
-a{
+a {
     color: var(--secondary-color);
     text-decoration: none;
 }
-a.post-content{
-    color: black;
-    text-decoration: none;
-}
 
-.notification {
-    background-color: var(--bg-color);
-}
-
-.modal-body li {
-    list-style-type: none;
+.propic {
+    object-fit: cover;
 }
 
 /* Mobile */
