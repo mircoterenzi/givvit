@@ -1,5 +1,7 @@
 create database Givvit;
 
+use Givvit;
+
 create table comments (
      comment_id int not null,
      post int not null,

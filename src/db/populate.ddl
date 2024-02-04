@@ -1,9 +1,9 @@
 -- Insert sample data into user_profile table
 INSERT INTO user_profile (user_id, username, first_name, last_name, password, salt, description, profile_img)
 VALUES
-(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', NULL),
-(2, 'sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, NULL),
-(3, 'souzuy', 'Mirco', 'Terenzi', 'password3', 'salt', 'quello con tutti 30', NULL),
+(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', 'pioli-propic.jpg'),
+(2, 'sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, 'sbobito-propic.jpg'),
+(3, 'mirco', 'Mirco', 'Terenzi', 'password3', 'salt', 'mi piacciono i gattini', 'mirco-propic.jpg'),
 (4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'salt', 'Passionate about art and creativity.', NULL),
 (5, 'tech_guru', 'Alex', 'Smith', 'password5', 'salt', 'Software engineer with a love for technology.', NULL),
 (6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'salt', 'Promoting a healthy lifestyle.', NULL),
@@ -311,10 +311,10 @@ VALUES
 
 
 -- Insert sample data into notification table
-INSERT INTO notification (user_for, notification_id, date, text, notification_type, user_from, visualized, post_id)
+INSERT INTO notification (user_for, notification_id, date, notification_type, user_from, visualized, post_id)
 VALUES
-(1, 1, '2024-01-05', 'You have a new follower!', 'Follow', 2, 0, NULL),
-(1, 2, '2024-01-06', 'Your post received a like!', 'Like', 2, 0, 1);
+(1, 1, '2024-01-05', 'Follow', 2, 0, NULL),
+(1, 2, '2024-01-06', 'Like', 2, 0, 1);
 
 
 -- Insert sample data into files table 
