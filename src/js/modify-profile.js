@@ -8,8 +8,8 @@ async function addtodb(formDataUser) {
     try {
         const response = await axios.post('./api/edit-profile.php', formDataUser);
         if (response.data["updateDone"]) {
-            document.getElementById("result").innerText = "Login done !!";
-            setTimeout(() => document.location.href = "index.php", 20000);
+            document.getElementById("result").innerText = "edit done !!";
+            setTimeout(() =>location.reload(), 1000);
         } else {
             document.getElementById("result").innerText = response.data["errorupdate"];
         }
