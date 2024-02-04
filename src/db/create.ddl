@@ -37,7 +37,7 @@ create table notification (
      date date not null,
      notification_type varchar(255) not null,
      user_from int not null,
-     visualized int not null default 1,
+     visualized int not null default 0,
      post_id int,
      constraint ID_notification_ID primary key (user_for, notification_id));
 
