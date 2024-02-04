@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append('inputComment', commentValue);
             formData.append('postId', add.getAttribute('postid'));/**prendo da post id perchè è id proprio del bottone */
             axios.post('./api/insert-comment.php', formData);
+            //cancello graficamente il commento di input dopo il click del button
+            inputComment.value = ''; 
         }else{
             /**il commento è vuoto e non lo aggiungo al database */
         }
