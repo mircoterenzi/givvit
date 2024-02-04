@@ -11,7 +11,7 @@ function login() {
     formData.append('password', document.getElementById("password").value)
     axios.post('./api/login.php', formData).then(response => {
         if (response.data["loginDone"]) {
-            document.getElementById("result").innerText = "Login done !!"
+            document.getElementById("result").innerText = "Login successful, please wait..."
             setTimeout(() => document.location.reload(), 2000);
         } else {
             document.getElementById("result").innerText = response.data["loginError"]

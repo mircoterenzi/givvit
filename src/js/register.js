@@ -8,7 +8,7 @@ function addtodb(formDataUser){
     
     axios.post('./api/register.php', formDataUser).then(response => {
         if (response.data["signinDone"]) {
-            document.getElementById("result").innerText = "Login done !!"
+            document.getElementById("result").innerText = "Registration successful, please wait..."
             setTimeout(() => document.location.href = "index.php", 2000);
         } else {
             document.getElementById("result").innerText = response.data["errorSignin"]

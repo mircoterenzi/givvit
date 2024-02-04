@@ -36,7 +36,7 @@ if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['passwor
             $_SESSION['username'] = $username;
             $_SESSION['login_string'] = hash('sha512', $password . $_SERVER['HTTP_USER_AGENT']);
         }else{
-         $result["errorSignin"] = "query problem";
+         $result["errorSignin"] = "Query problem";
         }
     }
 }
