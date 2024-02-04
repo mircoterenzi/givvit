@@ -414,11 +414,27 @@ class DatabaseHelper{
      * Comments CRUD
      */
 
-    public function insertComment($testo, $post, $user_id){
-        $query = "INSERT INTO comments (text, user, post, date) VALUES (?, ?, ?, ?)";
+    public function getNextCommentid($post_id){
+        $query = "SELECT MAX(comment_id) as max_id FROM comments WHERE post = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param('i', $post_id);
+        $stmt->execute();
+    
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        if ($row['max_id'] === null) {
+            return 1;
+        }
+    
+        return $row['max_id'] + 1;
+    }
+
+    public function insertComment($testo, $post_id, $user_id){
+        $query = "INSERT INTO comments (text, user, post, comment_id, date) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $stmt->bind_param('siis',$testo, $user_id, $post, $date);
+        $id = $this->getNextCommentid($post_id);
+        $stmt->bind_param('siiis',$testo, $user_id, $post_id, $id, $date);
         $stmt->execute();
         
         return $stmt->insert_id;

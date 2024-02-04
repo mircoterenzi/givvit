@@ -1,19 +1,18 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const sendButton = document.querySelectorAll('.send');
-    const inputComment = document.getElementById('input-comment');
+document.getElementById('send-comment').addEventListener('click', function () {
+    var commentValue = document.getElementById('input-comment').value.trim();
+    var postId = this.getAttribute('post-id');
 
-    sendButton.forEach(add => {
-        add.addEventListener('click', function(){
-        var commentValue = inputComment.value.trim();/**contenuto di testo del commento di input, senza spazi bianchi ad inizio o fine */
-        if (commentValue !== '') {
-            var formData = new FormData();
-            formData.append('inputComment', commentValue);
-            formData.append('postId', add.getAttribute('postid'));/**prendo da post id perchè è id proprio del bottone */
-            axios.post('./api/insert-comment.php', formData);
-        }else{
-            /**il commento è vuoto e non lo aggiungo al database */
+    var commentForm = new FormData();
+    commentForm.append('inputComment', commentValue);
+    commentForm.append('postId', postId);
+
+    console.log(commentForm.get('inputComment'), commentForm.get('postId'));
+
+    axios.post('./api/insert-comment.php', commentForm).then(response => {
+        if (response.data["insertDone"]) {
+            setTimeout(() => document.location.reload(), 1000);
+        } else {
+            document.getElementById('res').innerText = response.data["error"];
         }
-        });
     });
 });
-
