@@ -7,13 +7,13 @@ $profile = $templateParams["profile"][0];
 <section class="card p-4 shadow-sm rounded-5" user-id="<?php echo $profile["user_id"]; ?>">
     <div class="row mb-3 align-items-center">
         <div class="col-6">
-            <div class="ratio ratio-1x1 rounded-circle overflow-hidden">
+            <div class="ratio ratio-1x1 overflow-hidden">
                 <img src="img/<?php 
                 if(!empty($profile["profile_img"])) {
                 echo($profile["profile_img"]); 
                 } else {
                 echo("default-propic.jpg");
-                } ?>" alt="profile picture"/>
+                } ?>" alt="profile picture" class="propic rounded-circle" />
             </div>
         </div>
         <div class="col-6">

@@ -2,7 +2,7 @@
     <?php foreach($templateParams["notifications"] as $notification): ?>
     <article class="notification container mb-2 p-3 rounded-5" data-id="<?php echo $notification["notification_id"]; ?>" <?php if($notification["visualized"]){ echo('style="opacity: 0.5;"'); } ?> />
         <div class="row">
-            <div class="col-1">
+            <div class="col-auto d-flex align-items-center">
                 <?php if($notification["notification_type"] == "Follow"): ?>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" class="bi bi-person-fill-add" viewBox="0 0 16 16" alt="new follower icon">
                     <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -23,7 +23,7 @@
                 </svg>
                 <?php endif; ?>
             </div>
-            <div class="col-8">
+            <div class="col-7">
                 <p class="mb-0">
                     @<?php 
                     echo $notification["username"];
@@ -46,7 +46,7 @@
                     ?>
                 </p>
             </div>
-            <div class="col-3 text-end">
+            <div class="col d-flex justify-content-end align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" class="open-not bi bi-arrow-up-right-circle ms-2" viewBox="0 0 16 16" data-link="
                 <?php 
                 switch($notification["notification_type"]) {

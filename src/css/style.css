@@ -45,6 +45,10 @@ a.post-content{
     list-style-type: none;
 }
 
+.propic {
+    object-fit: cover;
+}
+
 /* Mobile */
 @media screen and (max-width: 768px) {
     div.desktop {
