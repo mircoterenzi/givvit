@@ -35,7 +35,7 @@
             <div class="row mt-2">
                 <!--ICONA BOTTONE IMG PROFILO, NON VERA FOTO-->
                 <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
-                    <i class="fa fa-user"></i>
+                    <em class="fa fa-user"></em>
                 </button>
                 <!--tag username-->
                 <div class="col inline text-start">
@@ -58,7 +58,7 @@
                 <div class="carousel-inner">
                     <?php foreach ($images as $image): ?>
                         <div class="carousel-item <?php echo ($image["file_id"] == 1) ? 'active' : ''; ?>">
-                            <img src="img/<?php echo $image["name"]; ?>" alt="" class="d-block w-100">
+                            <img alt="decorative img" class="d-block w-100" src="img/<?php echo $image["name"]; ?>">
                         </div>
                     <?php endforeach; ?>
                 </div>
@@ -99,11 +99,12 @@
                 <div class="col-lg-3 col-2 d-flex justify-content-end">
                     <!--ICONA FOTO PROFILO DELL'UTENTE LOGGATO IN USO-->
                     <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
-                        <i class="fa fa-user"></i>
+                        <em class="fa fa-user"></em>
                     </button>
                 </div>
                 <div class="col-lg-6 col-8">
-                    <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment" ></textarea>
+                <label for="input-comment" hidden>Insert your comment:</label>
+                <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
                 </div>
                 <div class="col-lg-3 col-2 d-flex justify-content-left">
                     <svg xmlns="http://www.w3.org/2000/svg" id = 'send-comment' width="16" height="16" fill="currentColor" class="send bi bi-send-fill" viewBox="0 0 16 16" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>" >
@@ -121,7 +122,7 @@
                             <div class="col-md-1 col-2">
                                 <!--icona del proprietario del commento-->
                                 <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
-                                    <i class="fa fa-user"></i>
+                                    <em class="fa fa-user"></em>
                                 </button>
                             </div>
                             <div class="col-md-11 col-10">

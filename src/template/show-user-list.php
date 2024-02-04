@@ -4,12 +4,12 @@
             <div class="row align-items-center">
                 <div class="col-3">
                     <div class="ratio ratio-1x1 overflow-hidden">
-                        <img src="img/<?php 
+                        <img  alt="profile picture" src="img/<?php 
                         if(!empty($user["profile_img"])) {
                         echo($user["profile_img"]); 
                         } else {
                         echo("default-propic.jpg");
-                        } ?>" alt="profile picture" class="propic rounded-circle" />
+                        } ?>" class="propic rounded-circle" />
                     </div>
                 </div>
                 <div class="col-auto">

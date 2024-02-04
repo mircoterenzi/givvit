@@ -22,7 +22,7 @@
         <div>
             <h2 class="h3 my-3"><?php echo $post["title"]; ?></h2>
             <?php if(!empty($post["path"])): ?>
-                <img src="img/<?php echo($post["path"]);?>" class="img-fluid mb-1" alt="post image"/>
+                <img alt="post image" src="img/<?php echo($post["path"]);?>" class="img-fluid mb-1" />
             <?php endif; ?>
             <p><?php echo $post["short_description"]; ?></p>
             </div>
