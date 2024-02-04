@@ -3,14 +3,7 @@
 <?php
     $post_full= $templateParams["post_open"][0];
     $images = $dbh -> getFilesById($post_full["post_id"]);
-    //$comments = $dbh -> getCommentOnPost($post_full["post_id"]);
-    $comments = [
-        "Commento 1",
-        "Commento 2",
-        "Commento 3",
-        "Commento 4",
-        "Commento 5"
-    ];
+    $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
 ?>
 
 <!-- Posts -->
@@ -133,7 +126,7 @@
                             <div class="col-md-11 col-10">
                                 <!--commento riguardo il post aperto-->
                                 <article class="card-comment mb-2 p-2 shadow-sm rounded-4 bg-light">
-                                    <?php echo "<p>$comment</p><br>";?>
+                                    <p><?php echo$comment["text"];?></p><br>
                                 </article>
                             </div>
                         </div>

@@ -414,11 +414,11 @@ class DatabaseHelper{
      * Comments CRUD
      */
 
-    public function insertComment($testo, $post, $utente){
+    public function insertComment($testo, $post, $user_id){
         $query = "INSERT INTO comments (text, user, post, date) VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $stmt->bind_param('siis',$testo, $utente, $post, $date);
+        $stmt->bind_param('siis',$testo, $user_id, $post, $date);
         $stmt->execute();
         
         return $stmt->insert_id;
@@ -434,10 +434,10 @@ class DatabaseHelper{
     }
 
     public function getCommentOnPost($postId) {
-        $query = "SELECT c.* u.username 
-                FROM comments JOIN user_profile u ON u.user_id = c.user
-                WHERE post = ?
-                ORDER BY p.date DESC";
+        $query = "SELECT c.* , u.username 
+                FROM comments c JOIN user_profile u ON u.user_id = c.user
+                WHERE c.post = ?
+                ORDER BY c.date DESC";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
