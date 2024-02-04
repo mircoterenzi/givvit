@@ -587,7 +587,7 @@ class DatabaseHelper{
         $date = date("Y-m-d");
         $id = $this->getNextNotificationId($receiver);
         $visualized = 0;
-        $stmt->bind_param('isiiisi', $id, $type, $sender, $receiver, $date, $visualized, $postId);
+        $stmt->bind_param('isiissi', $id, $type, $sender, $receiver, $date, $visualized, $postId);
         $stmt->execute();
     
         return $stmt->insert_id;
