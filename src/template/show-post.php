@@ -39,7 +39,10 @@
     </article>
     <?php endforeach; ?>
 <?php else: ?>
-    <p class="text-center">There are no post :(</p>
+    <div class="text-center">
+        <p>There are no posts :(</p>
+        <p>Find someone new on the <a href="explore.php">explore page</a></p>
+    </div>
 <?php endif; ?>
 
 
