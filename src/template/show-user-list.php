@@ -2,7 +2,7 @@
     <?php foreach($templateParams["user-list"] as $user): ?>
         <article class="card mb-4 p-4 shadow-sm rounded-5">
             <div class="row align-items-center">
-                <div class="col-2">
+                <div class="col-3">
                     <div class="ratio ratio-1x1 overflow-hidden">
                         <img src="img/<?php 
                         if(!empty($user["profile_img"])) {
