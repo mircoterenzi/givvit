@@ -1,19 +1,19 @@
 -- Insert sample data into user_profile table
-INSERT INTO user_profile (user_id, username, first_name, last_name, password, description, profile_img)
+INSERT INTO user_profile (user_id, username, first_name, last_name, password, salt, description, profile_img)
 VALUES
-(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'il capo del db', NULL),
-(2, 'sbobito', 'Dario', 'Berti', 'password2', NULL, NULL),
-(3, 'souzuy', 'Mirco', 'Terenzi', 'password3', 'quello con tutti 30', NULL),
-(4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'Passionate about art and creativity.', NULL),
-(5, 'tech_guru', 'Alex', 'Smith', 'password5', 'Software engineer with a love for technology.', NULL),
-(6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'Promoting a healthy lifestyle.', NULL),
-(7, 'adventure_seeker', 'Ethan', 'Davis', 'password7', 'Exploring the world one adventure at a time.', NULL),
-(8, 'music_lover', 'Olivia', 'Clark', 'password8', 'Passionate about music and concerts.', NULL),
-(9, 'bookworm', 'Daniel', 'White', 'password9', 'Avid reader and literature enthusiast.', NULL),
-(10, 'fitness_freak', 'Ava', 'Wilson', 'password10', 'Dedicated to fitness and well-being.', NULL),
-(11, 'foodie_explorer', 'Mia', 'Martin', 'password11', 'Exploring diverse cuisines and flavors.', NULL),
-(12, 'coding_enthusiast', 'Liam', 'Thompson', 'password12', 'Passionate about coding and programming.', NULL),
-(13, 'nature_lover', 'Emma', 'Anderson', 'password13', 'Connecting with nature and wildlife.', NULL);
+(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', NULL),
+(2, 'sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, NULL),
+(3, 'souzuy', 'Mirco', 'Terenzi', 'password3', 'salt', 'quello con tutti 30', NULL),
+(4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'salt', 'Passionate about art and creativity.', NULL),
+(5, 'tech_guru', 'Alex', 'Smith', 'password5', 'salt', 'Software engineer with a love for technology.', NULL),
+(6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'salt', 'Promoting a healthy lifestyle.', NULL),
+(7, 'adventure_seeker', 'Ethan', 'Davis', 'password7', 'salt', 'Exploring the world one adventure at a time.', NULL),
+(8, 'music_lover', 'Olivia', 'Clark', 'password8', 'salt', 'Passionate about music and concerts.', NULL),
+(9, 'bookworm', 'Daniel', 'White', 'password9', 'salt', 'Avid reader and literature enthusiast.', NULL),
+(10, 'fitness_freak', 'Ava', 'Wilson', 'password10', 'salt', 'Dedicated to fitness and well-being.', NULL),
+(11, 'foodie_explorer', 'Mia', 'Martin', 'password11', 'salt', 'Exploring diverse cuisines and flavors.', NULL),
+(12, 'coding_enthusiast', 'Liam', 'Thompson', 'password12', 'salt', 'Passionate about coding and programming.', NULL),
+(13, 'nature_lover', 'Emma', 'Anderson', 'password13', 'salt', 'Connecting with nature and wildlife.', NULL);
 
 
 -- Insert sample data into topic table
@@ -24,60 +24,59 @@ VALUES
 ('Science'),
 ('History'),
 ('Healthcare');
-
 -- Insert sample data into post table
-INSERT INTO post (post_id, title, short_description, long_description, amount_requested, date, user, topic)
+INSERT INTO post (title, short_description, long_description, amount_requested, date, user, topic)
 VALUES
-(1, 'Tech Project 1', NULL, 'This is a sample tech project description.', 500, '2024-01-01', 1, 'Technology'),
-(2, 'Art Exhibition 1', 'Join us for a mesmerizing art exhibition.', 'An event showcasing various artworks from talented artists.', 300, '2024-02-15', 2, 'Art'),
-(3, 'History Symposium', 'Exploring historical events and their impact on society.', 'Join us for an informative symposium on significant historical moments.', 200, '2024-03-10', 3, 'History'),
-(4, 'Science Fair', NULL, 'An exciting science fair featuring innovative projects and experiments.', 400, '2024-04-05', 4, 'Science'),
-(5, 'Healthcare Workshop', 'Learn about maintaining a healthy lifestyle.', 'Join our workshop to discover tips for better healthcare.', 250, '2024-05-20', 5, 'Healthcare'),
-(6, 'Artistic Creations', 'Express yourself through art!', 'An opportunity to showcase your artistic creations in a community event.', 350, '2024-06-15', 6, 'Art'),
-(7, 'Tech Project 2', NULL, 'Collaborative tech project seeking support for development.', 600, '2024-07-01', 7, 'Technology'),
-(8, 'Historical Lecture Series', 'Exploring different eras and historical figures.', 'A series of lectures on captivating historical topics.', 300, '2024-08-10', 8, 'History'),
-(9, 'Science Symposium', NULL, 'Engage in discussions on cutting-edge scientific advancements.', 450, '2024-09-05', 9, 'Science'),
-(10, 'Healthcare Awareness Campaign', 'Promoting awareness for a healthier community.', 'Join our campaign to spread awareness about healthcare.', 200, '2024-10-20', 10, 'Healthcare'),
-(11, 'Art Gala Night', 'A night of art, culture, and entertainment.', 'Experience the beauty of diverse artworks in an elegant gala setting.', 400, '2024-11-15', 11, 'Art'),
-(12, 'Tech Innovations Expo', NULL, 'Explore the latest technological innovations and breakthroughs.', 550, '2024-12-01', 12, 'Technology'),
-(13, 'Historical Documentary Screening', 'Journey through significant historical events.', 'Join us for an enlightening documentary screening and discussion.', 250, '2025-01-10', 13, 'History'),
-(14, 'Art Workshop: Abstract Painting', NULL, 'Learn the techniques of abstract painting from experienced artists.', 300, '2025-02-20', 1, 'Art'),
-(15, 'Science Quiz Competition', 'Test your knowledge in a fun and challenging science quiz competition.', 'Exciting rounds covering various scientific disciplines.', 200, '2025-03-05', 2, 'Science'),
-(16, 'Healthcare Symposium', 'An in-depth exploration of healthcare challenges and solutions.', 'Engage with experts and contribute to the healthcare discourse.', 350, '2025-04-15', 3, 'Healthcare'),
-(17, 'Tech Talk: Future Trends', 'Stay ahead with insights into the future trends in technology.', 'Tech experts share their vision for the future in this engaging talk.', 250, '2025-05-01', 4, 'Technology'),
-(18, 'Historical Walking Tour', 'Step back in time with a historical walking tour of significant landmarks.', 'Explore the history of the city with knowledgeable guides.', 300, '2025-06-10', 5, 'History'),
-(19, 'Artisan Market: Local Creations', 'Support local artists and creators at this vibrant artisan market.', 'Discover unique handmade products and artistic treasures.', 400, '2025-07-15', 6, 'Art'),
-(20, 'Health and Wellness Seminar', 'Empower yourself with knowledge about holistic health and wellness.', 'Experts share insights on nutrition, mindfulness, and overall well-being.', 300, '2025-08-01', 7, 'Healthcare'),
-(21, 'Tech Hackathon', NULL, 'A coding marathon to solve real-world problems and showcase innovative solutions.', 500, '2025-09-05', 8, 'Technology'),
-(22, 'Historical Costume Party', 'Travel through time by dressing up in historical costumes for a night of fun.', 'Experience the charm of different eras with themed music and activities.', 200, '2025-10-20', 9, 'History'),
-(23, 'Science Exhibition for Kids', 'Inspire young minds with a hands-on science exhibition tailored for children.', 'Interactive displays and experiments for a day of scientific exploration.', 250, '2025-11-15', 10, 'Science'),
-(24, 'Healthcare Charity Run', 'Run for a cause to support healthcare initiatives and community health projects.', 'A charity run promoting fitness and contributing to a healthier community.', 300, '2025-12-01', 11, 'Healthcare'),
-(25, 'Art Photography Contest', 'Showcase your photography skills in this art-themed photography contest.', 'Capture the beauty of art in your photographs and win exciting prizes.', 400, '2026-01-10', 12, 'Art'),
-(26, 'Tech Workshop: Artificial Intelligence Basics', 'Learn the fundamentals of AI and its applications in this interactive workshop.', 'Hands-on exercises and discussions led by industry experts.', 350, '2026-02-20', 13, 'Technology'),
-(27, 'Historical Trivia Night', 'Test your knowledge with historical trivia questions and compete for prizes.', 'An evening filled with history, fun, and friendly competition.', 200, '2026-03-05', 1, 'History'),
-(28, 'Science Outreach Program', 'Engage with the local community through interactive science demonstrations and activities.', 'Inspire interest in science and promote scientific curiosity.', 300, '2026-04-15', 2, 'Science'),
-(29, 'Health and Fitness Expo', 'Explore the latest trends in health and fitness with informative sessions and product showcases.', 'Experts share tips for maintaining a healthy and active lifestyle.', 250, '2026-05-01', 3, 'Healthcare'),
-(30, 'Artistic Mural Painting Project', 'Transform public spaces with vibrant murals created by local artists and volunteers.', 'A community-driven initiative to enhance the urban environment.', 400, '2026-06-10', 4, 'Art'),
-(31, 'Tech Conference: Emerging Technologies', 'Stay updated on the latest breakthroughs in emerging technologies and their impact.', 'Industry leaders and experts share insights in this conference.', 500, '2026-07-15', 5, 'Technology'),
-(32, 'Historical Book Club', 'Join a book club dedicated to exploring historical novels and non-fiction works.', 'Discuss and delve into the rich narratives of historical literature.', 200, '2026-08-01', 6, 'History'),
-(33, 'Science Discovery Camp for Kids', 'A fun and educational camp for kids to explore the wonders of science.', 'Hands-on experiments, nature walks, and scientific adventures.', 350, '2026-09-05', 7, 'Science'),
-(34, 'Healthcare Volunteer Day', 'Contribute to community health by participating in a healthcare volunteer day.', 'Assist in health screenings, education, and support for the local community.', 250, '2026-10-20', 8, 'Healthcare'),
-(35, 'Art Workshop: Pottery Making', 'Unleash your creativity with a hands-on pottery-making workshop.', 'Guidance from experienced artists to create unique pottery pieces.', 300, '2026-11-15', 9, 'Art'),
-(36, 'Tech Startup Pitch Event', 'A platform for tech startups to pitch their ideas and innovations to a panel of industry experts.', 'Networking opportunities and feedback for aspiring entrepreneurs.', 400, '2026-12-01', 10, 'Technology'),
-(37, 'Historical Photography Exhibition', 'Explore historical moments through captivating photographs from different eras.', 'An exhibition showcasing the power of photography in preserving history.', 300, '2027-01-10', 11, 'History'),
-(38, 'Science Documentary Screening', 'Discover the wonders of science through thought-provoking documentaries.', 'A curated selection of documentaries covering various scientific disciplines.', 250, '2027-02-20', 12, 'Science'),
-(39, 'Healthcare Panel Discussion', 'Gain insights into healthcare challenges and solutions through a panel of experts.', 'Open discussions on current healthcare issues and future trends.', 350, '2027-03-05', 13, 'Healthcare'),
-(40, 'Art Installation Project', 'Contribute to a community art installation project that reflects the diversity and creativity of the community.', 'A collaborative effort to enhance public spaces with art installations.', 400, '2027-04-15', 1, 'Art'),
-(41, 'Tech Webinar: Cybersecurity Essentials', 'Stay informed about essential cybersecurity practices in this informative webinar.', 'Experts share tips and strategies to enhance online security.', 300, '2027-05-01', 2, 'Technology'),
-(42, 'Historical Reenactment Festival', 'Step into the past with historical reenactments of key events and figures.', 'An immersive experience bringing history to life through performances and displays.', 350, '2027-06-10', 3, 'History'),
-(43, 'Science Symposium on Climate Change', 'Explore the impact of climate change on scientific research and solutions.', 'Experts discuss climate-related challenges and innovations in science.', 250, '2027-07-15', 4, 'Science'),
-(44, 'Health and Wellness Retreat', 'Escape to a peaceful retreat focused on holistic health and well-being.', 'Yoga sessions, nature walks, and wellness workshops for relaxation and rejuvenation.', 500, '2027-08-01', 5, 'Healthcare'),
-(45, 'Artisan Market: Sustainable Creations', 'Promote sustainability with an artisan market featuring eco-friendly and sustainable creations.', 'Discover products that prioritize environmental consciousness.', 300, '2027-09-05', 6, 'Art'),
-(46, 'Tech Workshop: Data Science Bootcamp', 'Dive into the world of data science with hands-on exercises and practical applications.', 'Learn essential data science skills from industry professionals.', 450, '2027-10-20', 7, 'Technology'),
-(47, 'Historical Walking Tour: Industrial Revolution', 'Explore the impact of the Industrial Revolution on historical landscapes.', 'A guided walking tour highlighting key sites from the era of industrialization.', 250, '2027-11-15', 8, 'History'),
-(48, 'Science Experiment Night for Kids', 'An interactive and fun-filled night for kids to conduct science experiments.', 'Encourage curiosity and creativity through hands-on scientific activities.', 200, '2027-12-01', 9, 'Science'),
-(49, 'Healthcare Workshop: Mindful Living', 'Learn practical techniques for mindful living and mental well-being.', 'Experts guide participants in cultivating mindfulness for a healthier lifestyle.', 300, '2028-01-10', 10, 'Healthcare'),
-(50, 'Art Festival: Diversity in Art', 'Celebrate the diversity of artistic expressions through a community art festival.', 'An inclusive event featuring artworks that reflect various cultures and perspectives.', 400, '2028-02-20', 11, 'Art');
+('Tech Project 1', NULL, 'This is a sample tech project description.', 500, '2024-01-01', 1, 'Technology'),
+('Art Exhibition 1', 'Join us for a mesmerizing art exhibition.', 'An event showcasing various artworks from talented artists.', 300, '2024-02-15', 2, 'Art'),
+('History Symposium', 'Exploring historical events and their impact on society.', 'Join us for an informative symposium on significant historical moments.', 200, '2024-03-10', 3, 'History'),
+('Science Fair', NULL, 'An exciting science fair featuring innovative projects and experiments.', 400, '2024-04-05', 4, 'Science'),
+('Healthcare Workshop', 'Learn about maintaining a healthy lifestyle.', 'Join our workshop to discover tips for better healthcare.', 250, '2024-05-20', 5, 'Healthcare'),
+('Artistic Creations', 'Express yourself through art!', 'An opportunity to showcase your artistic creations in a community event.', 350, '2024-06-15', 6, 'Art'),
+('Tech Project 2', NULL, 'Collaborative tech project seeking support for development.', 600, '2024-07-01', 7, 'Technology'),
+('Historical Lecture Series', 'Exploring different eras and historical figures.', 'A series of lectures on captivating historical topics.', 300, '2024-08-10', 8, 'History'),
+('Science Symposium', NULL, 'Engage in discussions on cutting-edge scientific advancements.', 450, '2024-09-05', 9, 'Science'),
+('Healthcare Awareness Campaign', 'Promoting awareness for a healthier community.', 'Join our campaign to spread awareness about healthcare.', 200, '2024-10-20', 10, 'Healthcare'),
+('Art Gala Night', 'A night of art, culture, and entertainment.', 'Experience the beauty of diverse artworks in an elegant gala setting.', 400, '2024-11-15', 11, 'Art'),
+('Tech Innovations Expo', NULL, 'Explore the latest technological innovations and breakthroughs.', 550, '2024-12-01', 12, 'Technology'),
+('Historical Documentary Screening', 'Journey through significant historical events.', 'Join us for an enlightening documentary screening and discussion.', 250, '2025-01-10', 13, 'History'),
+('Art Workshop: Abstract Painting', NULL, 'Learn the techniques of abstract painting from experienced artists.', '300', '2025-02-20', 1, 'Art'),
+('Science Quiz Competition', 'Test your knowledge in a fun and challenging science quiz competition.', 'Exciting rounds covering various scientific disciplines.', 200, '2025-03-05', 2, 'Science'),
+('Healthcare Symposium', 'An in-depth exploration of healthcare challenges and solutions.', 'Engage with experts and contribute to the healthcare discourse.', 350, '2025-04-15', 3, 'Healthcare'),
+('Tech Talk: Future Trends', 'Stay ahead with insights into the future trends in technology.', 'Tech experts share their vision for the future in this engaging talk.', 250, '2025-05-01', 4, 'Technology'),
+('Historical Walking Tour', 'Step back in time with a historical walking tour of significant landmarks.', 'Explore the history of the city with knowledgeable guides.', 300, '2025-06-10', 5, 'History'),
+('Artisan Market: Local Creations', 'Support local artists and creators at this vibrant artisan market.', 'Discover unique handmade products and artistic treasures.', 400, '2025-07-15', 6, 'Art'),
+('Health and Wellness Seminar', 'Empower yourself with knowledge about holistic health and wellness.', 'Experts share insights on nutrition, mindfulness, and overall well-being.', 300, '2025-08-01', 7, 'Healthcare'),
+('Tech Hackathon', NULL, 'A coding marathon to solve real-world problems and showcase innovative solutions.', 500, '2025-09-05', 8, 'Technology'),
+('Historical Costume Party', 'Travel through time by dressing up in historical costumes for a night of fun.', 'Experience the charm of different eras with themed music and activities.', 200, '2025-10-20', 9, 'History'),
+('Science Exhibition for Kids', 'Inspire young minds with a hands-on science exhibition tailored for children.', 'Interactive displays and experiments for a day of scientific exploration.', 250, '2025-11-15', 10, 'Science'),
+('Healthcare Charity Run', 'Run for a cause to support healthcare initiatives and community health projects.', 'A charity run promoting fitness and contributing to a healthier community.', 300, '2025-12-01', 11, 'Healthcare'),
+('Art Photography Contest', 'Showcase your photography skills in this art-themed photography contest.', 'Capture the beauty of art in your photographs and win exciting prizes.', 400, '2026-01-10', 12, 'Art'),
+('Tech Workshop: Artificial Intelligence Basics', 'Learn the fundamentals of AI and its applications in this interactive workshop.', 'Hands-on exercises and discussions led by industry experts.', 350, '2026-02-20', 13, 'Technology'),
+('Historical Trivia Night', 'Test your knowledge with historical trivia questions and compete for prizes.', 'An evening filled with history, fun, and friendly competition.', 200, '2026-03-05', 1, 'History'),
+('Science Outreach Program', 'Engage with the local community through interactive science demonstrations and activities.', 'Inspire interest in science and promote scientific curiosity.', 300, '2026-04-15', 2, 'Science'),
+('Health and Fitness Expo', 'Explore the latest trends in health and fitness with informative sessions and product showcases.', 'Experts share tips for maintaining a healthy and active lifestyle.', 250, '2026-05-01', 3, 'Healthcare'),
+('Artistic Mural Painting Project', 'Transform public spaces with vibrant murals created by local artists and volunteers.', 'A community-driven initiative to enhance the urban environment.', 400, '2026-06-10', 4, 'Art'),
+('Tech Conference: Emerging Technologies', 'Stay updated on the latest breakthroughs in emerging technologies and their impact.', 'Industry leaders and experts share insights in this conference.', 500, '2026-07-15', 5, 'Technology'),
+('Historical Book Club', 'Join a book club dedicated to exploring historical novels and non-fiction works.', 'Discuss and delve into the rich narratives of historical literature.', '200', '2026-08-01', 6, 'History'),
+('Science Discovery Camp for Kids', 'A fun and educational camp for kids to explore the wonders of science.', 'Hands-on experiments, nature walks, and scientific adventures.', 350, '2026-09-05', 7, 'Science'),
+('Healthcare Volunteer Day', 'Contribute to community health by participating in a healthcare volunteer day.', 'Assist in health screenings, education, and support for the local community.', 250, '2026-10-20', 8, 'Healthcare'),
+('Art Workshop: Pottery Making', 'Unleash your creativity with a hands-on pottery-making workshop.', 'Guidance from experienced artists to create unique pottery pieces.', 300, '2026-11-15', 9, 'Art'),
+('Tech Startup Pitch Event', 'A platform for tech startups to pitch their ideas and innovations to a panel of industry experts.', 'Networking opportunities and feedback for aspiring entrepreneurs.', 400, '2026-12-01', 10, 'Technology'),
+('Historical Photography Exhibition', 'Explore historical moments through captivating photographs from different eras.', 'An exhibition showcasing the power of photography in preserving history.', 300, '2027-01-10', 11, 'History'),
+('Science Documentary Screening', 'Discover the wonders of science through thought-provoking documentaries.', 'A curated selection of documentaries covering various scientific disciplines.', '250', '2027-02-20', 12, 'Science'),
+('Healthcare Panel Discussion', 'Gain insights into healthcare challenges and solutions through a panel of experts.', 'Open discussions on current healthcare issues and future trends.', 350, '2027-03-05', 13, 'Healthcare'),
+('Art Installation Project', 'Contribute to a community art installation project that reflects the diversity and creativity of the community.', 'A collaborative effort to enhance public spaces with art installations.', 400, '2027-04-15', 1, 'Art'),
+('Tech Webinar: Cybersecurity Essentials', 'Stay informed about essential cybersecurity practices in this informative webinar.', 'Experts share tips and strategies to enhance online security.', 300, '2027-05-01', 2, 'Technology'),
+('Historical Reenactment Festival', 'Step into the past with historical reenactments of key events and figures.', 'An immersive experience bringing history to life through performances and displays.', 350, '2027-06-10', 3, 'History'),
+('Science Symposium on Climate Change', 'Explore the impact of climate change on scientific research and solutions.', 'Experts discuss climate-related challenges and innovations in science.', 250, '2027-07-15', 4, 'Science'),
+('Health and Wellness Retreat', 'Escape to a peaceful retreat focused on holistic health and well-being.', 'Yoga sessions, nature walks, and wellness workshops for relaxation and rejuvenation.', 500, '2027-08-01', 5, 'Healthcare'),
+('Artisan Market: Sustainable Creations', 'Promote sustainability with an artisan market featuring eco-friendly and sustainable creations.', 'Discover products that prioritize environmental consciousness.', 300, '2027-09-05', 6, 'Art'),
+('Tech Workshop: Data Science Bootcamp', 'Dive into the world of data science with hands-on exercises and practical applications.', 'Learn essential data science skills from industry professionals.', 450, '2027-10-20', 7, 'Technology'),
+('Historical Walking Tour: Industrial Revolution', 'Explore the impact of the Industrial Revolution on historical landscapes.', 'A guided walking tour highlighting key sites from the era of industrialization.', 250, '2027-11-15', 8, 'History'),
+('Science Experiment Night for Kids', 'An interactive and fun-filled night for kids to conduct science experiments.', 'Encourage curiosity and creativity through hands-on scientific activities.', '200', '2027-12-01', 9, 'Science'),
+('Healthcare Workshop: Mindful Living', 'Learn practical techniques for mindful living and mental well-being.', 'Experts guide participants in cultivating mindfulness for a healthier lifestyle.', 300, '2028-01-10', 10, 'Healthcare'),
+('Art Festival: Diversity in Art', 'Celebrate the diversity of artistic expressions through a community art festival.', 'An inclusive event featuring artworks that reflect various cultures and perspectives.', 400, '2028-02-20', 11, 'Art');
 
 
 -- Insert sample data into comments table
@@ -310,7 +309,6 @@ VALUES
 (8, 24);
 
 
--- TODO accordarsi sul testo
 
 -- Insert sample data into notification table
 INSERT INTO notification (user_for, notification_id, date, text, notification_type, user_from, visualized, post_id)
@@ -322,5 +320,8 @@ VALUES
 -- Insert sample data into files table 
 INSERT INTO files (post, name, file_id)
 VALUES
-(1, 'TechProjectDoc.pdf', 1),
-(2, 'ArtExhibitionPoster.jpg', 1);
+(1, 'example.jpg', 1),
+(1, 'example.jpg', 2),
+(1, 'example.jpg', 3),
+(1, 'example.jpg', 4),
+(2, 'example.jpg', 1);

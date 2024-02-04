@@ -1,64 +1,54 @@
 create database Givvit;
 
-
--- DBSpace Section
--- _______________
-
-
--- Tables Section
--- _____________ 
-
 create table comments (
-     post numeric not null,
+     comment_id int not null,
+     post int not null,
      text varchar(512) not null,
      date date not null,
-     comment_id numeric not null,
-     user numeric not null,
-     redponded_by numeric,
+     user int not null,
+     redponded_by int,
      constraint ID_comments_ID primary key (post, comment_id));
 
 create table donation (
-     user numeric not null,
-     post numeric not null,
-     amount numeric not null,
+     user int not null,
+     post int not null,
+     amount int not null,
      constraint ID_donation_ID primary key (user, post));
 
 create table files (
-     post numeric not null,
+     file_id int not null,
+     post int not null,
      name varchar(255) not null,
-     file_id numeric not null,
      constraint ID_files_ID primary key (post, file_id));
 
 create table follow (
-     follower numeric not null,
-     followed numeric not null,
+     follower int not null,
+     followed int not null,
      constraint ID_follow_ID primary key (follower, followed));
 
 create table likes (
-     user numeric not null,
-     post numeric not null,
+     user int not null,
+     post int not null,
      constraint ID_likes_ID primary key (post, user));
 
 create table notification (
-     user_for numeric not null,
-     notification_id numeric not null,
+     notification_id int not null,
+     user_for int not null,
      date date not null,
-     text varchar(255) not null,
      notification_type varchar(255) not null,
-     user_from numeric not null,
-     visualized numeric not null default 1,
-     post_id numeric,
+     user_from int not null,
+     visualized int not null default 1,
+     post_id int,
      constraint ID_notification_ID primary key (user_for, notification_id));
 
 create table post (
-     post_id numeric not null,
+     post_id int not null auto_increment,
      title varchar(64) not null,
      short_description varchar(255),
      long_description varchar(1024) not null,
-     amount_requested numeric not null,
+     amount_requested int not null,
      date date not null,
-     closed numeric not null default 1,
-     user numeric not null,
+     user int not null,
      topic varchar(32) not null,
      constraint ID_post_ID primary key (post_id));
 
@@ -67,7 +57,7 @@ create table topic (
      constraint ID_topic_ID primary key (name));
 
 create table user_profile (
-     user_id numeric not null,
+     user_id int not null auto_increment,
      username varchar(32) not null,
      first_name varchar(32) not null,
      last_name varchar(32) not null,

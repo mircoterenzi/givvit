@@ -130,7 +130,7 @@ class DatabaseHelper{
 
     public function getUnreadNotificationsById($user_id) {
         $query = "
-            SELECT n.notification_id, n.notification_type, n.text, n.post_id, ur.username,
+            SELECT n.notification_id, n.notification_type, n.post_id, ur.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
@@ -147,7 +147,7 @@ class DatabaseHelper{
 
     public function getNotificationsById($user_id) {
         $query = "
-            SELECT n.notification_id, n.notification_type, n.visualized, n.text, n.post_id, ur.username,
+            SELECT n.notification_id, n.notification_type, n.visualized, n.post_id, ur.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
             WHERE n.user_for = ?
@@ -332,32 +332,13 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getNextPostid(){
-        $query = "SELECT MAX(post_id) as max_id FROM post";
-        $stmt = $this->db->query($query);
-        $row = $stmt->fetch_assoc();
-    
-        return $row['max_id'] + 1;
-    }
-
     public function insertPost($title, $long_description,$user, $amount_requested, $topic, $short_description = null){
-        $query = "INSERT INTO post (post_id,title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO post (title, long_description, short_description, amount_requested, date, user, topic) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
-        $id = $this->getNextPostid();
-        $stmt->bind_param('isssisis',$id,$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
-        $stmt->execute();
+        $stmt->bind_param('sssisis',$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
         
-        return $id;
-    }
-
-    public function closePost($post_id){
-        $query = "UPDATE post SET closed = 0 WHERE id = ?";
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$idPost);
-        $stmt->execute();
-        var_dump($stmt->error);
-        return true;
+        return  $stmt->execute();
     }
 
     public function getAmountRaisedByPost($postId) {
@@ -594,12 +575,12 @@ class DatabaseHelper{
         return $row['max_id'] + 1;
     }
 
-    public function insertNotification($type, $text, $sender, $receiver, $postId = null) {
-        $query = "INSERT INTO nofication (notification_id, notification_type, text, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public function insertNotification($type, $sender, $receiver, $postId = null) {
+        $query = "INSERT INTO nofication (notification_id, notification_type, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
         $id = $this->getNextNotificationId($receiver);
-        $stmt->bind_param('issiiis',$id, $type, $text, $sender, $receiver, $postId, $date);
+        $stmt->bind_param('issiiis',$id, $type, $sender, $receiver, $postId, $date);
         $stmt->execute();
 
         return $stmt->insert_id;
@@ -632,23 +613,14 @@ class DatabaseHelper{
      * Register
      */
 
-    public function getNextuser_id(){
-        $query = "SELECT MAX(user_id) as max_id FROM user_profile";
-        $stmt = $this->db->query($query);
-        $row = $stmt->fetch_assoc();
-    
-        return $row['max_id'] + 1;
-    }
-    
 
     public function insertUser($name, $surname, $username, $email, $password, $salt, $descr = null, $img = null) {
-        $query = "INSERT INTO user_profile (user_id,first_name, last_name, username, email, password, salt, description,profile_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user_profile ( first_name, last_name, username, email, password, salt, description,profile_img) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
-        $id = $this->getNextuser_id();
-        $stmt->bind_param('issssssss',$id, $name, $surname, $username, $email, $password, $salt, $descr, $img);
+        $stmt->bind_param('ssssssss', $name, $surname, $username, $email, $password, $salt, $descr, $img);
         $stmt->execute();
 
-        return $id;
+        return $this->getUsersByUsername($username);
     }
 }
 ?>
