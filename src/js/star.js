@@ -22,7 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
         add.addEventListener('click', function(){
             const formData = new FormData();
             formData.append('type', "liked");
-            formData.append('postid', add.getAttribute('value')); 
+            formData.append('postid', add.getAttribute('post-id'));
+
+            var notFrom = new FormData();
+            notFrom.append("not_type", 'Like');
+            notFrom.append("receiver", add.getAttribute('owner-id'));
+            notFrom.append("post_id", add.getAttribute('post-id'));
+            axios.post('./api/insertNotification.php',notFrom);
+
             axios.post("./api/star.php",formData).then(() => {
                 setTimeout(() => location.reload(), 100)
             });

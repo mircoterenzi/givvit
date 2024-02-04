@@ -337,8 +337,8 @@ class DatabaseHelper{
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
         $stmt->bind_param('sssisis',$title, $long_description, $short_description, $amount_requested, $date, $user, $topic);
-        
-        return  $stmt->execute();
+        $stmt->execute();
+        return $this->db->insert_id;
     }
 
     public function getAmountRaisedByPost($postId) {
@@ -564,27 +564,34 @@ class DatabaseHelper{
     /**
      * Notification CRUD 
      */
-    public function getNextNotificationId($user_for){
+    public function getNextNotificationId($user_for) {
         $query = "SELECT MAX(notification_id) as max_id FROM notification where user_for = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$user_for);
+        $stmt->bind_param('i', $user_for);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_all(MYSQLI_ASSOC);
     
-        return $row['max_id'] + 1;
+        // Check if there are any rows returned
+        if (!empty($row)) {
+            return $row[0]['max_id'] + 1;
+        }
+    
+        // If no rows are returned, start from 1
+        return 1;
     }
-
+    
     public function insertNotification($type, $sender, $receiver, $postId = null) {
-        $query = "INSERT INTO nofication (notification_id, notification_type, user_from, user_for, post_id , date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO notification (notification_id, notification_type, user_from, user_for, date, visualized, post_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);
         $date = date("Y-m-d");
         $id = $this->getNextNotificationId($receiver);
-        $stmt->bind_param('issiiis',$id, $type, $sender, $receiver, $postId, $date);
+        $visualized = 0;
+        $stmt->bind_param('isiiisi', $id, $type, $sender, $receiver, $date, $visualized, $postId);
         $stmt->execute();
-
+    
         return $stmt->insert_id;
-    }
+    }    
 
     public function viewedNotification($user_id,$idNotification){
         $query = "UPDATE notification SET visualized = 1 WHERE notification_id = ? and user_for = ?";
