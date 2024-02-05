@@ -46,7 +46,7 @@
                             </svg>
                             <!-- Desktop menu -->
                             <div class="desktop ms-2">
-                                <a href="explore.php?n=15" title = "explore" >
+                                <a href="explore.php" title = "explore" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-compass" viewBox="0 0 16 16" alt="compass icon">
                                         <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016m6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
                                         <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
@@ -73,7 +73,7 @@
         <div class="mobile">
             <div class="d-flex fixed-bottom justify-content-center">
                 <nav class="nav p-3 mb-2 shadow-lg rounded-5">
-                    <a href="explore.php?n=15" title = "explore" >
+                    <a href="explore.php" title = "explore" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" class="bi bi-compass" viewBox="0 0 16 16" alt="compass icon">
                             <path d="M8 16.016a7.5 7.5 0 0 0 1.962-14.74A1 1 0 0 0 9 0H7a1 1 0 0 0-.962 1.276A7.5 7.5 0 0 0 8 16.016m6.5-7.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
                             <path d="m6.94 7.44 4.95-2.83-2.83 4.95-4.949 2.83 2.828-4.95z"/>
