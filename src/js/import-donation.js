@@ -1,24 +1,33 @@
-document.getElementById('send-donation').addEventListener('click', function () {
-    var donationValue = document.getElementById('donation-amount').value;
-    var postId = this.getAttribute('post-id');
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('send-donation').addEventListener('click', async function () {
+        var donationValue = document.getElementById('donation-amount').value;
+        var postId = this.getAttribute('post-id');
+        var reciver = this.getAttribute('owner-id');
 
-    //interrupts execution if donationValue isn't a number
-    if (isNaN(donationValue) || donationValue.trim() === "") {
-        alert("The donation import must be a numeric value! ($)");
-        return;
-    }
 
-    var donationform = new FormData();
-    donationform.append('donationAmount', donationValue);
-    donationform.append('postId', postId);
+        //interrupts execution if donationValue isn't a number
+        if (isNaN(donationValue) || donationValue.trim() === "") {
+            alert("The donation import must be a numeric value! ($)");
+            return;
+        }
 
-    console.log(donationform.get('donationAmount'), donationform.get('postId'));
+        var donationform = new FormData();
+        donationform.append('donationAmount', donationValue);
+        donationform.append('postId', postId);
+        donationform.append('reciver',reciver);
 
-    axios.post('./api/import-donation.php', donationform).then(response => {
+        var response = await axios.post('./api/import-donation.php', donationform)
         if (response.data["importDone"]) {
             setTimeout(() => document.location.reload(), 1000);
+            var notFrom = new FormData();
+            notFrom.append("not_type",'Donation');
+            notFrom.append("receiver",reciver);
+            notFrom.append("post_id",postId);
+
+            axios.post('./api/insertNotification.php', notFrom);
         } else {
-            document.getElementById('res').innerText = response.data["error"];
+            alert(response.data["error"]);
         }
+        
     });
 });

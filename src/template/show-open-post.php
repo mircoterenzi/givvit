@@ -88,10 +88,10 @@
             </div>
             </div>
 
-            <!-- Post selection -->
+            <!-- Donation -->
             <section class="d-flex flex-row p-4 d-flex justify-content-center">
             <textarea class="form-control" id="donation-amount" placeholder="Import($):"></textarea>
-            <button type="button" class="btn btn-primary mx-2 bg-success" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>">donate</button>
+            <button type="button" class="btn btn-primary mx-2 bg-success" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" >donate</button>
             </section>
 
             <!--inserimento commento-->

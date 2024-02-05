@@ -496,16 +496,23 @@ class DatabaseHelper{
      * Donations CRUD
      */
 
-    public function checkDonation($idUser, $idPost){
+     public function checkDonation($idUser, $idPost){
         $query = "SELECT * FROM donation 
                 WHERE post = ? AND user = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$idPost, $idUser);
+        $stmt->bind_param('ii', $idPost, $idUser);
+        
         $stmt->execute();
+    
         $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
+    
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    
 
     public function insertDonation($idPost, $user_id, $amount){
         $query = "INSERT INTO donation (post, user, amount) VALUES (?, ?, ?)";
