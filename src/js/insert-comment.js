@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.data["insertDone"]) {
                 setTimeout(() => document.location.reload(), 1000);
             } else {
-                document.getElementById('res').innerText = response.data["error"];
+                alert(response.data["error"]);
             }
         });
     });
