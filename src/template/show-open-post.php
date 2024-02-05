@@ -82,7 +82,7 @@
             <p><?php echo $post_full["long_description"]; ?></p>
 
             <!--barra progressi-->
-            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
+            <div class="progress" style="padding-left: 0px; padding-right: 0px;" role="progressbar" aria-label="progress with donations" aria-valuenow="25" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
                 <div class="progress-bar" style="width:  <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%">
                 <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,2)?> % 
             </div>
@@ -130,9 +130,9 @@
                                 <article class="card-comment mb-3 p-2 shadow-sm rounded-4 bg-light">
                                     <p><?php echo$comment["text"];?></p>
                                     <!--tag username in fondo al commento-->
-                                    <p class="text-end">
+                                    <section class="text-end">
                                         <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
-                                    </p>
+                                    </section>
                                 </article>
                             </div>
                         </div>
