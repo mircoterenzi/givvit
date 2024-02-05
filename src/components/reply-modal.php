@@ -8,13 +8,14 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="reply" class="form-label" hidden>Your reply</label>
-                        <textarea class="form-control" id="reply" rows="3" placeholder="Insert your reply..."></textarea>
+                        <label for="reply-text" class="form-label" hidden>Your reply</label>
+                        <textarea class="form-control" id="reply-text" rows="3" placeholder="Insert your reply..."></textarea>
                     </div>
                 </form>
             </div>
+            <input type="hidden" id="reply-values" data-postId="" data-userId="" data-commentId="">
             <div class="modal-footer">
-                <button type="button" class="rm-follow btn">Reply</button>
+                <button id="send-reply" type="button" class="rm-follow btn" post-id ="<?php echo $post_full["post_id"]; ?>">Reply</button>
             </div>
         </div>
     </div>

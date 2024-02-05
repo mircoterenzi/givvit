@@ -411,17 +411,17 @@ class DatabaseHelper{
         $stmt->bind_param('siii',$testo, $user_id, $post_id, $id);
         $stmt->execute();
         
-        return $stmt->insert_id;
+        return $id;
     }
 
-    public function insertCommentResponse($postId, $responseId){
-        $query = "UPDATE comments SET responded_by = ? WHERE post_id = ?";
+    public function insertCommentResponse($post_id, $commentId, $responseId){
+        $query = "UPDATE comments SET responded_by = ? WHERE post = ? AND comment_id = ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$responseId, $postId);
-        $stmt->execute();
+        $stmt->bind_param('iii', $responseId, $post_id, $commentId);
         
-        return $stmt->insert_id;
+       return $stmt->execute();
     }
+      
 
     public function getCommentOnPost($postId) {
         $query = "SELECT c.* , u.username , u.profile_img

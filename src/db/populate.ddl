@@ -102,7 +102,7 @@ VALUES
 (5, 'This workshop is much needed. Count me in!', 2, 9, NULL),
 (6, 'Looking forward to expressing myself through art!', 1, 10, NULL),
 (7, 'I am interested in supporting collaborative tech projects. Let\'s connect!', 1, 11, NULL),
-(7, 'Any specific technologies you\'ll be working on?', 2, 12, 11),
+(7, 'Any specific technologies you\'ll be working on?', 2, 12, NULL),
 (8, 'I love historical lectures! Will there be Q&A sessions?', 1, 13, NULL),
 (9, 'The science symposium sounds intriguing. Can\'t wait!', 1, 1, NULL),
 (9, 'Is there a schedule available for the symposium?', 2, 2, NULL),
