@@ -6,7 +6,6 @@ create table comments (
      comment_id int not null,
      post int not null,
      text varchar(512) not null,
-     date date not null,
      user int not null,
      responded_by int,
      constraint ID_comments_ID primary key (post, comment_id));
