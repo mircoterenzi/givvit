@@ -127,8 +127,9 @@
                             </div>
                             <div class="col-md-11 col-10">
                                 <!--commento riguardo il post aperto-->
-                                <article class="card-comment mb-2 p-2 shadow-sm rounded-4 bg-light">
-                                    <p><?php echo$comment["text"];?></p><br>
+                                <article class="card-comment mb-3 p-2 shadow-sm rounded-4 bg-light">
+                                    <p><?php echo$comment["text"];?></p>
+                                    <!--tag username in fondo al commento-->
                                     <p class="text-end">
                                         <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" class="username" id="<?php echo $post_full["user_id"]; ?>">@<?php echo $post_full["username"]; ?></a>
                                     </p>
