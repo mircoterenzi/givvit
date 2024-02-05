@@ -37,6 +37,10 @@ a {
     object-fit: cover;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 /* Mobile */
 @media screen and (max-width: 768px) {
     div.desktop {
