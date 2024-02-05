@@ -8,29 +8,29 @@ create table comments (
      text varchar(512) not null,
      user int not null,
      responded_by int,
-     constraint ID_comments_ID primary key (post, comment_id));
+     constraint PK_comments primary key (post, comment_id));
 
 create table donation (
      user int not null,
      post int not null,
      amount int not null,
-     constraint ID_donation_ID primary key (user, post));
+     constraint PK_donation primary key (user, post));
 
 create table files (
      file_id int not null,
      post int not null,
      name varchar(255) not null,
-     constraint ID_files_ID primary key (post, file_id));
+     constraint PK_files primary key (post, file_id));
 
 create table follow (
      follower int not null,
      followed int not null,
-     constraint ID_follow_ID primary key (follower, followed));
+     constraint PK_follow primary key (follower, followed));
 
 create table likes (
      user int not null,
      post int not null,
-     constraint ID_likes_ID primary key (post, user));
+     constraint PK_likes primary key (post, user));
 
 create table notification (
      notification_id int not null,
@@ -40,7 +40,7 @@ create table notification (
      user_from int not null,
      visualized int not null default 0,
      post_id int,
-     constraint ID_notification_ID primary key (user_for, notification_id));
+     constraint PK_notification primary key (user_for, notification_id));
 
 create table post (
      post_id int not null auto_increment,
@@ -51,11 +51,11 @@ create table post (
      date date not null,
      user int not null,
      topic varchar(32) not null,
-     constraint ID_post_ID primary key (post_id));
+     constraint PK_post primary key (post_id));
 
 create table topic (
      name varchar(32) not null,
-     constraint ID_topic_ID primary key (name));
+     constraint PK_topic primary key (name));
 
 create table user_profile (
      user_id int not null auto_increment,
@@ -67,7 +67,7 @@ create table user_profile (
      email char(125) ,
      description varchar(512),
      profile_img varchar(512),
-     constraint ID_user_profile_ID primary key (user_id));
+     constraint PK_user_profile primary key (user_id));
 
 
 -- Constraints Section
