@@ -131,7 +131,7 @@
                                     <p><?php echo$comment["text"];?></p>
                                     <!--tag username in fondo al commento-->
                                     <p class="text-end">
-                                        <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" class="username" id="<?php echo $post_full["user_id"]; ?>">@<?php echo $post_full["username"]; ?></a>
+                                        <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                     </p>
                                 </article>
                             </div>
