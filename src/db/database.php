@@ -265,7 +265,7 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
  
-    public function getAllPosts($n = 10){
+    public function getAllPosts($n){
         $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
                 p.amount_requested, r.ammount_raised, img.name as path
                 FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
@@ -282,23 +282,17 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getPostsbyTopic($topic, $n=-1){
+    public function getPostsbyTopic($topic, $n){
         $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, 
             p.amount_requested, r.ammount_raised, img.name as path
             FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
             left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
             WHERE topic = ?
-            ORDER BY p.date DESC";
-
-        if($n > 0){
-            $query .= " LIMIT ?";
-        }
+            ORDER BY p.date DESC
+            LIMIT ?";
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('s',$topic);
-        if($n > 0){
-            $stmt->bind_param('i',$n);
-        }
+        $stmt->bind_param('si',$topic,$n);
         $stmt->execute();
         $result = $stmt->get_result();
 

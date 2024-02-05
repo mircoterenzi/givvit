@@ -38,9 +38,6 @@
         </div>
     </article>
     <?php endforeach; ?>
-    <div class="container text-center">
-        <button class="btn btn-primary" id="loadMore">Load more</button>
-    </div>
 <?php else: ?>
     <div class="text-center">
         <p>There are no posts :(</p>

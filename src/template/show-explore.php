@@ -15,9 +15,16 @@
             <li><a href="explore.php" class="dropdown-item">Remove Filters</a></li>
             <li><hr class="dropdown-divider"></li>
             <?php foreach($templateParams["topics-list"] as $topic): ?>
-                <li><a href="explore.php?topic=<?php echo $topic["name"]; ?>" class="dropdown-item"><?php echo $topic["name"]; ?></a></li>
+                <li><a href="explore.php?topic=<?php echo $topic["name"]; ?>&n=15" class="dropdown-item"><?php echo $topic["name"]; ?></a></li>
             <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <?php require("show-post.php"); ?>
+<div class="container text-center">
+    <?php if(!empty($_GET["topic"])): ?>
+        <a href="explore.php?topic=<?php echo $_GET["topic"]; ?>&n=<?php echo $_GET["n"]+10; ?>" class="btn btn-primary"> Load more </a>
+    <?php else: ?>
+        <a href="explore.php?n=<?php echo $_GET["n"]+10; ?>" class="btn btn-primary"> Load more </a>
+    <?php endif; ?>
+</div>
