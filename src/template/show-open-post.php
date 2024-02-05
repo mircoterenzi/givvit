@@ -33,7 +33,7 @@
             <h2 class="h3 my-3"><?php echo $post_full["title"]; ?></h2>
 
             <div class="row mb-3">
-                <div class="col-1">
+                <div class="col-2">
                     <div class="ratio ratio-1x1 overflow-hidden">
                         <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
                         <img  alt="profile picture" src="img/<?php 
@@ -119,13 +119,13 @@
                     foreach($comments as $comment): 
                     if ($_SESSION["userId"] == $post_full["user_id"]): 
                 ?>
-                        <div class="row my-4 justify-content-end">
+                        <div class="row my-3 justify-content-end">
                     <?php else: ?>
-                        <div class="row my-4 justify-content-start">
+                        <div class="row my-3 justify-content-start">
                     <?php endif; ?>
                     <?php if ($_SESSION["userId"] != $post_full["user_id"]): ?>
                             <div class="col-2">
-                                <div class="ratio ratio-1x1 overflow-hidden">
+                                <div class="ratio ratio-1x1 mt-2 overflow-hidden">
                                     <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
                                     <img  alt="profile picture" src="img/<?php 
                                     if(!empty($user["profile_img"])) {
@@ -136,16 +136,16 @@
                                 </div>
                             </div>
                     <?php endif; ?>
-                            <div class="col-auto">
+                            <div class="col-10">
                                 <article class="card-comment p-3 shadow-sm rounded-4 bg-light">
-                                    <p><?php echo$comment["text"];?></p>
+                                    <p><?php echo $comment["text"];?></p>
                                     <section class="row">
                                         <div class="col">
                                             <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                         </div>
                                         <div class="col text-end">
-                                            <?php if($_SESSION["userId"] == $post_full["user_id"]): ?>
-                                                <button type="button" class="btn btn-sm" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>">Reply</button>
+                                            <?php if($_SESSION["userId"] != $post_full["user_id"]): ?>
+                                                <button data-bs-toggle="modal" data-bs-target="#reply-msg-modal" type="button" class="btn btn-sm" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>">Reply</button>
                                             <?php endif; ?>
                                         </div>
                                     </section>
@@ -189,3 +189,4 @@
             </section>
         </article>
 </section>
+<?php include("./components/reply-modal.php"); ?>
