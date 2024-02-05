@@ -90,8 +90,8 @@
 
             <!-- Post selection -->
             <section class="d-flex flex-row p-4 d-flex justify-content-center">
-                <button type="button" class="btn btn-outline-secondary mx-2">import: $</button>
-                <button type="button" class="btn btn-primary mx-2 bg-success">donate</button>
+            <textarea class="form-control" id="donation-amount" placeholder="Import($):"></textarea>
+            <button type="button" class="btn btn-primary mx-2 bg-success" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>">donate</button>
             </section>
 
             <!--inserimento commento-->
