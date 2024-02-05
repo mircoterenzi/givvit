@@ -129,16 +129,31 @@
                                 <!--commento riguardo il post aperto-->
                                 <article class="card-comment mb-3 p-2 shadow-sm rounded-4 bg-light">
                                     <p><?php echo$comment["text"];?></p>
-                                    <!--tag username in fondo al commento-->
                                     <section class="text-end">
-                                        <?php if($_SESSION["userId"] != $post_full["user_id"]): ?>
-                                            <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" disabled>reply</button>
-                                        <?php else: ?>
+                                        <?php if($_SESSION["userId"] == $post_full["user_id"]): ?>
                                             <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" >reply</button>
                                         <?php endif; ?>
-                                    <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
+                                        <!--tag username in fondo al commento-->
+                                        <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                     </section>
                                 </article>
+                                <!--controllo se il commento ha una risposta-->
+                                <?php if(!empty($comment["responded_by"])): ?>
+                                    <div class = "row justify-content-end">
+                                        <div class="col-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                                            </svg>
+                                        </div>
+                                        <div class="col-9">
+                                            <article class="card-comment mb-3 p-2 shadow-sm rounded-4 bg-light">
+                                                <?php $response = $dbh->getCommentOnPostResponse($post_full["post_id"], $comment["responded_by"]);
+                                                    echo $response[0]["text"];
+                                                ?>                                            
+                                            </article>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
