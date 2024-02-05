@@ -115,30 +115,55 @@
             <hr class="hr hr-blurry m-2" />
             <!--lista di commenti del post-->
             <section>
-                <?php if(!empty($comments)): ?>
-                    <?php foreach($comments as $comment): ?>
-                        <div class="row align-items-center">
-                            <div class="col-md-1 col-2">
-                                <!--icona del proprietario del commento-->
-                                <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
-                                    <em class="fa fa-user"></em>
-                                </button>
+                <?php if(!empty($comments)):
+                    foreach($comments as $comment): 
+                    if ($_SESSION["userId"] == $post_full["user_id"]): 
+                ?>
+                        <div class="row my-4 justify-content-end">
+                    <?php else: ?>
+                        <div class="row my-4 justify-content-start">
+                    <?php endif; ?>
+                    <?php if ($_SESSION["userId"] != $post_full["user_id"]): ?>
+                            <div class="col-2">
+                                <div class="ratio ratio-1x1 overflow-hidden">
+                                    <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
+                                    <img  alt="profile picture" src="img/<?php 
+                                    if(!empty($user["profile_img"])) {
+                                    echo($user["profile_img"]); 
+                                    } else {
+                                    echo("default-propic.jpg");
+                                    } ?>" class="propic rounded-circle" />
+                                </div>
                             </div>
-                            <div class="col-md-11 col-10">
-                                <!--commento riguardo il post aperto-->
-                                <article class="card-comment mb-3 p-2 shadow-sm rounded-4 bg-light">
+                    <?php endif; ?>
+                            <div class="col-auto">
+                                <article class="card-comment p-3 shadow-sm rounded-4 bg-light">
                                     <p><?php echo$comment["text"];?></p>
-                                    <!--tag username in fondo al commento-->
-                                    <section class="text-end">
-                                        <?php if($_SESSION["userId"] != $post_full["user_id"]): ?>
-                                            <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" disabled>reply</button>
-                                        <?php else: ?>
-                                            <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" >reply</button>
-                                        <?php endif; ?>
-                                    <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
+                                    <section class="row">
+                                        <div class="col">
+                                            <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
+                                        </div>
+                                        <div class="col text-end">
+                                            <?php if($_SESSION["userId"] == $post_full["user_id"]): ?>
+                                                <button type="button" class="btn btn-sm" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>">Reply</button>
+                                            <?php endif; ?>
+                                        </div>
                                     </section>
                                 </article>
                             </div>
+                            <?php if ($_SESSION["userId"] == $post_full["user_id"]): ?>
+                            <div class="col-2">
+                                <div class="ratio ratio-1x1 overflow-hidden">
+                                    <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
+                                    <img  alt="profile picture" src="img/<?php 
+                                    if(!empty($user["profile_img"])) {
+                                    echo($user["profile_img"]); 
+                                    } else {
+                                    echo("default-propic.jpg");
+                                    } ?>" class="propic rounded-circle" />
+                                </div>
+                            </div>
+                    <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
