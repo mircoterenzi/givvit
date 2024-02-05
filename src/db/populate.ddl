@@ -1,19 +1,19 @@
 -- Insert sample data into user_profile table
-INSERT INTO user_profile (user_id, username, first_name, last_name, password, salt, description, profile_img)
+INSERT INTO user_profile (username, first_name, last_name, password, salt, description, profile_img)
 VALUES
-(1, 'pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', 'pioli-propic.jpg'),
-(2, 'sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, 'sbobito-propic.jpg'),
-(3, 'mirco', 'Mirco', 'Terenzi', 'password3', 'salt', 'mi piacciono i gattini', 'mirco-propic.jpg'),
-(4, 'example', 'Example', 'Profile', 'd30275eac88d1c1d5ce0334374221cbf811efb7458ad91e58c1d9f13b816acc2567370301d58561089253b6c1adb645f1ece0c69d88b5679d3190190805c2999', 'e372f1c3b92ad9571cb2e6a5a97c956d88e94be5523ae4766796332c413685d34aff99e795b00d349cf455bfb0f543f95a552a23669b4d66af56084cd3eaf230', 'Profile used as an example to test the functionality of the social network without creating a new profile', example.jpg),
-(5, 'tech_guru', 'Alex', 'Smith', 'password5', 'salt', 'Software engineer with a love for technology.', NULL),
-(6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'salt', 'Promoting a healthy lifestyle.', NULL),
-(7, 'adventure_seeker', 'Ethan', 'Davis', 'password7', 'salt', 'Exploring the world one adventure at a time.', NULL),
-(8, 'music_lover', 'Olivia', 'Clark', 'password8', 'salt', 'Passionate about music and concerts.', NULL),
-(9, 'bookworm', 'Daniel', 'White', 'password9', 'salt', 'Avid reader and literature enthusiast.', NULL),
-(10, 'fitness_freak', 'Ava', 'Wilson', 'password10', 'salt', 'Dedicated to fitness and well-being.', NULL),
-(11, 'foodie_explorer', 'Mia', 'Martin', 'password11', 'salt', 'Exploring diverse cuisines and flavors.', NULL),
-(12, 'coding_enthusiast', 'Liam', 'Thompson', 'password12', 'salt', 'Passionate about coding and programming.', NULL),
-(13, 'nature_lover', 'Emma', 'Anderson', 'password13', 'salt', 'Connecting with nature and wildlife.', NULL);
+('pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', 'pioli-propic.jpg'),
+('sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, 'sbobito-propic.jpg'),
+('mirco', 'Mirco', 'Terenzi', 'password3', 'salt', 'mi piacciono i gattini', 'mirco-propic.jpg'),
+('example', 'Example', 'Profile', 'd30275eac88d1c1d5ce0334374221cbf811efb7458ad91e58c1d9f13b816acc2567370301d58561089253b6c1adb645f1ece0c69d88b5679d3190190805c2999', 'e372f1c3b92ad9571cb2e6a5a97c956d88e94be5523ae4766796332c413685d34aff99e795b00d349cf455bfb0f543f95a552a23669b4d66af56084cd3eaf230', 'Profile used as an example to test the functionality of the social network without creating a new profile', example.jpg),
+('tech_guru', 'Alex', 'Smith', 'password5', 'salt', 'Software engineer with a love for technology.', NULL),
+('health_enthusiast', 'Sophia', 'Miller', 'password6', 'salt', 'Promoting a healthy lifestyle.', NULL),
+('adventure_seeker', 'Ethan', 'Davis', 'password7', 'salt', 'Exploring the world one adventure at a time.', NULL),
+('music_lover', 'Olivia', 'Clark', 'password8', 'salt', 'Passionate about music and concerts.', NULL),
+('bookworm', 'Daniel', 'White', 'password9', 'salt', 'Avid reader and literature enthusiast.', NULL),
+('fitness_freak', 'Ava', 'Wilson', 'password10', 'salt', 'Dedicated to fitness and well-being.', NULL),
+('foodie_explorer', 'Mia', 'Martin', 'password11', 'salt', 'Exploring diverse cuisines and flavors.', NULL),
+('coding_enthusiast', 'Liam', 'Thompson', 'password12', 'salt', 'Passionate about coding and programming.', NULL),
+('nature_lover', 'Emma', 'Anderson', 'password13', 'salt', 'Connecting with nature and wildlife.', NULL);
 
 
 -- Insert sample data into topic table
