@@ -4,7 +4,7 @@ VALUES
 (1, 'pioli', 'Alessandro', 'Coli', 'password1', 'salt', 'il capo del db', 'pioli-propic.jpg'),
 (2, 'sbobito', 'Dario', 'Berti', 'password2', 'salt', NULL, 'sbobito-propic.jpg'),
 (3, 'mirco', 'Mirco', 'Terenzi', 'password3', 'salt', 'mi piacciono i gattini', 'mirco-propic.jpg'),
-(4, 'creative_mind', 'Emily', 'Johnson', 'password4', 'salt', 'Passionate about art and creativity.', NULL),
+(4, 'example', 'Example', 'Profile', 'd30275eac88d1c1d5ce0334374221cbf811efb7458ad91e58c1d9f13b816acc2567370301d58561089253b6c1adb645f1ece0c69d88b5679d3190190805c2999', 'e372f1c3b92ad9571cb2e6a5a97c956d88e94be5523ae4766796332c413685d34aff99e795b00d349cf455bfb0f543f95a552a23669b4d66af56084cd3eaf230', 'Profile used as an example to test the functionality of the social network without creating a new profile', example.jpg),
 (5, 'tech_guru', 'Alex', 'Smith', 'password5', 'salt', 'Software engineer with a love for technology.', NULL),
 (6, 'health_enthusiast', 'Sophia', 'Miller', 'password6', 'salt', 'Promoting a healthy lifestyle.', NULL),
 (7, 'adventure_seeker', 'Ethan', 'Davis', 'password7', 'salt', 'Exploring the world one adventure at a time.', NULL),
@@ -212,7 +212,7 @@ VALUES
 (1, 3),
 (2, 4),
 (3, 5),
-(4, 6),
+(4, 1),
 (5, 7),
 (6, 8),
 (7, 9),
@@ -225,7 +225,7 @@ VALUES
 (1, 4),
 (2, 5),
 (3, 6),
-(4, 7);
+(4, 2);
 
 
 -- Insert sample data into likes table
