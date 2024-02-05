@@ -1,7 +1,9 @@
-document.getElementById("edit-profile-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    editprof();
-    event.target.reset();
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("edit-profile-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        editprof();
+        event.target.reset();
+    });
 });
 
 async function addtodb(formDataUser) {

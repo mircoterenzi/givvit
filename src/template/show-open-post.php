@@ -126,10 +126,9 @@
                     <?php if ($_SESSION["userId"] != $post_full["user_id"]): ?>
                             <div class="col-2">
                                 <div class="ratio ratio-1x1 mt-2 overflow-hidden">
-                                    <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
                                     <img  alt="profile picture" src="img/<?php 
-                                    if(!empty($user["profile_img"])) {
-                                    echo($user["profile_img"]); 
+                                    if(!empty($comment["profile_img"])) {
+                                    echo($comment["profile_img"]); 
                                     } else {
                                     echo("default-propic.jpg");
                                     } ?>" class="propic rounded-circle" />
