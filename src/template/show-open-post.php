@@ -131,7 +131,12 @@
                                     <p><?php echo$comment["text"];?></p>
                                     <!--tag username in fondo al commento-->
                                     <section class="text-end">
-                                        <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
+                                        <?php if($_SESSION["userId"] != $post_full["user_id"]): ?>
+                                            <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" disabled>reply</button>
+                                        <?php else: ?>
+                                            <button type="button" class="btn btn-primary mx-2" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>" style="background-color: #ff5733; color: #ffffff;" >reply</button>
+                                        <?php endif; ?>
+                                    <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                     </section>
                                 </article>
                             </div>
