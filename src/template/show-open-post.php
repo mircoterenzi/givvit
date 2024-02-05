@@ -144,7 +144,7 @@
                                             <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                         </div>
                                         <div class="col text-end">
-                                            <?php if($_SESSION["userId"] != $post_full["user_id"]): ?>
+                                            <?php if($_SESSION["userId"] == $post_full["user_id"]): ?>
                                                 <button data-bs-toggle="modal" data-bs-target="#reply-msg-modal" type="button" class="btn btn-sm" id="reply" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>">Reply</button>
                                             <?php endif; ?>
                                         </div>
