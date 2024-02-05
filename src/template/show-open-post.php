@@ -1,4 +1,5 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
 <?php
     $post_full= $templateParams["post_open"][0];
@@ -29,6 +30,7 @@
                     </svg>
                     <?php endif;?>
                 </div>
+            </div>
             <!--titolo del post-->
             <h2 class="h3 my-3"><?php echo $post_full["title"]; ?></h2>
 
@@ -88,7 +90,7 @@
             <p><?php echo $post_full["long_description"]; ?></p>
 
             <!--barra progressi-->
-            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post_full["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
+            <div class="progress progress-custom" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post_full["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post_full["amount_requested"]; ?>">
                 <div class="progress-bar" style="width: <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%"><?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%</div>
             </div>
 
@@ -100,12 +102,12 @@
             </div>
 
             <!--inserimento commento-->
-            <div class="row align-items-center">
+            <div class="row comment-send align-items-center">
                 <div class="col-11">
                     <label for="input-comment" hidden>Insert your comment:</label>
                     <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
                 </div>
-                <div class="col-1 justify-content-left">
+                <div class="col-1 ps-1">
                     <svg xmlns="http://www.w3.org/2000/svg" id ="send-comment" width="20" class="send clickable bi bi-send-fill" viewBox="0 0 16 16" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>" >
                         <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
                     </svg>
