@@ -8,7 +8,7 @@ create table comments (
      text varchar(512) not null,
      date date not null,
      user int not null,
-     redponded_by int,
+     responded_by int,
      constraint ID_comments_ID primary key (post, comment_id));
 
 create table donation (

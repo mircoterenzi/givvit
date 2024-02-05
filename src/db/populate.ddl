@@ -80,7 +80,7 @@ VALUES
 
 
 -- Insert sample data into comments table
-INSERT INTO comments (post, text, date, comment_id, user, redponded_by)
+INSERT INTO comments (post, text, date, comment_id, user, responded_by)
 VALUES
 (1, 'Great project! I would love to contribute.', '2023-01-02', 1, 2, 2),
 (1, 'Thank you! Your support means a lot.', '2023-01-03', 2, 1, NULL),

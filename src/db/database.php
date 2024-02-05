@@ -426,9 +426,10 @@ class DatabaseHelper{
 
     public function getCommentOnPost($postId) {
         $query = "SELECT c.* , u.username 
-                FROM comments c JOIN user_profile u ON u.user_id = c.user
-                WHERE c.post = ?
-                ORDER BY c.date DESC";
+            FROM comments c JOIN user_profile u ON u.user_id = c.user
+            JOIN post p ON p.post_id = c.post 
+            WHERE c.post = ? AND c.user != p.user 
+            ORDER BY c.date DESC";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('i',$postId);
@@ -436,6 +437,19 @@ class DatabaseHelper{
         $result = $stmt->get_result();
 
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getCommentOnPostResponse($postId, $responseId){
+        $query = "SELECT c.* , u.username 
+        FROM comments c JOIN user_profile u ON u.user_id = c.user
+        WHERE c.post = ? AND c.comment_id = ? ";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param('ii',$postId,$responseId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     /**
