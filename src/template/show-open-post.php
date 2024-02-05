@@ -32,14 +32,14 @@
             <!--titolo del post-->
             <h2 class="h3 my-3"><?php echo $post_full["title"]; ?></h1>
 
-            <div class="row mt-2">
+            <div class="row mb-3 ms-1">
                 <!--ICONA BOTTONE IMG PROFILO, NON VERA FOTO-->
                 <button type="button" class="btn btn-primary btn-sm rounded-circle" style="width: 28px; height: 28px;">
                     <em class="fa fa-user"></em>
                 </button>
                 <!--tag username-->
                 <div class="col inline text-start">
-                    <p><?php echo $post_full["username"] ?></p>
+                    <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" class="username" id="<?php echo $post_full["user_id"]; ?>">@<?php echo $post_full["username"]; ?></a>
                 </div>
             </div>
             <br>
@@ -129,6 +129,9 @@
                                 <!--commento riguardo il post aperto-->
                                 <article class="card-comment mb-2 p-2 shadow-sm rounded-4 bg-light">
                                     <p><?php echo$comment["text"];?></p><br>
+                                    <p class="text-end">
+                                        <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" class="username" id="<?php echo $post_full["user_id"]; ?>">@<?php echo $post_full["username"]; ?></a>
+                                    </p>
                                 </article>
                             </div>
                         </div>
