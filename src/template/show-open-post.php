@@ -164,7 +164,7 @@
                                     ?>   
                                     <div class="row">
                                         <div class="col text-end">
-                                            <a href="profile.php?id=<?php echo $response["username"]; ?>" >@<?php echo $response["username"]; ?></a>
+                                            <a href="profile.php?id=<?php echo $post_full["username"]; ?>" >@<?php echo $post_full["username"]; ?></a>
                                         </div>
                                     </div>                                         
                                 </article>
