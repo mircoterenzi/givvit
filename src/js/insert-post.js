@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const insertPostForm = document.getElementById("insert-post");
 
+    var path = "open-post.php?postId=" ;
+
     insertPostForm.addEventListener("submit", function (event) {
         event.preventDefault();
         saveFormData();
@@ -20,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (response.data["insertDone"]) {
                 document.getElementById("result").innerText = "Insert done !!";
                 const postId = response.data["PostId"];
+                path = path + postId;
                 await handleImageUpload(postId);
             } else {
                 document.getElementById("result").innerText = response.data.errorInsert;
@@ -65,6 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("result").innerText = 'An error occurred during image upload.';
             }
         }
-        setTimeout(() => document.location.reload(), 100);
+        setTimeout(() => document.location.href = path, 100);
     }
 });
