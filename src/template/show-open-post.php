@@ -95,6 +95,7 @@
                 <div class="progress-bar" style="width: <?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%"><?php echo round($post_full["ammount_raised"]/$post_full["amount_requested"] * 100,0)?>%</div>
             </div>
 
+            <?php if($_SESSION["userId"] != $post_full["user_id"]): ?> <!-- can't donate or comment to yourself-->
             <!-- Donation -->
             <div class="d-flex py-4 justify-content-center">
                 <label for="donation-amount" hidden>Import (€)</label>
@@ -102,8 +103,7 @@
                 <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
             </div>
 
-            <!--inserimento commento-->
-            <div class="row comment-send align-items-center">
+            <!--inserimento commento-->            <div class="row comment-send align-items-center">
                 <div class="col-11">
                     <label for="input-comment" hidden>Insert your comment:</label>
                     <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
@@ -116,6 +116,7 @@
             </div>
             <p id="res"></p>
             <hr class="hr hr-blurry m-2" />
+            <?php endif; ?>
             <!--lista di commenti del post-->
             <section>
                 <?php if(!empty($comments)):

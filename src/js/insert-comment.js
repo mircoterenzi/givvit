@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
                 axios.post('./api/insertNotification.php', notFrom);
             } else {
-                alert(response.data["error"]);
+                document.getElementById("res").innerText = response.data["error"];
             }
         });
 });
