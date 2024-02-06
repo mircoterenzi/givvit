@@ -13,7 +13,7 @@
                     </div>
                     <div class="mb-2">
                         <label for="theme">Theme*</label>
-                        <select id ="theme" class="form-select" aria-label="Default select example">
+                        <select id ="theme" class="form-select" aria-label="Default select example" required>
                             <option selected></option>
                             <?php foreach($templateParams["topics-list"] as $topic): ?>
                             <option id="<?php echo $topic["name"] ?>" value="<?php echo $topic["name"] ?>"><?php echo($topic["name"]) ?></option>
