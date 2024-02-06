@@ -165,7 +165,7 @@
                                         <?php if ($_SESSION["userId"] == $post_full["user_id"] && empty($comment["responded_by"])): ?>
                                             <button data-bs-toggle="modal" data-bs-target="#reply-msg-modal" type="button" class="btn btn-sm" id="reply"
                                                     data-postId="<?php echo $post_full['post_id']; ?>"
-                                                    data-userId="<?php echo $post_full['user_id']; ?>"
+                                                    data-userId="<?php echo $comment['user']; ?>"
                                                     data-commentId="<?php echo $comment['comment_id']; ?>">Reply</button>
                                         <?php endif; ?>
                                     </div>

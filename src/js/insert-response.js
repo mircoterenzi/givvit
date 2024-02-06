@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     sendReplyButton.addEventListener('click', async function () {
         var commentValue = replyText.value.trim();
         var postId = replyValues.getAttribute('data-postId');
-        var owner = replyValues.getAttribute('data-userId');
+        var receiver = replyValues.getAttribute('data-userId');
         var commentId = replyValues.getAttribute('data-commentId');
 
         var commentForm = new FormData();
@@ -25,13 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var response = await axios.post('./api/insert-response.php', commentForm);
         if (response.data["insertDone"]) {
-            setTimeout(() => document.location.reload(), 100);
             var notFrom = new FormData();
-            notFrom.append("not_type", 'Comment');
-            notFrom.append("receiver", owner);
-            notFrom.append("post_id", postId);
+            notFrom.append("not_type",'Reply');
+            notFrom.append("receiver",receiver);
+            notFrom.append("post_id",postId);
 
-            axios.post('./api/insert-notification.php', notFrom);
+            console.log("wait");
+    
+            await axios.post('./api/insert-notification.php', notFrom);
+
+            setTimeout(() => document.location.reload(), 100);
         } else {
             alert(response.data["error"]);
         }
