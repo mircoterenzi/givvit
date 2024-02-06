@@ -15,8 +15,9 @@
             <div class="col text-start">
                 <a class="badge" href="explore.php?topic=<?php echo $post_full["topic"]; ?>"><?php echo $post_full["topic"]; ?></a>
             </div>
-            <!--stella SVG-->
-            <div class="col d-flex text-end justify-content-end">
+            <?php if($_SESSION["userId"] != $post_full["user_id"]):?>
+                <!--stella SVG-->
+                <div class="col d-flex text-end justify-content-end">
                 <p class="mb-0 me-2"><?php echo $post_full["numLikes"] ?></p>
                 <?php
                     if(empty($dbh->checkLikeByUser($post_full["post_id"], $_SESSION["userId"]))):
@@ -30,6 +31,8 @@
                 </svg>
                 <?php endif;?>
             </div>
+            <?php endif;?>
+            
         </div>
         <!--titolo del post-->
         <h2 class="h3 my-3"><?php echo $post_full["title"]; ?></h2>
@@ -92,35 +95,35 @@
         </div>
 
         <?php if($_SESSION["userId"] != $post_full["user_id"]): ?> <!-- can't donate or comment to yourself-->
-        <!-- Donation -->
-        <div class="row mt-3">
-            <div class="col-9">
-                <label for="donation-amount" hidden>Import (€)</label>
-                <input class="form-control" id="donation-amount" placeholder="Import (€)" />
+            <!-- Donation -->
+            <div class="row mt-3">
+                <div class="col-9">
+                    <label for="donation-amount" hidden>Import (€)</label>
+                    <input class="form-control" id="donation-amount" placeholder="Import (€)" />
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
+                </div>
             </div>
-            <div class="col-3">
-                <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
-            </div>
-        </div>
 
-        <!-- Elemento per mostrare messaggi di errore -->
-        <p id="errorMessage" style="color: red;"></p>
+            <!-- Elemento per mostrare messaggi di errore -->
+            <p id="errorMessage" style="color: red;"></p>
 
 
-        <!--inserimento commento-->
-        <div class="row comment-send align-items-center">
-            <div class="col-11">
-                <label for="input-comment" hidden>Insert your comment:</label>
-                <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
+            <!--inserimento commento-->
+            <div class="row comment-send align-items-center">
+                <div class="col-11">
+                    <label for="input-comment" hidden>Insert your comment:</label>
+                    <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
+                </div>
+                <div class="col-1 ps-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" id ="send-comment" width="20" class="send clickable bi bi-send-fill" viewBox="0 0 16 16" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>" >
+                        <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                    </svg>
+                </div>
             </div>
-            <div class="col-1 ps-1">
-                <svg xmlns="http://www.w3.org/2000/svg" id ="send-comment" width="20" class="send clickable bi bi-send-fill" viewBox="0 0 16 16" post-id ="<?php echo $post_full["post_id"]; ?>" owner-id ="<?php echo $post_full["user_id"]; ?>" >
-                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
-                </svg>
-            </div>
-        </div>
-        <p id="res" style="color: red;"></p>
-        <hr class="hr hr-blurry m-2" />
+            <p id="res" style="color: red;"></p>
+            <hr class="hr hr-blurry m-2" />
         <?php endif; ?>
         <!--lista di commenti del post-->
         <section>
