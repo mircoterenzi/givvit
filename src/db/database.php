@@ -209,7 +209,7 @@ class DatabaseHelper{
                     p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised, c.numCom, l.numLikes
                     FROM post p JOIN user_profile u ON u.user_id = p.user 
                     left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id
-                    LEFT OUTER JOIN (SELECT COUNT(*) AS numCom, post FROM comments where post = ? and responded_by = NULL GROUP BY post) c ON c.post = p.post_id
+                    LEFT OUTER JOIN (SELECT COUNT(*) AS numCom, post FROM comments where post = ? and responded_by IS NULL GROUP BY post) c ON c.post = p.post_id
                     LEFT OUTER JOIN (SELECT COUNT(*) AS numLikes, post FROM likes where post = ? GROUP BY post) l ON l  .post = p.post_id
                     WHERE  post_id = ?
                     ORDER BY p.date DESC";
