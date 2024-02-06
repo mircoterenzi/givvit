@@ -79,7 +79,7 @@ alter table comments add constraint REF_comme_user__FK
 
 alter table comments add constraint REF_comme_post
      foreign key (post)
-     references post(post_id);
+     references post(post_id) on delete cascade;
 
 alter table donation add constraint REF_donat_post_FK
      foreign key (post)
@@ -91,7 +91,7 @@ alter table donation add constraint REF_donat_user_
 
 alter table files add constraint REF_files_post
      foreign key (post)
-     references post(post_id);
+     references post(post_id) on delete cascade;
 
 alter table follow add constraint REF_follo_user__1_FK
      foreign key (followed)
@@ -103,7 +103,7 @@ alter table follow add constraint REF_follo_user_
 
 alter table likes add constraint REF_likes_post
      foreign key (post)
-     references post(post_id);
+     references post(post_id) on delete cascade;
 
 alter table likes add constraint REF_likes_user__FK
      foreign key (user)
@@ -119,7 +119,7 @@ alter table notification add constraint REF_notif_user__FK
 
 alter table notification add constraint REF_notif_post_FK
      foreign key (post_id)
-     references post(post_id);
+     references post(post_id) on delete cascade;
 
 alter table post add constraint REF_post_user__FK
      foreign key (user)
