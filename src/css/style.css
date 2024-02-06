@@ -60,14 +60,3 @@ a {
         display: none;
     }
 }
-
-/* progress bar */
-.progress-custom {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.comment-send {
-    margin-right: 0;
-    margin-left: 0;
-}
