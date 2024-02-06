@@ -188,7 +188,7 @@
                                 ?>   
                                 <div class="row">
                                     <div class="col text-end">
-                                        <a href="profile.php?id=<?php echo $post_full["username"]; ?>" >@<?php echo $post_full["username"]; ?></a>
+                                        <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" >@<?php echo $post_full["username"]; ?></a>
                                     </div>
                                 </div>                                         
                             </article>
