@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     var replyButton = document.getElementById('reply');
-    var modal = document.getElementById('reply-msg-modal');
     var replyText = document.getElementById('reply-text');
     var replyValues = document.getElementById('reply-values');
     var sendReplyButton = document.getElementById('send-reply');
 
-    if(replyButton) {
+    if(replyButton != null) {
         replyButton.addEventListener('click', function () {
             replyValues.setAttribute('data-postId', replyButton.getAttribute('data-postId'));
             replyValues.setAttribute('data-userId', replyButton.getAttribute('data-userId'));

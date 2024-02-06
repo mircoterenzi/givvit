@@ -1,15 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('send-comment').addEventListener('click', async function () {
-        var commentValue = document.getElementById('input-comment').value.trim();
-        var postId = this.getAttribute('post-id');
-        var receiver = this.getAttribute('owner-id');
+    const btn = document.getElementById('send-comment')
+    
+    if (btn != null) {
+        btn.addEventListener('click', async function () {
+            var commentValue = document.getElementById('input-comment').value.trim();
+            var postId = this.getAttribute('post-id');
+            var receiver = this.getAttribute('owner-id');
 
-        var commentForm = new FormData();
-        commentForm.append('inputComment', commentValue);
-        commentForm.append('postId', postId);
-        commentForm.append('receiver',receiver);
+            var commentForm = new FormData();
+            commentForm.append('inputComment', commentValue);
+            commentForm.append('postId', postId);
+            commentForm.append('receiver',receiver);
 
-        var response = await axios.post('./api/insert-comment.php', commentForm)
+            var response = await axios.post('./api/insert-comment.php', commentForm)
             if (response.data["insertDone"]) {
                 setTimeout(() => document.location.reload(), 100);
                 var notFrom = new FormData();
@@ -22,4 +25,5 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById("res").innerText = response.data["error"];
             }
         });
+    }
 });

@@ -33,7 +33,7 @@
                 </div>
             <?php else:?>
                 <div class="col d-flex text-end justify-content-end">
-                <svg xmlns="http://www.w3.org/2000/svg" id="delete" post-id ="<?php echo $post_full["post_id"]; ?>" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" id="delete" post-id ="<?php echo $post_full["post_id"]; ?>" width="20" class="clickable bi bi-trash3-fill" viewBox="0 0 16 16">
                 <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
                 </svg>
                 </div>
@@ -103,11 +103,11 @@
         <?php if($_SESSION["userId"] != $post_full["user_id"]): ?> <!-- can't donate or comment to yourself-->
             <!-- Donation -->
             <div class="row mt-3">
-                <div class="col-9">
+                <div class="col">
                     <label for="donation-amount" hidden>Import (€)</label>
                     <input class="form-control" id="donation-amount" placeholder="Import (€)" />
                 </div>
-                <div class="col-3">
+                <div class="col-auto">
                     <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                 foreach($comments as $comment): ?>
                     <div class="row mt-3">
                         <div class="col-2">
-                            <div class="ratio ratio-1x1 mt-2 overflow-hidden">
+                            <div class="ratio ratio-1x1 overflow-hidden">
                                 <img  alt="profile picture" src="img/<?php 
                                 if(!empty($comment["profile_img"])) {
                                 echo($comment["profile_img"]); 
@@ -168,14 +168,14 @@
                     </div>
                     <!--controllo se il commento ha una risposta-->
                     <?php if(!empty($comment["responded_by"])): ?>
-                    <div class = "row justify-content-end">
+                    <div class = "row justify-content-end mt-3">
                         <div class="col-1 me-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
                             </svg>
                         </div>
                         <div class="col-6">
-                            <article class="card-comment p-2 mt-3 shadow-sm rounded-4 bg-light">
+                            <article class="card-comment p-2 shadow-sm rounded-4 bg-light">
                                 <?php $response = $dbh->getCommentOnPostResponse($post_full["post_id"], $comment["responded_by"]);
                                     echo $response[0]["text"];
                                 ?>   
@@ -186,7 +186,7 @@
                                 </div>                                         
                             </article>
                         </div>
-                        <div class="col-2 mt-3">
+                        <div class="col-2">
                             <div class="ratio ratio-1x1 overflow-hidden">
                                 <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
                                 <img  alt="profile picture" src="img/<?php 
@@ -201,7 +201,7 @@
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="text-center">There are no comments for now >:( </p>
+                <p class="text-center mt-3">There are no comments :'( </p>
             <?php endif; ?>
         </section>
     </article>
