@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="css/style.css">
 
 <?php
-    $post_full= $templateParams["post_open"][0];
+    $post_full= $templateParams["post_open"];
     $images = $dbh -> getFilesById($post_full["post_id"]);
     $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
 ?>
