@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
-</head>
-<body>
+<?php
+    $post_full= $templateParams["post_open"];
+    $images = $dbh -> getFilesById($post_full["post_id"]);
+    $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
+?>
     
-    <?php
-        $post_full= $templateParams["post_open"];
-        $images = $dbh -> getFilesById($post_full["post_id"]);
-        $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
-    ?>
-</body>
-
-
 <!-- Post -->
 <section>
     <article class="mainpost mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
@@ -121,7 +113,7 @@
             </div>
 
             <!-- Elemento per mostrare messaggi di errore -->
-            <p id="errorMessage" style="color: red;"></p>
+            <p id="errorMessage"></p>
 
 
             <!--inserimento commento-->
@@ -136,7 +128,7 @@
                     </svg>
                 </div>
             </div>
-            <p id="res" style="color: red;"></p>
+            <p id="errormessage"></p>
             <hr class="hr hr-blurry m-2" />
         <?php endif; ?>
         <!--lista di commenti del post-->
@@ -157,7 +149,7 @@
                         <div class="col-10">
                             <article class="card-comment p-3 shadow-sm rounded-4 bg-light">
                                 <p><?php echo $comment["text"];?></p>
-                                <section class="row">
+                                <div class="row">
                                     <div class="col">
                                         <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                     </div>
@@ -169,7 +161,7 @@
                                                     data-commentId="<?php echo $comment['comment_id']; ?>">Reply</button>
                                         <?php endif; ?>
                                     </div>
-                                </section>
+                                </div>
                             </article>
                         </div>
                     </div>
@@ -214,4 +206,3 @@
     </article>
 </section>
 <?php include("./components/reply-modal.php"); ?>
-</html>
