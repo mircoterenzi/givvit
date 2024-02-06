@@ -10,16 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
         commentForm.append('receiver',receiver);
 
         var response = await axios.post('./api/insert-comment.php', commentForm)
-            if (response.data["insertDone"]) {
-                document.location.reload();
-                var notFrom = new FormData();
-                notFrom.append("not_type",'Comment');
-                notFrom.append("receiver",receiver);
-                notFrom.append("post_id",postId);
-        
-                axios.post('./api/insertNotification.php', notFrom);
-            } else {
-                document.getElementById("res").innerText = response.data["error"];
-            }
-        });
+        if (response.data["insertDone"]) {
+            document.location.reload();
+            var notFrom = new FormData();
+            notFrom.append("not_type",'Comment');
+            notFrom.append("receiver",receiver);
+            notFrom.append("post_id",postId);
+    
+            axios.post('./api/insertNotification.php', notFrom);
+        } else {
+            document.getElementById("res").innerText = response.data["error"];
+        }
+    });
 });
