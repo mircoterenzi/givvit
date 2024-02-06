@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 notFrom.append("receiver",receiver);
                 notFrom.append("post_id",postId);
         
-                axios.post('./api/insertNotification.php', notFrom);
+                axios.post('./api/insert-notification.php', notFrom);
             } else {
                 document.getElementById("res").innerText = response.data["error"];
             }
