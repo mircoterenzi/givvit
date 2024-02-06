@@ -205,16 +205,17 @@ class DatabaseHelper{
      */
 
     public function getPostById($postId) {
-        $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description, p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised, c.numCom
+        $query = "SELECT p.post_id, p.title, u.username, u.user_id, p.long_description,
+                    p.short_description, p.topic, p.date, p.amount_requested, r.ammount_raised, c.numCom, l.numLikes
                     FROM post p JOIN user_profile u ON u.user_id = p.user 
                     left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id
-                    LEFT OUTER JOIN 
-                    (SELECT COUNT(*) AS numCom, post FROM comments where post = ? GROUP BY post) c ON c.post = p.post_id
+                    LEFT OUTER JOIN (SELECT COUNT(*) AS numCom, post FROM comments where post = ? GROUP BY post) c ON c.post = p.post_id
+                    LEFT OUTER JOIN (SELECT COUNT(*) AS numLikes, post FROM likes where post = ? GROUP BY post) l ON l  .post = p.post_id
                     WHERE  post_id = ?
                     ORDER BY p.date DESC";
 
         $stmt = $this->db->prepare($query);
-        $stmt->bind_param('ii',$postId,$postId);
+        $stmt->bind_param('iii',$postId,$postId,$postId);
         $stmt->execute();
         $result = $stmt->get_result();
 
