@@ -18,7 +18,7 @@ $profile = $templateParams["profile"][0];
         </div>
         <div class="col-6">
             <p class="mb-0"><?php echo($profile["first_name"]); ?> <?php echo($profile["last_name"]); ?></p>
-            <p class="fw-bold">@<?php echo($profile["username"]); ?></p>
+            <h2 class="h6 fw-bold">@<?php echo($profile["username"]); ?></h2>
             <?php if($_GET["id"] == $_SESSION["userId"]): ?>
             <svg data-bs-toggle="modal" data-bs-target="#edit-profile-modal" xmlns="http://www.w3.org/2000/svg" width="22" class="clickable bi bi-pencil-square me-2" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -49,7 +49,7 @@ $profile = $templateParams["profile"][0];
 </section>
 
 <!-- List selection -->
-<section class="d-flex my-4 justify-content-center">
+<div class="d-flex my-4 justify-content-center">
     <div class="btn-group">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Now displaying: <?php echo $_GET["type"]; ?>
@@ -79,10 +79,10 @@ $profile = $templateParams["profile"][0];
             </a></li>
         </ul>
     </div>
-</section>
+</div>
 
 <!-- List -->
-</section>  
+<div>  
     <?php
     if($_GET["type"] == "posted") {
         $templateParams["posts"] = $dbh->getPostsbyUser($_GET["id"]);
@@ -103,7 +103,7 @@ $profile = $templateParams["profile"][0];
         echo("Error");
     }
     ?>
-</section>
+</div>
 <?php
 require_once("./components/remove-follow-modal.php");
 require_once("./components/edit-profile-modal.php");

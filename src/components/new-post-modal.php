@@ -40,7 +40,7 @@
                         <label for="img">Profile image</label>
                         <input type="file" class="form-control" id="img" name="img" multiple/>
                     </div>
-                    <p id ="result"></p>
+                    <p id ="result-post"></p>
                     <label for="login" hidden>Post it!</label>
                     <input class="btn w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
                 </form>
