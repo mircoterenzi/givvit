@@ -15,7 +15,7 @@
             </div>
             <input type="hidden" id="reply-values" data-postId="" data-userId="" data-commentId="">
             <div class="modal-footer">
-                <button id="send-reply" type="button" class="rm-follow btn" post-id ="<?php echo $post_full["post_id"]; ?>">Reply</button>
+                <button id="send-reply" type="button" class="rm-follow btn">Reply</button>
             </div>
         </div>
     </div>

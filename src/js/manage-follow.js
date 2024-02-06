@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function manageFollow(type) {
         const card = document.querySelector('.card');
-        const userId = card.getAttribute('user-id');
+        const userId = card.getAttribute('data-user-id');
         if(type == "follow" ){
             var notFrom = new FormData();
             notFrom.append("not_type", 'Follow');
-            notFrom.append("receiver", card.getAttribute('user-id'));
+            notFrom.append("receiver", userId);
             axios.post('./api/insert-notification.php',notFrom);
         }
 
