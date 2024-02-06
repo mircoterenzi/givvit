@@ -118,14 +118,8 @@
             <!--lista di commenti del post-->
             <section>
                 <?php if(!empty($comments)):
-                    foreach($comments as $comment): 
-                    if ($_SESSION["userId"] == $post_full["user_id"]): 
-                ?>
-                        <div class="row my-3 justify-content-end">
-                    <?php else: ?>
-                        <div class="row my-3 justify-content-start">
-                    <?php endif; ?>
-                    <?php if ($_SESSION["userId"] != $post_full["user_id"]): ?>
+                    foreach($comments as $comment): ?>
+                        <div class="row mt-3">
                             <div class="col-2">
                                 <div class="ratio ratio-1x1 mt-2 overflow-hidden">
                                     <img  alt="profile picture" src="img/<?php 
@@ -136,7 +130,6 @@
                                     } ?>" class="propic rounded-circle" />
                                 </div>
                             </div>
-                    <?php endif; ?>
                             <div class="col-10">
                                 <article class="card-comment p-3 shadow-sm rounded-4 bg-light">
                                     <p><?php echo $comment["text"];?></p>
@@ -154,26 +147,29 @@
                                         </div>
                                     </section>
                                 </article>
-                                <!--controllo se il commento ha una risposta-->
-                                <?php if(!empty($comment["responded_by"])): ?>
-                                    <div class = "row justify-content-end">
-                                        <div class="col-1 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
-                                            </svg>
-                                        </div>
-                                        <div class="col-9">
-                                            <article class="card-comment m-3 p-2 shadow-sm rounded-4 bg-light">
-                                                <?php $response = $dbh->getCommentOnPostResponse($post_full["post_id"], $comment["responded_by"]);
-                                                    echo $response[0]["text"];
-                                                ?>                                            
-                                            </article>
-                                        </div>
-                                    </div>
-                                <?php endif; ?>
                             </div>
-                            <?php if ($_SESSION["userId"] == $post_full["user_id"]): ?>
-                            <div class="col-2">
+                        </div>
+                        <!--controllo se il commento ha una risposta-->
+                        <?php if(!empty($comment["responded_by"])): ?>
+                        <div class = "row justify-content-end">
+                            <div class="col-1 me-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                                </svg>
+                            </div>
+                            <div class="col-6">
+                                <article class="card-comment p-2 mt-3 shadow-sm rounded-4 bg-light">
+                                    <?php $response = $dbh->getCommentOnPostResponse($post_full["post_id"], $comment["responded_by"]);
+                                        echo $response[0]["text"];
+                                    ?>   
+                                    <div class="row">
+                                        <div class="col text-end">
+                                            <a href="profile.php?id=<?php echo $post_full["username"]; ?>" >@<?php echo $post_full["username"]; ?></a>
+                                        </div>
+                                    </div>                                         
+                                </article>
+                            </div>
+                            <div class="col-2 mt-3">
                                 <div class="ratio ratio-1x1 overflow-hidden">
                                     <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
                                     <img  alt="profile picture" src="img/<?php 
@@ -184,8 +180,8 @@
                                     } ?>" class="propic rounded-circle" />
                                 </div>
                             </div>
-                    <?php endif; ?>
                         </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p class="text-center">There are no comments for now >:( </p>
