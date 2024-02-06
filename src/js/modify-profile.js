@@ -34,7 +34,7 @@ async function editprof() {
         const formDataImage = new FormData();
         formDataImage.append("image", fileInput.files[0]);
         try {
-            const responseUpload = await axios.post('./api/uploadImage.php', formDataImage);
+            const responseUpload = await axios.post('./api/upload-image.php', formDataImage);
             if (!responseUpload.data["uploadDone"]) {
                 document.getElementById("result").innerText = responseUpload.data["errorInUpload"];
             } else {

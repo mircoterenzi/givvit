@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             notFrom.append("receiver", owner);
             notFrom.append("post_id", postId);
 
-            axios.post('./api/insertNotification.php', notFrom);
+            axios.post('./api/insert-notification.php', notFrom);
         } else {
             alert(response.data["error"]);
         }

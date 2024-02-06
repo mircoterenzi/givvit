@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const formDataFile = new FormData();
                     formDataFile.append("postId",postId);
                     formDataFile.append("fileName",fileNames[i]);
-                    const result = await axios.post('./api/addImgtoFile.php', formDataFile);
+                    const result = await axios.post('./api/add-img-to-file.php', formDataFile);
                 }
             } catch (error) {
                 console.error('Error during image upload:', error);

@@ -33,7 +33,7 @@ function signin() {
     if(fileInput.files.length > 0){ 
         const formDataImage = new FormData();
         formDataImage.append("image", fileInput.files[0]);
-        axios.post('./api/uploadImage.php', formDataImage).then(responseUpload => {
+        axios.post('./api/upload-image.php', formDataImage).then(responseUpload => {
             if (!responseUpload.data["uploadDone"]) {
                 document.querySelector("#signin-form > p").innerText = responseUpload.data["errorInUpload"]
             } else {

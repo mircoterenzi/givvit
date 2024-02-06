@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
             notFrom.append("receiver",reciver);
             notFrom.append("post_id",postId);
 
-            axios.post('./api/insertNotification.php', notFrom);
+            axios.post('./api/insert-notification.php', notFrom);
         } else {
             document.getElementById('errorMessage').textContent = response.data["error"];
         }

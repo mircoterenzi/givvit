@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var notFrom = new FormData();
             notFrom.append("not_type", 'Follow');
             notFrom.append("receiver", card.getAttribute('user-id'));
-            axios.post('./api/insertNotification.php',notFrom);
+            axios.post('./api/insert-notification.php',notFrom);
         }
 
         const formData = new FormData();

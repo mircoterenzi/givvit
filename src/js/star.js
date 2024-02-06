@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             notFrom.append("not_type", 'Like');
             notFrom.append("receiver", add.getAttribute('owner-id'));
             notFrom.append("post_id", add.getAttribute('post-id'));
-            axios.post('./api/insertNotification.php',notFrom);
+            axios.post('./api/insert-notification.php',notFrom);
 
             axios.post("./api/star.php",formData).then(() => {
                 setTimeout(() => location.reload(), 100)
