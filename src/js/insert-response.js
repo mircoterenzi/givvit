@@ -5,11 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var replyValues = document.getElementById('reply-values');
     var sendReplyButton = document.getElementById('send-reply');
 
-    replyButton.addEventListener('click', function () {
-        replyValues.setAttribute('data-postId', replyButton.getAttribute('data-postId'));
-        replyValues.setAttribute('data-userId', replyButton.getAttribute('data-userId'));
-        replyValues.setAttribute('data-commentId', replyButton.getAttribute('data-commentId'));
-    });
+    if(replyButton) {
+        replyButton.addEventListener('click', function () {
+            replyValues.setAttribute('data-postId', replyButton.getAttribute('data-postId'));
+            replyValues.setAttribute('data-userId', replyButton.getAttribute('data-userId'));
+            replyValues.setAttribute('data-commentId', replyButton.getAttribute('data-commentId'));
+        });
+    }
 
     sendReplyButton.addEventListener('click', async function () {
         var commentValue = replyText.value.trim();

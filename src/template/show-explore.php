@@ -22,7 +22,7 @@
 </div>
 <?php require("show-post.php"); ?>
 <?php if($n <= sizeof($templateParams["posts"]) ): ?>
-<div class="container text-center">
+<div class="container text-center mb-5">
     <?php if(!empty($_GET["topic"])): ?>
         <a href="explore.php?topic=<?php echo $_GET["topic"]; ?>&n=<?php echo $n+10; ?>#<?php echo $n ?>" class="btn btn-primary"> Load more </a>
     <?php else: ?>
