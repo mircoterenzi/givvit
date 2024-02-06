@@ -84,7 +84,7 @@
             </div>
 
             <?php else: ?>
-            <img src="img/example.jpg" alt="" class="d-block w-100" />
+                <br><br>
             <?php endif; ?>
 
             <!--descrizione lunga-->
