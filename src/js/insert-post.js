@@ -65,6 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("result").innerText = 'An error occurred during image upload.';
             }
         }
-        setTimeout(() => document.location.reload(), 1000);
+        setTimeout(() => document.location.reload(), 100);
     }
 });

@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var response = await axios.post('./api/import-donation.php', donationform)
         if (response.data["importDone"]) {
-            setTimeout(() => document.location.reload(), 1000);
+            setTimeout(() => document.location.reload(), 100);
             var notFrom = new FormData();
             notFrom.append("not_type",'Donation');
             notFrom.append("receiver",reciver);
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             axios.post('./api/insertNotification.php', notFrom);
         } else {
-            document.getElementById('errorMessage').textContent = "The donation must be a number!";
+            document.getElementById('errorMessage').textContent = response.data["error"];
         }
         
     });

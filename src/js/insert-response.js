@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var response = await axios.post('./api/insert-response.php', commentForm);
         if (response.data["insertDone"]) {
-            setTimeout(() => document.location.reload(), 1000);
+            setTimeout(() => document.location.reload(), 100);
             var notFrom = new FormData();
             notFrom.append("not_type", 'Comment');
             notFrom.append("receiver", owner);

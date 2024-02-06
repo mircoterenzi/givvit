@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append('type', type);
         formData.append('id', userId);
         axios.post("./api/manage-follow.php",formData).then(() => {
-            setTimeout(() => location.reload(), 200)
+            setTimeout(() => location.reload(), 100)
         });
     }
 });

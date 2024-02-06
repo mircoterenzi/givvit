@@ -12,7 +12,7 @@ function login() {
     axios.post('./api/login.php', formData).then(response => {
         if (response.data["loginDone"]) {
             document.getElementById("result").innerText = "Login successful, please wait..."
-            setTimeout(() => document.location.reload(), 2000);
+            setTimeout(() => document.location.reload(), 500);
         } else {
             document.getElementById("result").innerText = response.data["loginError"]
         }
