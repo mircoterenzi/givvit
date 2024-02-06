@@ -31,13 +31,13 @@
             <img alt="post image" src="img/<?php echo($post["path"]);?>" class="img-fluid mb-1" />
             <?php endif; ?>
             <p><?php echo $post["short_description"]; ?></p>
-            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo $post["ammount_raised"]?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
+            <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo printVarIfPresent($post["ammount_raised"]); ?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
                 <div class="progress-bar" style="width: <?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,0)?>%"><?php echo round($post["ammount_raised"]/$post["amount_requested"] * 100,0)?>%</div>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col inline text-start">
-                <a href="profile.php?id=<?php echo $post["user_id"]; ?>" class="username" id="<?php echo $post["user_id"]; ?>">@<?php echo $post["username"]; ?></a>
+                <a href="profile.php?id=<?php echo $post["user_id"]; ?>" class="username">@<?php echo $post["username"]; ?></a>
             </div>
         </div>
     </article>

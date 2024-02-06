@@ -14,7 +14,7 @@
                     <div class="mb-2">
                         <label for="theme">Theme*</label>
                         <select id ="theme" class="form-select" aria-label="Default select example" required>
-                            <option selected></option>
+                            <option value="" selected disabled>Please select an option</option>
                             <?php foreach($templateParams["topics-list"] as $topic): ?>
                             <option id="<?php echo $topic["name"] ?>" value="<?php echo $topic["name"] ?>"><?php echo($topic["name"]) ?></option>
                             <?php endforeach; ?>
@@ -40,7 +40,7 @@
                         <label for="img">Profile image</label>
                         <input type="file" class="form-control" id="img" name="img" multiple/>
                     </div>
-                    <p id ="result"></p>
+                    <p id ="result-post"></p>
                     <label for="login" hidden>Post it!</label>
                     <input class="btn w-100 my-2" type="submit" id="login" name="post" value="Post it!"/>
                 </form>

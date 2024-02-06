@@ -20,16 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const response = await axios.post('./api/insert-post.php', formDataUser);
             
             if (response.data["insertDone"]) {
-                document.getElementById("result").innerText = "Insert done !!";
+                document.getElementById("result-post").innerText = "Insert done !!";
                 const postId = response.data["PostId"];
                 path = path + postId;
                 await handleImageUpload(postId);
             } else {
-                document.getElementById("result").innerText = response.data.errorInsert;
+                document.getElementById("result-post").innerText = response.data.errorInsert;
             }
         } catch (error) {
             console.error('Error:', error);
-            document.getElementById("result").innerText = 'An error occurred while saving the post.';
+            document.getElementById("result-post").innerText = 'An error occurred while saving the post.';
         }
     }
 
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } catch (error) {
                 console.error('Error during image upload:', error);
-                document.getElementById("result").innerText = 'An error occurred during image upload.';
+                document.getElementById("result-post").innerText = 'An error occurred during image upload.';
             }
         }
         setTimeout(() => document.location.href = path, 100);

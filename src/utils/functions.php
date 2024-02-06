@@ -146,7 +146,7 @@
         if(!empty($var)){
             return $var;
         } else {
-            echo("0");
+            return 0;
         }
     }
 

@@ -10,10 +10,10 @@ async function addtodb(formDataUser) {
     try {
         const response = await axios.post('./api/edit-profile.php', formDataUser);
         if (response.data["updateDone"]) {
-            document.getElementById("result").innerText = "edit done !!";
+            document.getElementById("result-edit").innerText = "edit done !!";
             setTimeout(() =>location.reload(), 100);
         } else {
-            document.getElementById("result").innerText = response.data["errorupdate"];
+            document.getElementById("result-edit").innerText = response.data["errorupdate"];
         }
     } catch (error) {
         console.error('Error adding to the database:', error);
@@ -36,7 +36,7 @@ async function editprof() {
         try {
             const responseUpload = await axios.post('./api/upload-image.php', formDataImage);
             if (!responseUpload.data["uploadDone"]) {
-                document.getElementById("result").innerText = responseUpload.data["errorInUpload"];
+                document.getElementById("result-edit").innerText = responseUpload.data["errorInUpload"];
             } else {
                 formDataUser.append('image', responseUpload.data["fileName"]);
                 await addtodb(formDataUser);

@@ -17,7 +17,7 @@
                     </div>
                     <div>
                         <label for="username">Username*</label>
-                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $profile["username"] ?>" rrequired/>
+                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $profile["username"] ?>" required/>
                     </div>
                     <div>
                         <label for="profile-img">Profile image</label>
@@ -27,7 +27,7 @@
                         <label for="desc">Profile description</label>
                         <textarea class="form-control" id="desc" name="desc"><?php echo $profile["description"] ?></textarea>
                     </div>
-                    <p id="result"></p>
+                    <p id="result-edit"></p>
                     <label for="submit" hidden>Register</label>
                     <input class="btn w-100 mt-3 mb-2" type="submit" id="submit" name="register" value="Update your profile"/>
                 </form>
