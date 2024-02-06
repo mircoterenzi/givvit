@@ -30,9 +30,9 @@
                         </svg>
                         <?php
                         $templateParams["notifications"] = $dbh->getNotificationsById($_SESSION["userId"]);
-                        if(!empty($dbh->getUnreadNotificationsById($_SESSION["userId"]))):
+                        if(!empty($templateParams["notifications"])):
                         ?>
-                        <span class="badge bg-danger"><?php echo(count($dbh->getUnreadNotificationsById($_SESSION["userId"]))); ?></span>
+                        <span class="badge bg-danger"><?php echo(count($templateParams["notifications"])); ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="col text-center">

@@ -128,30 +128,13 @@ class DatabaseHelper{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUnreadNotificationsById($user_id) {
+    public function getNotificationsById($user_id) {
         $query = "
             SELECT n.notification_id, n.notification_type, n.post_id, ur.username,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
-            ORDER BY n.date DESC
-        ";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bind_param('i',$user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function getNotificationsById($user_id) {
-        $query = "
-            SELECT n.notification_id, n.notification_type, n.visualized, n.post_id, ur.username,
-            ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
-            FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
-            WHERE n.user_for = ?
-            ORDER BY n.date DESC
+            ORDER BY n.date
         ";
 
         $stmt = $this->db->prepare($query);
