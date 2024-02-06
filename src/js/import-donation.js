@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //interrupts execution if donationValue isn't a number
         if (isNaN(donationValue) || donationValue.trim() === "") {
-            alert("The donation import must be a numeric value! ($)");
+            document.getElementById('errorMessage').textContent = "The donation must be a number!";
             return;
         }
 

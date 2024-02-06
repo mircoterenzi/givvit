@@ -103,7 +103,12 @@
                 <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
             </div>
 
-            <!--inserimento commento-->            <div class="row comment-send align-items-center">
+            <!-- Elemento per mostrare messaggi di errore -->
+            <p id="errorMessage" style="color: red;"></p>
+
+
+            <!--inserimento commento-->
+            <div class="row comment-send align-items-center">
                 <div class="col-11">
                     <label for="input-comment" hidden>Insert your comment:</label>
                     <textarea class="form-control" id="input-comment" name="inputText" placeholder="Insert your comment"></textarea>
