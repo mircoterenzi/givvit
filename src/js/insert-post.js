@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const formDataImage = new FormData();
                 formDataImage.append("image", fileInput.files[i]);
 
-                const uploadPromise = axios.post('./api/uploadImage.php', formDataImage)
+                const uploadPromise = axios.post('./api/upload-image.php', formDataImage)
                     .then(responseUpload => {
                         if (!responseUpload.data.uploadDone) {
                             throw new Error(responseUpload.data.errorInUpload);
