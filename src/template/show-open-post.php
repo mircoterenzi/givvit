@@ -108,7 +108,7 @@
                     <input class="form-control" id="donation-amount" placeholder="Import (€)" />
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
+                    <button type="button" class="btn ms-2" id="send-donation" data-post-id ="<?php echo $post_full["post_id"]; ?>"  data-owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
                 </div>
             </div>
 

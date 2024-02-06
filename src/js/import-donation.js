@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btn != null) {
         btn.addEventListener('click', async function () {
             var donationValue = document.getElementById('donation-amount').value;
-            var postId = this.getAttribute('post-id');
-            var reciver = this.getAttribute('owner-id');
+            var postId = this.getAttribute('data-post-id');
+            var reciver = this.getAttribute('data-owner-id');
 
 
             //interrupts execution if donationValue isn't a number
