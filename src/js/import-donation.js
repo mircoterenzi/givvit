@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             axios.post('./api/insertNotification.php', notFrom);
         } else {
-            alert(response.data["error"]);
+            document.getElementById('errorMessage').textContent = "The donation must be a number!";
         }
         
     });

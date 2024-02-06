@@ -119,7 +119,7 @@
                     </svg>
                 </div>
             </div>
-            <p id="res"></p>
+            <p id="res" style="color: red;"></p>
             <hr class="hr hr-blurry m-2" />
             <?php endif; ?>
             <!--lista di commenti del post-->
