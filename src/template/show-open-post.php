@@ -1,11 +1,19 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-<?php
-    $post_full= $templateParams["post_open"];
-    $images = $dbh -> getFilesById($post_full["post_id"]);
-    $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
-?>
+</head>
+<body>
+    
+    <?php
+        $post_full= $templateParams["post_open"];
+        $images = $dbh -> getFilesById($post_full["post_id"]);
+        $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
+    ?>
+</body>
+
 
 <!-- Post -->
 <section>
@@ -207,3 +215,4 @@
     </article>
 </section>
 <?php include("./components/reply-modal.php"); ?>
+</html>
