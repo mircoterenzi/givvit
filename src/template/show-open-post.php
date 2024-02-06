@@ -102,6 +102,10 @@
                 <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
             </div>
 
+            <!-- Elemento per mostrare messaggi di errore -->
+            <p id="errorMessage" style="color: red;"></p>
+
+
             <!--inserimento commento-->
             <div class="row comment-send align-items-center">
                 <div class="col-11">
