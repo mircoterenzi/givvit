@@ -17,7 +17,8 @@
                     <a class="badge" href="explore.php?topic=<?php echo $post_full["topic"]; ?>"><?php echo $post_full["topic"]; ?></a>
                 </div>
                 <!--stella SVG-->
-                <div class="col text-end">
+                <div class="col d-flex text-end justify-content-end">
+                    <p class="mb-0 me-2"><?php echo $post_full["numLikes"] ?></p>
                     <?php
                         if(empty($dbh->checkLikeByUser($post_full["post_id"], $_SESSION["userId"]))):
                     ?>
@@ -138,7 +139,7 @@
                                             <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                         </div>
                                         <div class="col text-end">
-                                            <?php if($_SESSION["userId"] == $post_full["user_id"]): ?>
+                                            <?php if($_SESSION["userId"] == $post_full["user_id"] && empty($comment["responded_by"])): ?>
                                                 <button data-bs-toggle="modal" data-bs-target="#reply-msg-modal" type="button" class="btn btn-sm" id="reply"
                                                     data-postId="<?php echo $post_full['post_id']; ?>"
                                                     data-userId="<?php echo $post_full['user_id']; ?>"
