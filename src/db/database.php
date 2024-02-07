@@ -134,7 +134,7 @@ class DatabaseHelper{
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false
-            ORDER BY n.date
+            ORDER BY n.date, n.notification_id
         ";
 
         $stmt = $this->db->prepare($query);
@@ -194,8 +194,7 @@ class DatabaseHelper{
                     left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id
                     LEFT OUTER JOIN (SELECT COUNT(*) AS numCom, post FROM comments where post = ? and responded_by IS NULL GROUP BY post) c ON c.post = p.post_id
                     LEFT OUTER JOIN (SELECT COUNT(*) AS numLikes, post FROM likes where post = ? GROUP BY post) l ON l  .post = p.post_id
-                    WHERE  post_id = ?
-                    ORDER BY p.date DESC";
+                    WHERE  post_id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('iii',$postId,$postId,$postId);
@@ -212,7 +211,7 @@ class DatabaseHelper{
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
                 left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 WHERE user = ?
-                ORDER BY p.date DESC";
+                ORDER BY p.date DESC ,p.post_id DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -235,7 +234,7 @@ class DatabaseHelper{
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
                 left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
                 join ( select * from likes where user = ?) l on l.post = p.post_id
-                ORDER BY p.date DESC";
+                ORDER BY p.date DESC ,p.post_id DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -257,7 +256,7 @@ class DatabaseHelper{
                 FROM post p JOIN user_profile u ON u.user_id = p.user left OUTER join
                 (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id  
                 left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id 
-                ORDER BY p.date DESC
+                ORDER BY p.date DESC,p.post_id DESC
                 LIMIT ?";
         
         $stmt = $this->db->prepare($query);
@@ -275,7 +274,7 @@ class DatabaseHelper{
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
             left outer JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id  
             WHERE topic = ?
-            ORDER BY p.date DESC
+            ORDER BY p.date DESC,p.post_id DESC
             LIMIT ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param('si',$topic,$n);
@@ -296,7 +295,7 @@ class DatabaseHelper{
                     FROM follow s INNER JOIN user_profile u ON s.followed = u.user_id
                     WHERE s.follower = ?
                 )
-            ORDER BY p.date DESC";
+            ORDER BY p.date DESC,p.post_id DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";
@@ -530,7 +529,7 @@ class DatabaseHelper{
             (SELECT name,post from files WHERE file_id = 1) img on img.post = p.post_id 
             JOIN (SELECT SUM(amount) AS ammount_raised , post FROM donation group by post) r on r.post = p.post_id
             WHERE post_id IN ( SELECT post from donation WHERE user = ?) 
-            ORDER BY p.date DESC";
+            ORDER BY p.date, p.post_id DESC";
 
         if($n > 0){
             $query .= " LIMIT ?";

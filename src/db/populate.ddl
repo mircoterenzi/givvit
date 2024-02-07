@@ -84,8 +84,8 @@ VALUES
 ('Tech Workshop: Data Science Bootcamp', 'Dive into the world of data science with hands-on exercises and practical applications.', 'Learn essential data science skills from industry professionals.', 450, '2023-10-20', 7, 'Technology'),
 ('Historical Walking Tour: Industrial Revolution', 'Explore the impact of the Industrial Revolution on historical landscapes.', 'A guided walking tour highlighting key sites from the era of industrialization.', 250, '2023-11-15', 8, 'History'),
 ('Science Experiment Night for Kids', 'An interactive and fun-filled night for kids to conduct science experiments.', 'Encourage curiosity and creativity through hands-on scientific activities.', '200', '2023-12-01', 9, 'Science'),
-('Healthcare Workshop: Mindful Living', 'Learn practical techniques for mindful living and mental well-being.', 'Experts guide participants in cultivating mindfulness for a healthier lifestyle.', 300, '2028-01-10', 10, 'Healthcare'),
-('Art Festival: Diversity in Art', 'Celebrate the diversity of artistic expressions through a community art festival.', 'An inclusive event featuring artworks that reflect various cultures and perspectives.', 400, '2028-02-20', 11, 'Art');
+('Healthcare Workshop: Mindful Living', 'Learn practical techniques for mindful living and mental well-being.', 'Experts guide participants in cultivating mindfulness for a healthier lifestyle.', 300, '2023-01-10', 10, 'Healthcare'),
+('Art Festival: Diversity in Art', 'Celebrate the diversity of artistic expressions through a community art festival.', 'An inclusive event featuring artworks that reflect various cultures and perspectives.', 400, '2023-02-20', 11, 'Art');
 
 
 -- Insert sample data into comments table
