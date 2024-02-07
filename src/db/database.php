@@ -86,12 +86,10 @@ class DatabaseHelper{
     
         $result = $stmt->get_result();
     
-        // Check if any rows are returned
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             return $row['user_id'];
         } else {
-            // No rows found, return 0
             return 0;
         }
     }
@@ -578,12 +576,10 @@ class DatabaseHelper{
         $result = $stmt->get_result();
         $row = $result->fetch_all(MYSQLI_ASSOC);
     
-        // Check if there are any rows returned
         if (!empty($row)) {
             return $row[0]['max_id'] + 1;
         }
     
-        // If no rows are returned, start from 1
         return 1;
     }
     

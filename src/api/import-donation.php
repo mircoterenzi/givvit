@@ -16,6 +16,7 @@
     }else{
         $result["error"] = "donation empty";
     }
+    
 
    header('Content-Type: application/json');
    echo json_encode($result);

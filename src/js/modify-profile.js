@@ -21,7 +21,6 @@ async function addtodb(formDataUser) {
 }
 
 async function editprof() {
-    //form data for user post req
     const formDataUser = new FormData();
     formDataUser.append('name', document.getElementById("name").value);
     formDataUser.append('surname', document.getElementById("surname").value);

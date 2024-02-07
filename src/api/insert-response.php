@@ -3,7 +3,6 @@
     $result["insertDone"] = false;
     $result["error"] = "ok";
     $responseId = 0;
-    /**inserisco commento nel database */
     if(isset($_POST["inputComment"], $_POST["postId"], $_POST["comment_id"]) && !empty($_POST["inputComment"])) {
         $responseId = $dbh->insertComment($_POST["inputComment"], $_POST["postId"], $_SESSION["userId"]);
         if ($responseId != 0) {

@@ -18,7 +18,6 @@ function addtodb(formDataUser){
 
 function signin() {
 
-    //form data for user post req
     const formDataUser = new FormData()
     formDataUser.append('email', document.getElementById("email").value)
     formDataUser.append('name', document.getElementById("name").value)

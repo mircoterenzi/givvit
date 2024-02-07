@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var reciver = this.getAttribute('data-owner-id');
 
 
-            //interrupts execution if donationValue isn't a number
             if (isNaN(donationValue) || donationValue.trim() === "") {
                 document.getElementById('errorMessage').textContent = "The donation must be a number!";
                 return;

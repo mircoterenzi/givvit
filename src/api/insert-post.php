@@ -23,7 +23,6 @@
             }
        }
     }else { 
-      // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
       $result["errorInsert"] = "Request not valid insert post";
    }
 

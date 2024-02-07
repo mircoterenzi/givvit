@@ -4,7 +4,7 @@
    
    $result["uploadDone"] = false;
 
-   //carico img nel filesystem
+   //img upload
    if(isset($_FILES['image'])) { 
     $uploadResult = uploadImage("../img/", $_FILES["image"]);
     if($uploadResult[0]) {
@@ -14,7 +14,6 @@
         $result["errorInUpload"] =  $uploadResult[1];
     }
    } else { 
-      // Le variabili corrette non sono state inviate a questa pagina dal metodo POST.
       $result["errorInUpload"] = "Richiesta non valida";
    }
 

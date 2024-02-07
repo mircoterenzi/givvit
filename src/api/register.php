@@ -27,7 +27,6 @@ if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['passwor
         $desc = isset($_POST["desc"]) ? $_POST["desc"] : null;
         $image = isset($_POST["image"]) ? $_POST["image"] : null;
 
-        // Insert user into the database
         $id = $dbh->insertUser($name, $surname, $username, $email, $password, $salt, $desc, $image);
 
         if ($id) {
@@ -41,8 +40,6 @@ if (empty($_POST['email']) || empty($_POST['username']) || empty($_POST['passwor
     }
 }
 
-// Set response header
 header('Content-Type: application/json');
-// Return JSON response
 echo json_encode($result);
 ?>
