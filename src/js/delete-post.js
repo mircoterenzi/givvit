@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('delete').addEventListener('click', async function () {
+    document.getElementById('confirm-delete').addEventListener('click', async function () {
         var postId = this.getAttribute('post-id');
         var deleteFrom = new FormData();
         deleteFrom.append("postId", postId);
@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => document.location.href = "index.php", 500);
         } else {
             alert( response.data["error"] );
+            location.reload();
         }
     });
 });
