@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('confirm-delete').addEventListener('click', async function () {
-        var postId = this.getAttribute('post-id');
+        var postId = this.getAttribute('data-post-id');
         var deleteFrom = new FormData();
         deleteFrom.append("postId", postId);
    

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Undo</button>
-                <button type="button" class="btn"  id="confirm-delete" post-id ="<?php echo $post_full["post_id"]; ?>" >Delet post</button>
+                <button type="button" class="btn"  id="confirm-delete" data-post-id ="<?php echo $post_full["post_id"]; ?>" >Delet post</button>
             </div>
         </div>
     </div>
