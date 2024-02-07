@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             try {
                 const fileNames = await Promise.all(uploadPromises);
-                console.log('File Names:', fileNames);
                 for(let i = 0; i < fileNames.length; i++){
                     const formDataFile = new FormData();
                     formDataFile.append("postId",postId);

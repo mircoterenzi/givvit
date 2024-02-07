@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
             notFrom.append("not_type",'Reply');
             notFrom.append("receiver",receiver);
             notFrom.append("post_id",postId);
-
-            console.log("wait");
     
             await axios.post('./api/insert-notification.php', notFrom);
 
