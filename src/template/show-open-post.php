@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 
-</head>
-<body>
+<?php
+    $post_full= $templateParams["post_open"];
+    $images = $dbh -> getFilesById($post_full["post_id"]);
+    $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
+?>
     
-    <?php
-        $post_full= $templateParams["post_open"];
-        $images = $dbh -> getFilesById($post_full["post_id"]);
-        $comments = $dbh -> getCommentOnPost($post_full["post_id"]);
-    ?>
-</body>
-
-
 <!-- Post -->
-<section>
+<div>
     <article class="mainpost mb-4 p-4 shadow-sm rounded-5 bg-white" id="<?php echo $post_full["post_id"]; ?>">
         <div class="row">
             <!--badge topic $post_full["topic"]-->
@@ -30,11 +22,11 @@
                     <?php
                         if(empty($dbh->checkLikeByUser($post_full["post_id"], $_SESSION["userId"]))):
                     ?>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" class="clickable empty-star bi bi-star" viewBox="0 0 16 16" owner-id ="<?php echo $post_full["user_id"]; ?>" post-id ="<?php echo $post_full["post_id"]; ?>" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" class="clickable empty-star bi bi-star" viewBox="0 0 16 16" data-owner-id ="<?php echo $post_full["user_id"]; ?>" data-post-id ="<?php echo $post_full["post_id"]; ?>" >
                         <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
                     </svg>
                     <?php else: ?>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" class="clickable full-star bi bi-star-fill" viewBox="0 0 16 16" value ="<?php echo $post_full["post_id"]; ?>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" class="clickable full-star bi bi-star-fill" viewBox="0 0 16 16" data-post-id ="<?php echo $post_full["post_id"]; ?>">
                             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                     </svg>
                     <?php endif;?>
@@ -116,12 +108,12 @@
                     <input class="form-control" id="donation-amount" placeholder="Import (€)" />
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn ms-2" id="send-donation" post-id ="<?php echo $post_full["post_id"]; ?>"  owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
+                    <button type="button" class="btn ms-2" id="send-donation" data-post-id ="<?php echo $post_full["post_id"]; ?>"  data-owner-id ="<?php echo $post_full["user_id"]; ?>">Donate</button>
                 </div>
             </div>
 
             <!-- Elemento per mostrare messaggi di errore -->
-            <p id="errorMessage" style="color: red;"></p>
+            <p id="errorMessage"></p>
 
 
             <!--inserimento commento-->
@@ -136,11 +128,11 @@
                     </svg>
                 </div>
             </div>
-            <p id="res" style="color: red;"></p>
+            <p id="errormessage"></p>
             <hr class="hr hr-blurry m-2" />
         <?php endif; ?>
         <!--lista di commenti del post-->
-        <section>
+        <div>
             <?php if(!empty($comments)):
                 foreach($comments as $comment): ?>
                     <div class="row mt-3">
@@ -155,9 +147,9 @@
                             </div>
                         </div>
                         <div class="col-10">
-                            <article class="card-comment p-3 shadow-sm rounded-4 bg-light">
+                            <div class="card-comment p-3 shadow-sm rounded-4 bg-light">
                                 <p><?php echo $comment["text"];?></p>
-                                <section class="row">
+                                <div class="row">
                                     <div class="col">
                                         <a href="profile.php?id=<?php echo $comment["user"]; ?>" class="username" id="<?php echo $comment["user"]; ?>">@<?php echo $comment["username"]; ?></a>
                                     </div>
@@ -169,8 +161,8 @@
                                                     data-commentId="<?php echo $comment['comment_id']; ?>">Reply</button>
                                         <?php endif; ?>
                                     </div>
-                                </section>
-                            </article>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!--controllo se il commento ha una risposta-->
@@ -182,7 +174,7 @@
                             </svg>
                         </div>
                         <div class="col-6">
-                            <article class="card-comment p-2 shadow-sm rounded-4 bg-light">
+                            <div class="card-comment p-2 shadow-sm rounded-4 bg-light">
                                 <?php $response = $dbh->getCommentOnPostResponse($post_full["post_id"], $comment["responded_by"]);
                                     echo $response[0]["text"];
                                 ?>   
@@ -191,7 +183,7 @@
                                         <a href="profile.php?id=<?php echo $post_full["user_id"]; ?>" >@<?php echo $post_full["username"]; ?></a>
                                     </div>
                                 </div>                                         
-                            </article>
+                            </div>
                         </div>
                         <div class="col-2">
                             <div class="ratio ratio-1x1 overflow-hidden">
@@ -210,8 +202,7 @@
             <?php else: ?>
                 <p class="text-center mt-3">There are no comments :'( </p>
             <?php endif; ?>
-        </section>
+        </div>
     </article>
-</section>
+</div>
 <?php include("./components/reply-modal.php"); ?>
-</html>
