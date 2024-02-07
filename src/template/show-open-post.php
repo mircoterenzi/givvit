@@ -48,7 +48,7 @@
             <div class="col-2">
                 <div class="ratio ratio-1x1 overflow-hidden">
                     <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
-                    <img  alt="profile picture" src="img/<?php 
+                    <img alt="" src="img/<?php 
                     if(!empty($user["profile_img"])) {
                     echo($user["profile_img"]); 
                     } else {
@@ -76,7 +76,7 @@
             <div class="carousel-inner">
                 <?php foreach ($images as $image): ?>
                     <div class="carousel-item <?php echo ($image["file_id"] == 1) ? 'active' : ''; ?>">
-                        <img alt="decorative img" class="d-block w-100" src="img/<?php echo $image["name"]; ?>">
+                        <img class="d-block w-100" alt="" src="img/<?php echo $image["name"]; ?>">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -139,7 +139,7 @@
                     <div class="row mt-3">
                         <div class="col-2">
                             <div class="ratio ratio-1x1 overflow-hidden">
-                                <img  alt="profile picture" src="img/<?php 
+                                <img  alt="" src="img/<?php 
                                 if(!empty($comment["profile_img"])) {
                                 echo($comment["profile_img"]); 
                                 } else {
@@ -189,7 +189,7 @@
                         <div class="col-2">
                             <div class="ratio ratio-1x1 overflow-hidden">
                                 <?php $user = $dbh->getUserById($post_full["user_id"])[0]; ?>
-                                <img  alt="profile picture" src="img/<?php 
+                                <img alt="" src="img/<?php 
                                 if(!empty($user["profile_img"])) {
                                 echo($user["profile_img"]); 
                                 } else {

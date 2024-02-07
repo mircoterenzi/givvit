@@ -130,7 +130,7 @@ class DatabaseHelper{
 
     public function getNotificationsById($user_id) {
         $query = "
-            SELECT n.notification_id, n.notification_type, n.post_id, ur.username,
+            SELECT n.notification_id, n.notification_type, n.post_id, ur.username, n.visualized,
             ui.user_id as user_for_id, ur.user_id as user_from_id, ur.username as username_from, ui.username as username_for
             FROM notification n INNER JOIN user_profile ui ON ui.user_id = n.user_for INNER JOIN user_profile ur ON ur.user_id = n.user_from
             WHERE n.user_for = ? AND n.visualized = false

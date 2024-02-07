@@ -8,7 +8,7 @@ $profile = $templateParams["profile"][0];
     <div class="row mb-3 align-items-center">
         <div class="col-6">
             <div class="ratio ratio-1x1 overflow-hidden">
-                <img  alt="profile picture" src="img/<?php 
+                <img  alt="" src="img/<?php 
                 if(!empty($profile["profile_img"])) {
                 echo($profile["profile_img"]); 
                 } else {

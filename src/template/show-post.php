@@ -28,7 +28,7 @@
         <div>
             <h2 class="h3 my-3"><?php echo $post["title"]; ?></h2>
             <?php if(!empty($post["path"])): ?>
-            <img alt="post image" src="img/<?php echo($post["path"]);?>" class="w-100 mb-1" />
+            <img alt="" src="img/<?php echo($post["path"]);?>" class="w-100 mb-1" />
             <?php endif; ?>
             <p><?php echo $post["short_description"]; ?></p>
             <div class="progress" role="progressbar" aria-label="progress with donations" aria-valuenow= "<?php echo printVarIfPresent($post["ammount_raised"]); ?>" aria-valuemin="0" aria-valuemax="<?php echo $post["amount_requested"]; ?>">
