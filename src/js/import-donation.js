@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
     if (btn != null) {
         btn.addEventListener('click', async function () {
-            var donationValue = document.getElementById('donation-amount').value;
-            var postId = this.getAttribute('data-post-id');
-            var reciver = this.getAttribute('data-owner-id');
+            const donationValue = document.getElementById('donation-amount').value;
+            const postId = this.getAttribute('data-post-id');
+            const reciver = this.getAttribute('data-owner-id');
 
 
             if (isNaN(donationValue) || donationValue.trim() === "") {
@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            var donationform = new FormData();
+            const donationform = new FormData();
             donationform.append('donationAmount', donationValue);
             donationform.append('postId', postId);
             donationform.append('reciver',reciver);
 
-            var response = await axios.post('./api/import-donation.php', donationform)
+            const response = await axios.post('./api/import-donation.php', donationform)
             if (response.data["importDone"]) {
                 setTimeout(() => document.location.reload(), 100);
-                var notFrom = new FormData();
+                const notFrom = new FormData();
                 notFrom.append("not_type",'Donation');
                 notFrom.append("receiver",reciver);
                 notFrom.append("post_id",postId);

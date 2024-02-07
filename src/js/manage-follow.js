@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const card = document.querySelector('.card');
         const userId = card.getAttribute('data-user-id');
         if(type == "follow" ){
-            var notFrom = new FormData();
+            const notFrom = new FormData();
             notFrom.append("not_type", 'Follow');
             notFrom.append("receiver", userId);
             axios.post('./api/insert-notification.php',notFrom);

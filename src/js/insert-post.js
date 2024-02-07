@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const insertPostForm = document.getElementById("insert-post");
 
-    var path = "open-post.php?postId=" ;
+    let path = "open-post.php?postId=" ;
 
     insertPostForm.addEventListener("submit", function (event) {
         event.preventDefault();

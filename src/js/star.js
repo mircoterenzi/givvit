@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append('type', "liked");
             formData.append('postid', add.getAttribute('data-post-id'));
 
-            var notFrom = new FormData();
+            const notFrom = new FormData();
             notFrom.append("not_type", 'Like');
             notFrom.append("receiver", add.getAttribute('data-owner-id'));
             notFrom.append("post_id", add.getAttribute('data-post-id'));
